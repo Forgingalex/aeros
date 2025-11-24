@@ -1,0 +1,802 @@
+[
+  {
+    "image_path": "val\\image_000000.png",
+    "heading": 0.5545681827159952
+  },
+  {
+    "image_path": "val\\image_000001.png",
+    "heading": 0.7333250862012395
+  },
+  {
+    "image_path": "val\\image_000002.png",
+    "heading": 0.7666656772785359
+  },
+  {
+    "image_path": "val\\image_000003.png",
+    "heading": 0.11480919010568824
+  },
+  {
+    "image_path": "val\\image_000004.png",
+    "heading": 0.5560232270955394
+  },
+  {
+    "image_path": "val\\image_000005.png",
+    "heading": 0.07090723066335736
+  },
+  {
+    "image_path": "val\\image_000006.png",
+    "heading": -0.07968587975596864
+  },
+  {
+    "image_path": "val\\image_000007.png",
+    "heading": -0.04938911922544287
+  },
+  {
+    "image_path": "val\\image_000008.png",
+    "heading": 0.32691001300404077
+  },
+  {
+    "image_path": "val\\image_000009.png",
+    "heading": 0.39938417545400196
+  },
+  {
+    "image_path": "val\\image_000010.png",
+    "heading": -0.06933522802783798
+  },
+  {
+    "image_path": "val\\image_000011.png",
+    "heading": 0.02580799637333253
+  },
+  {
+    "image_path": "val\\image_000012.png",
+    "heading": -0.7346513886457912
+  },
+  {
+    "image_path": "val\\image_000013.png",
+    "heading": 0.32610419084373765
+  },
+  {
+    "image_path": "val\\image_000014.png",
+    "heading": -0.7148344131818063
+  },
+  {
+    "image_path": "val\\image_000015.png",
+    "heading": 0.5594437092262252
+  },
+  {
+    "image_path": "val\\image_000016.png",
+    "heading": 0.09843700753944995
+  },
+  {
+    "image_path": "val\\image_000017.png",
+    "heading": 0.3894071175751359
+  },
+  {
+    "image_path": "val\\image_000018.png",
+    "heading": -0.12217756844976246
+  },
+  {
+    "image_path": "val\\image_000019.png",
+    "heading": 0.28204598837436445
+  },
+  {
+    "image_path": "val\\image_000020.png",
+    "heading": 0.015196106964089129
+  },
+  {
+    "image_path": "val\\image_000021.png",
+    "heading": -0.5684436344094841
+  },
+  {
+    "image_path": "val\\image_000022.png",
+    "heading": 0.2469874786680355
+  },
+  {
+    "image_path": "val\\image_000023.png",
+    "heading": 0.7565288503432761
+  },
+  {
+    "image_path": "val\\image_000024.png",
+    "heading": -0.08414206957803982
+  },
+  {
+    "image_path": "val\\image_000025.png",
+    "heading": -0.6989413620823071
+  },
+  {
+    "image_path": "val\\image_000026.png",
+    "heading": -0.24018235621301787
+  },
+  {
+    "image_path": "val\\image_000027.png",
+    "heading": -0.14195295890529003
+  },
+  {
+    "image_path": "val\\image_000028.png",
+    "heading": -0.4689830787152075
+  },
+  {
+    "image_path": "val\\image_000029.png",
+    "heading": -0.7414080778871555
+  },
+  {
+    "image_path": "val\\image_000030.png",
+    "heading": 0.6376061960136072
+  },
+  {
+    "image_path": "val\\image_000031.png",
+    "heading": 0.041762464046148806
+  },
+  {
+    "image_path": "val\\image_000032.png",
+    "heading": -0.07278121001434723
+  },
+  {
+    "image_path": "val\\image_000033.png",
+    "heading": -0.5570723077718212
+  },
+  {
+    "image_path": "val\\image_000034.png",
+    "heading": -0.6357585850248745
+  },
+  {
+    "image_path": "val\\image_000035.png",
+    "heading": 0.4129541199883562
+  },
+  {
+    "image_path": "val\\image_000036.png",
+    "heading": 0.34441798416111946
+  },
+  {
+    "image_path": "val\\image_000037.png",
+    "heading": 0.03239666801240593
+  },
+  {
+    "image_path": "val\\image_000038.png",
+    "heading": 0.7798797830717317
+  },
+  {
+    "image_path": "val\\image_000039.png",
+    "heading": -0.6920051112547835
+  },
+  {
+    "image_path": "val\\image_000040.png",
+    "heading": -0.6635615131944788
+  },
+  {
+    "image_path": "val\\image_000041.png",
+    "heading": -0.682118040467883
+  },
+  {
+    "image_path": "val\\image_000042.png",
+    "heading": -0.4368855391057821
+  },
+  {
+    "image_path": "val\\image_000043.png",
+    "heading": 0.14662569842886908
+  },
+  {
+    "image_path": "val\\image_000044.png",
+    "heading": 0.3808363827311463
+  },
+  {
+    "image_path": "val\\image_000045.png",
+    "heading": 0.6557470150267388
+  },
+  {
+    "image_path": "val\\image_000046.png",
+    "heading": -0.5622815615745174
+  },
+  {
+    "image_path": "val\\image_000047.png",
+    "heading": 0.1771766006707387
+  },
+  {
+    "image_path": "val\\image_000048.png",
+    "heading": -0.18587563562236875
+  },
+  {
+    "image_path": "val\\image_000049.png",
+    "heading": 0.5125995256448779
+  },
+  {
+    "image_path": "val\\image_000050.png",
+    "heading": 0.03658363057010405
+  },
+  {
+    "image_path": "val\\image_000051.png",
+    "heading": -0.2711137994281936
+  },
+  {
+    "image_path": "val\\image_000052.png",
+    "heading": -0.551933658511862
+  },
+  {
+    "image_path": "val\\image_000053.png",
+    "heading": -0.09896971020161516
+  },
+  {
+    "image_path": "val\\image_000054.png",
+    "heading": 0.026672262457902884
+  },
+  {
+    "image_path": "val\\image_000055.png",
+    "heading": -0.27825641625081954
+  },
+  {
+    "image_path": "val\\image_000056.png",
+    "heading": -0.3918344071731498
+  },
+  {
+    "image_path": "val\\image_000057.png",
+    "heading": 0.3113078824016633
+  },
+  {
+    "image_path": "val\\image_000058.png",
+    "heading": -0.7275177187860548
+  },
+  {
+    "image_path": "val\\image_000059.png",
+    "heading": -0.6947837981236447
+  },
+  {
+    "image_path": "val\\image_000060.png",
+    "heading": -0.5145378107816945
+  },
+  {
+    "image_path": "val\\image_000061.png",
+    "heading": -0.17939843681481038
+  },
+  {
+    "image_path": "val\\image_000062.png",
+    "heading": -0.2384969319206629
+  },
+  {
+    "image_path": "val\\image_000063.png",
+    "heading": -0.4481161819482834
+  },
+  {
+    "image_path": "val\\image_000064.png",
+    "heading": -0.6615773972011815
+  },
+  {
+    "image_path": "val\\image_000065.png",
+    "heading": -0.633540735866294
+  },
+  {
+    "image_path": "val\\image_000066.png",
+    "heading": 0.6927931862045156
+  },
+  {
+    "image_path": "val\\image_000067.png",
+    "heading": -0.31408919064828694
+  },
+  {
+    "image_path": "val\\image_000068.png",
+    "heading": -0.47786555603544945
+  },
+  {
+    "image_path": "val\\image_000069.png",
+    "heading": 0.7702852415116204
+  },
+  {
+    "image_path": "val\\image_000070.png",
+    "heading": 0.07046755922159442
+  },
+  {
+    "image_path": "val\\image_000071.png",
+    "heading": 0.6265803669018839
+  },
+  {
+    "image_path": "val\\image_000072.png",
+    "heading": 0.7695699782153387
+  },
+  {
+    "image_path": "val\\image_000073.png",
+    "heading": 0.2206038757737745
+  },
+  {
+    "image_path": "val\\image_000074.png",
+    "heading": 0.5949689683368384
+  },
+  {
+    "image_path": "val\\image_000075.png",
+    "heading": 0.14681910200908332
+  },
+  {
+    "image_path": "val\\image_000076.png",
+    "heading": -0.47170053422732433
+  },
+  {
+    "image_path": "val\\image_000077.png",
+    "heading": -0.23438500152310426
+  },
+  {
+    "image_path": "val\\image_000078.png",
+    "heading": -0.07871426396195846
+  },
+  {
+    "image_path": "val\\image_000079.png",
+    "heading": -0.5812990653089689
+  },
+  {
+    "image_path": "val\\image_000080.png",
+    "heading": 0.7214775021071362
+  },
+  {
+    "image_path": "val\\image_000081.png",
+    "heading": 0.32239942228392304
+  },
+  {
+    "image_path": "val\\image_000082.png",
+    "heading": -0.7103716460683153
+  },
+  {
+    "image_path": "val\\image_000083.png",
+    "heading": -0.4101080332201463
+  },
+  {
+    "image_path": "val\\image_000084.png",
+    "heading": 0.5564304681447658
+  },
+  {
+    "image_path": "val\\image_000085.png",
+    "heading": 0.46245318583780026
+  },
+  {
+    "image_path": "val\\image_000086.png",
+    "heading": 0.6603103878521075
+  },
+  {
+    "image_path": "val\\image_000087.png",
+    "heading": 0.4702127585646294
+  },
+  {
+    "image_path": "val\\image_000088.png",
+    "heading": -0.2416460024051601
+  },
+  {
+    "image_path": "val\\image_000089.png",
+    "heading": 0.049341215970940655
+  },
+  {
+    "image_path": "val\\image_000090.png",
+    "heading": 0.3232711125035661
+  },
+  {
+    "image_path": "val\\image_000091.png",
+    "heading": -0.44436576506435005
+  },
+  {
+    "image_path": "val\\image_000092.png",
+    "heading": 0.5521976711521064
+  },
+  {
+    "image_path": "val\\image_000093.png",
+    "heading": 0.35775980468512136
+  },
+  {
+    "image_path": "val\\image_000094.png",
+    "heading": -0.6510957091161684
+  },
+  {
+    "image_path": "val\\image_000095.png",
+    "heading": -0.7693757973975968
+  },
+  {
+    "image_path": "val\\image_000096.png",
+    "heading": -0.46345484222932015
+  },
+  {
+    "image_path": "val\\image_000097.png",
+    "heading": -0.00795941030402103
+  },
+  {
+    "image_path": "val\\image_000098.png",
+    "heading": 0.4789371717965072
+  },
+  {
+    "image_path": "val\\image_000099.png",
+    "heading": 0.652925965060525
+  },
+  {
+    "image_path": "val\\image_000100.png",
+    "heading": -0.7488890535433523
+  },
+  {
+    "image_path": "val\\image_000101.png",
+    "heading": 0.35055510480514007
+  },
+  {
+    "image_path": "val\\image_000102.png",
+    "heading": -0.49442024595745004
+  },
+  {
+    "image_path": "val\\image_000103.png",
+    "heading": 0.3398251793894902
+  },
+  {
+    "image_path": "val\\image_000104.png",
+    "heading": 0.6543717280785317
+  },
+  {
+    "image_path": "val\\image_000105.png",
+    "heading": -0.5366138688526606
+  },
+  {
+    "image_path": "val\\image_000106.png",
+    "heading": -0.6388342109957861
+  },
+  {
+    "image_path": "val\\image_000107.png",
+    "heading": -0.2789673493514505
+  },
+  {
+    "image_path": "val\\image_000108.png",
+    "heading": 0.5643454790887235
+  },
+  {
+    "image_path": "val\\image_000109.png",
+    "heading": -0.6301158390772122
+  },
+  {
+    "image_path": "val\\image_000110.png",
+    "heading": -0.09501269791939071
+  },
+  {
+    "image_path": "val\\image_000111.png",
+    "heading": -0.6097609729385696
+  },
+  {
+    "image_path": "val\\image_000112.png",
+    "heading": 0.324024073297716
+  },
+  {
+    "image_path": "val\\image_000113.png",
+    "heading": -0.2251607626612352
+  },
+  {
+    "image_path": "val\\image_000114.png",
+    "heading": 0.5047563799495141
+  },
+  {
+    "image_path": "val\\image_000115.png",
+    "heading": -0.523774495989889
+  },
+  {
+    "image_path": "val\\image_000116.png",
+    "heading": -0.0733927581373931
+  },
+  {
+    "image_path": "val\\image_000117.png",
+    "heading": 0.24262169802896616
+  },
+  {
+    "image_path": "val\\image_000118.png",
+    "heading": 0.35149839281679296
+  },
+  {
+    "image_path": "val\\image_000119.png",
+    "heading": -0.09301415490408504
+  },
+  {
+    "image_path": "val\\image_000120.png",
+    "heading": -0.5669468351679618
+  },
+  {
+    "image_path": "val\\image_000121.png",
+    "heading": 0.1420714240706743
+  },
+  {
+    "image_path": "val\\image_000122.png",
+    "heading": 0.5101368849670149
+  },
+  {
+    "image_path": "val\\image_000123.png",
+    "heading": -0.662618333691826
+  },
+  {
+    "image_path": "val\\image_000124.png",
+    "heading": 0.7155043774143715
+  },
+  {
+    "image_path": "val\\image_000125.png",
+    "heading": 0.40308818211210196
+  },
+  {
+    "image_path": "val\\image_000126.png",
+    "heading": 0.3391462243555352
+  },
+  {
+    "image_path": "val\\image_000127.png",
+    "heading": -0.35391002803125776
+  },
+  {
+    "image_path": "val\\image_000128.png",
+    "heading": -0.7212644676092359
+  },
+  {
+    "image_path": "val\\image_000129.png",
+    "heading": 0.3327122904310411
+  },
+  {
+    "image_path": "val\\image_000130.png",
+    "heading": -0.6419911505374749
+  },
+  {
+    "image_path": "val\\image_000131.png",
+    "heading": 0.29564030889152204
+  },
+  {
+    "image_path": "val\\image_000132.png",
+    "heading": -0.7351490646806952
+  },
+  {
+    "image_path": "val\\image_000133.png",
+    "heading": 0.5196722877391573
+  },
+  {
+    "image_path": "val\\image_000134.png",
+    "heading": 0.6551013518633226
+  },
+  {
+    "image_path": "val\\image_000135.png",
+    "heading": -0.4539667793378731
+  },
+  {
+    "image_path": "val\\image_000136.png",
+    "heading": 0.5377547375685927
+  },
+  {
+    "image_path": "val\\image_000137.png",
+    "heading": -0.08937109090260498
+  },
+  {
+    "image_path": "val\\image_000138.png",
+    "heading": -0.4711201473798368
+  },
+  {
+    "image_path": "val\\image_000139.png",
+    "heading": 0.07435315611882332
+  },
+  {
+    "image_path": "val\\image_000140.png",
+    "heading": 0.022804363604457367
+  },
+  {
+    "image_path": "val\\image_000141.png",
+    "heading": -0.7472099105642837
+  },
+  {
+    "image_path": "val\\image_000142.png",
+    "heading": 0.7558446165021822
+  },
+  {
+    "image_path": "val\\image_000143.png",
+    "heading": -0.10064176081725396
+  },
+  {
+    "image_path": "val\\image_000144.png",
+    "heading": -0.49600752980353496
+  },
+  {
+    "image_path": "val\\image_000145.png",
+    "heading": 0.3550719077657587
+  },
+  {
+    "image_path": "val\\image_000146.png",
+    "heading": 0.7752991007955263
+  },
+  {
+    "image_path": "val\\image_000147.png",
+    "heading": 0.26370165230822473
+  },
+  {
+    "image_path": "val\\image_000148.png",
+    "heading": -0.4298339546552946
+  },
+  {
+    "image_path": "val\\image_000149.png",
+    "heading": -0.1874372904006394
+  },
+  {
+    "image_path": "val\\image_000150.png",
+    "heading": 0.7433174471151405
+  },
+  {
+    "image_path": "val\\image_000151.png",
+    "heading": -0.7503918903925273
+  },
+  {
+    "image_path": "val\\image_000152.png",
+    "heading": -0.32932402218260337
+  },
+  {
+    "image_path": "val\\image_000153.png",
+    "heading": -0.2596808852139346
+  },
+  {
+    "image_path": "val\\image_000154.png",
+    "heading": -0.08065825299153995
+  },
+  {
+    "image_path": "val\\image_000155.png",
+    "heading": -0.4011916834797375
+  },
+  {
+    "image_path": "val\\image_000156.png",
+    "heading": -0.5674590897197457
+  },
+  {
+    "image_path": "val\\image_000157.png",
+    "heading": 0.5407044018583196
+  },
+  {
+    "image_path": "val\\image_000158.png",
+    "heading": -0.12976942443471884
+  },
+  {
+    "image_path": "val\\image_000159.png",
+    "heading": -0.26373279281798756
+  },
+  {
+    "image_path": "val\\image_000160.png",
+    "heading": -0.6367096783491452
+  },
+  {
+    "image_path": "val\\image_000161.png",
+    "heading": -0.7272449315357541
+  },
+  {
+    "image_path": "val\\image_000162.png",
+    "heading": 0.07409416858407547
+  },
+  {
+    "image_path": "val\\image_000163.png",
+    "heading": 0.28582292013490584
+  },
+  {
+    "image_path": "val\\image_000164.png",
+    "heading": 0.6073694968327661
+  },
+  {
+    "image_path": "val\\image_000165.png",
+    "heading": 0.5770177867137167
+  },
+  {
+    "image_path": "val\\image_000166.png",
+    "heading": 0.6287683785700653
+  },
+  {
+    "image_path": "val\\image_000167.png",
+    "heading": -0.6767877144990878
+  },
+  {
+    "image_path": "val\\image_000168.png",
+    "heading": 0.32383313825216664
+  },
+  {
+    "image_path": "val\\image_000169.png",
+    "heading": 0.6907852611504284
+  },
+  {
+    "image_path": "val\\image_000170.png",
+    "heading": 0.09174767117985039
+  },
+  {
+    "image_path": "val\\image_000171.png",
+    "heading": -0.3622583149547012
+  },
+  {
+    "image_path": "val\\image_000172.png",
+    "heading": -0.498501438079772
+  },
+  {
+    "image_path": "val\\image_000173.png",
+    "heading": -0.5057943811450449
+  },
+  {
+    "image_path": "val\\image_000174.png",
+    "heading": -0.1344328765899795
+  },
+  {
+    "image_path": "val\\image_000175.png",
+    "heading": 0.7137098755720592
+  },
+  {
+    "image_path": "val\\image_000176.png",
+    "heading": -0.6508208621711591
+  },
+  {
+    "image_path": "val\\image_000177.png",
+    "heading": -0.21779033543673376
+  },
+  {
+    "image_path": "val\\image_000178.png",
+    "heading": 0.008022645143777263
+  },
+  {
+    "image_path": "val\\image_000179.png",
+    "heading": -0.7813920018582886
+  },
+  {
+    "image_path": "val\\image_000180.png",
+    "heading": 0.7826683799202141
+  },
+  {
+    "image_path": "val\\image_000181.png",
+    "heading": -0.12041858713828546
+  },
+  {
+    "image_path": "val\\image_000182.png",
+    "heading": 0.23744771010221877
+  },
+  {
+    "image_path": "val\\image_000183.png",
+    "heading": 0.6604212266103529
+  },
+  {
+    "image_path": "val\\image_000184.png",
+    "heading": -0.4921810665738913
+  },
+  {
+    "image_path": "val\\image_000185.png",
+    "heading": -0.46005500365157015
+  },
+  {
+    "image_path": "val\\image_000186.png",
+    "heading": 0.34663509880177035
+  },
+  {
+    "image_path": "val\\image_000187.png",
+    "heading": 0.26532798363738563
+  },
+  {
+    "image_path": "val\\image_000188.png",
+    "heading": 0.688274831103201
+  },
+  {
+    "image_path": "val\\image_000189.png",
+    "heading": -0.7236587203599777
+  },
+  {
+    "image_path": "val\\image_000190.png",
+    "heading": -0.13588601147423995
+  },
+  {
+    "image_path": "val\\image_000191.png",
+    "heading": -0.3909228550712374
+  },
+  {
+    "image_path": "val\\image_000192.png",
+    "heading": -0.5676960920108162
+  },
+  {
+    "image_path": "val\\image_000193.png",
+    "heading": 0.6671164632756499
+  },
+  {
+    "image_path": "val\\image_000194.png",
+    "heading": 0.13537676240906682
+  },
+  {
+    "image_path": "val\\image_000195.png",
+    "heading": 0.04814295466769414
+  },
+  {
+    "image_path": "val\\image_000196.png",
+    "heading": 0.1376550543290499
+  },
+  {
+    "image_path": "val\\image_000197.png",
+    "heading": 0.6755575482040563
+  },
+  {
+    "image_path": "val\\image_000198.png",
+    "heading": 0.7800424842035609
+  },
+  {
+    "image_path": "val\\image_000199.png",
+    "heading": -0.4955115558202343
+  }
+]

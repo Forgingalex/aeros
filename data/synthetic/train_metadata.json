@@ -1,0 +1,3202 @@
+[
+  {
+    "image_path": "train\\image_000000.png",
+    "heading": 0.08913386155338776
+  },
+  {
+    "image_path": "train\\image_000001.png",
+    "heading": 0.40633083539398274
+  },
+  {
+    "image_path": "train\\image_000002.png",
+    "heading": 0.3488855238415556
+  },
+  {
+    "image_path": "train\\image_000003.png",
+    "heading": -0.38832056828767314
+  },
+  {
+    "image_path": "train\\image_000004.png",
+    "heading": 0.38323678073421497
+  },
+  {
+    "image_path": "train\\image_000005.png",
+    "heading": 0.5073680729160568
+  },
+  {
+    "image_path": "train\\image_000006.png",
+    "heading": 0.6640872060469949
+  },
+  {
+    "image_path": "train\\image_000007.png",
+    "heading": -0.051706279279347234
+  },
+  {
+    "image_path": "train\\image_000008.png",
+    "heading": 0.270102528412725
+  },
+  {
+    "image_path": "train\\image_000009.png",
+    "heading": 0.24117370609169964
+  },
+  {
+    "image_path": "train\\image_000010.png",
+    "heading": -0.4992943497725746
+  },
+  {
+    "image_path": "train\\image_000011.png",
+    "heading": 0.749089713307971
+  },
+  {
+    "image_path": "train\\image_000012.png",
+    "heading": -0.4565568570787811
+  },
+  {
+    "image_path": "train\\image_000013.png",
+    "heading": 0.3830452316986157
+  },
+  {
+    "image_path": "train\\image_000014.png",
+    "heading": -0.2035866560330667
+  },
+  {
+    "image_path": "train\\image_000015.png",
+    "heading": 0.23022690533396029
+  },
+  {
+    "image_path": "train\\image_000016.png",
+    "heading": 0.7223026512090667
+  },
+  {
+    "image_path": "train\\image_000017.png",
+    "heading": 0.10747834327436134
+  },
+  {
+    "image_path": "train\\image_000018.png",
+    "heading": -0.6912034769930488
+  },
+  {
+    "image_path": "train\\image_000019.png",
+    "heading": 0.45562838171502307
+  },
+  {
+    "image_path": "train\\image_000020.png",
+    "heading": 0.4585207334473227
+  },
+  {
+    "image_path": "train\\image_000021.png",
+    "heading": 0.6802341796933216
+  },
+  {
+    "image_path": "train\\image_000022.png",
+    "heading": 0.08144954429080709
+  },
+  {
+    "image_path": "train\\image_000023.png",
+    "heading": -0.1417368112602606
+  },
+  {
+    "image_path": "train\\image_000024.png",
+    "heading": 0.6696570975069966
+  },
+  {
+    "image_path": "train\\image_000025.png",
+    "heading": -0.33761574410724593
+  },
+  {
+    "image_path": "train\\image_000026.png",
+    "heading": -0.053391021743547706
+  },
+  {
+    "image_path": "train\\image_000027.png",
+    "heading": 0.7351858633764816
+  },
+  {
+    "image_path": "train\\image_000028.png",
+    "heading": 0.28333798753755746
+  },
+  {
+    "image_path": "train\\image_000029.png",
+    "heading": 0.7379871819925374
+  },
+  {
+    "image_path": "train\\image_000030.png",
+    "heading": -0.1890072202870171
+  },
+  {
+    "image_path": "train\\image_000031.png",
+    "heading": 0.41920136580413914
+  },
+  {
+    "image_path": "train\\image_000032.png",
+    "heading": 0.3178862393089543
+  },
+  {
+    "image_path": "train\\image_000033.png",
+    "heading": 0.5450428715029556
+  },
+  {
+    "image_path": "train\\image_000034.png",
+    "heading": 0.5232556829264359
+  },
+  {
+    "image_path": "train\\image_000035.png",
+    "heading": -0.18076042940585102
+  },
+  {
+    "image_path": "train\\image_000036.png",
+    "heading": 0.7613912321694871
+  },
+  {
+    "image_path": "train\\image_000037.png",
+    "heading": -0.3962442324545745
+  },
+  {
+    "image_path": "train\\image_000038.png",
+    "heading": 0.596056754269118
+  },
+  {
+    "image_path": "train\\image_000039.png",
+    "heading": 0.11124163598802272
+  },
+  {
+    "image_path": "train\\image_000040.png",
+    "heading": -0.5882096622503361
+  },
+  {
+    "image_path": "train\\image_000041.png",
+    "heading": 0.37889735879862463
+  },
+  {
+    "image_path": "train\\image_000042.png",
+    "heading": -0.4479336833702307
+  },
+  {
+    "image_path": "train\\image_000043.png",
+    "heading": -0.36965443957936395
+  },
+  {
+    "image_path": "train\\image_000044.png",
+    "heading": 0.04434013198002196
+  },
+  {
+    "image_path": "train\\image_000045.png",
+    "heading": -0.7321629831701405
+  },
+  {
+    "image_path": "train\\image_000046.png",
+    "heading": 0.17874228904459466
+  },
+  {
+    "image_path": "train\\image_000047.png",
+    "heading": 0.37521716868097355
+  },
+  {
+    "image_path": "train\\image_000048.png",
+    "heading": -0.06097761819133518
+  },
+  {
+    "image_path": "train\\image_000049.png",
+    "heading": -0.07906461827524247
+  },
+  {
+    "image_path": "train\\image_000050.png",
+    "heading": -0.6424696004620167
+  },
+  {
+    "image_path": "train\\image_000051.png",
+    "heading": -0.21878968868146287
+  },
+  {
+    "image_path": "train\\image_000052.png",
+    "heading": -0.17069679100262602
+  },
+  {
+    "image_path": "train\\image_000053.png",
+    "heading": 0.5338170115855003
+  },
+  {
+    "image_path": "train\\image_000054.png",
+    "heading": 0.2335430313141187
+  },
+  {
+    "image_path": "train\\image_000055.png",
+    "heading": 0.2651974510079851
+  },
+  {
+    "image_path": "train\\image_000056.png",
+    "heading": -0.41523545390575467
+  },
+  {
+    "image_path": "train\\image_000057.png",
+    "heading": -0.2475053245268658
+  },
+  {
+    "image_path": "train\\image_000058.png",
+    "heading": 0.3650409476815559
+  },
+  {
+    "image_path": "train\\image_000059.png",
+    "heading": -0.5435417902949985
+  },
+  {
+    "image_path": "train\\image_000060.png",
+    "heading": 0.021798189527011957
+  },
+  {
+    "image_path": "train\\image_000061.png",
+    "heading": -0.7200290907325854
+  },
+  {
+    "image_path": "train\\image_000062.png",
+    "heading": 0.3442039864930455
+  },
+  {
+    "image_path": "train\\image_000063.png",
+    "heading": 0.06278469718074875
+  },
+  {
+    "image_path": "train\\image_000064.png",
+    "heading": -0.7075357215696936
+  },
+  {
+    "image_path": "train\\image_000065.png",
+    "heading": 0.3484714037060619
+  },
+  {
+    "image_path": "train\\image_000066.png",
+    "heading": -0.27737750680798834
+  },
+  {
+    "image_path": "train\\image_000067.png",
+    "heading": -0.6725735008584524
+  },
+  {
+    "image_path": "train\\image_000068.png",
+    "heading": 0.4892857100218133
+  },
+  {
+    "image_path": "train\\image_000069.png",
+    "heading": 0.2725731098577149
+  },
+  {
+    "image_path": "train\\image_000070.png",
+    "heading": -0.35091359990778276
+  },
+  {
+    "image_path": "train\\image_000071.png",
+    "heading": -0.4732854474426889
+  },
+  {
+    "image_path": "train\\image_000072.png",
+    "heading": -0.48126962264854695
+  },
+  {
+    "image_path": "train\\image_000073.png",
+    "heading": -0.46238787597171366
+  },
+  {
+    "image_path": "train\\image_000074.png",
+    "heading": 0.40881650590396235
+  },
+  {
+    "image_path": "train\\image_000075.png",
+    "heading": -0.37806667993124826
+  },
+  {
+    "image_path": "train\\image_000076.png",
+    "heading": 0.13667900758444107
+  },
+  {
+    "image_path": "train\\image_000077.png",
+    "heading": 0.04063190046074894
+  },
+  {
+    "image_path": "train\\image_000078.png",
+    "heading": 0.32716693244636574
+  },
+  {
+    "image_path": "train\\image_000079.png",
+    "heading": 0.6028071353319888
+  },
+  {
+    "image_path": "train\\image_000080.png",
+    "heading": 0.704682359669661
+  },
+  {
+    "image_path": "train\\image_000081.png",
+    "heading": -0.18994646777829904
+  },
+  {
+    "image_path": "train\\image_000082.png",
+    "heading": -0.4597157808330641
+  },
+  {
+    "image_path": "train\\image_000083.png",
+    "heading": 0.01755088655471304
+  },
+  {
+    "image_path": "train\\image_000084.png",
+    "heading": -0.7064117555575234
+  },
+  {
+    "image_path": "train\\image_000085.png",
+    "heading": -0.6687622984960699
+  },
+  {
+    "image_path": "train\\image_000086.png",
+    "heading": 0.16593565893797635
+  },
+  {
+    "image_path": "train\\image_000087.png",
+    "heading": 0.26229131725329946
+  },
+  {
+    "image_path": "train\\image_000088.png",
+    "heading": -0.16961445227828043
+  },
+  {
+    "image_path": "train\\image_000089.png",
+    "heading": -0.45917616793192606
+  },
+  {
+    "image_path": "train\\image_000090.png",
+    "heading": 0.2571184022553934
+  },
+  {
+    "image_path": "train\\image_000091.png",
+    "heading": 0.7530418715771796
+  },
+  {
+    "image_path": "train\\image_000092.png",
+    "heading": 0.2727828374912067
+  },
+  {
+    "image_path": "train\\image_000093.png",
+    "heading": -0.28256940277546505
+  },
+  {
+    "image_path": "train\\image_000094.png",
+    "heading": -0.7008263984794055
+  },
+  {
+    "image_path": "train\\image_000095.png",
+    "heading": -0.01627725012298642
+  },
+  {
+    "image_path": "train\\image_000096.png",
+    "heading": -0.4096259451487579
+  },
+  {
+    "image_path": "train\\image_000097.png",
+    "heading": 0.13203171537670488
+  },
+  {
+    "image_path": "train\\image_000098.png",
+    "heading": 0.20814341201366127
+  },
+  {
+    "image_path": "train\\image_000099.png",
+    "heading": -0.5791048975291716
+  },
+  {
+    "image_path": "train\\image_000100.png",
+    "heading": -0.4695871244481285
+  },
+  {
+    "image_path": "train\\image_000101.png",
+    "heading": -0.06618622772408422
+  },
+  {
+    "image_path": "train\\image_000102.png",
+    "heading": 0.36515323705869496
+  },
+  {
+    "image_path": "train\\image_000103.png",
+    "heading": 0.7533670020714764
+  },
+  {
+    "image_path": "train\\image_000104.png",
+    "heading": -0.3075153089492397
+  },
+  {
+    "image_path": "train\\image_000105.png",
+    "heading": -0.16069071147807235
+  },
+  {
+    "image_path": "train\\image_000106.png",
+    "heading": -0.095262424941018
+  },
+  {
+    "image_path": "train\\image_000107.png",
+    "heading": -0.3887279544843426
+  },
+  {
+    "image_path": "train\\image_000108.png",
+    "heading": 0.6630672274752214
+  },
+  {
+    "image_path": "train\\image_000109.png",
+    "heading": 0.7454845784045183
+  },
+  {
+    "image_path": "train\\image_000110.png",
+    "heading": 0.16964274353423303
+  },
+  {
+    "image_path": "train\\image_000111.png",
+    "heading": 0.12093393393183482
+  },
+  {
+    "image_path": "train\\image_000112.png",
+    "heading": -0.18941681072972505
+  },
+  {
+    "image_path": "train\\image_000113.png",
+    "heading": -0.6744308148367952
+  },
+  {
+    "image_path": "train\\image_000114.png",
+    "heading": 0.27512688823386333
+  },
+  {
+    "image_path": "train\\image_000115.png",
+    "heading": -0.006202972644293814
+  },
+  {
+    "image_path": "train\\image_000116.png",
+    "heading": -0.2708855652133886
+  },
+  {
+    "image_path": "train\\image_000117.png",
+    "heading": 0.1810712643365464
+  },
+  {
+    "image_path": "train\\image_000118.png",
+    "heading": -0.7008641487437633
+  },
+  {
+    "image_path": "train\\image_000119.png",
+    "heading": -0.5167746537027698
+  },
+  {
+    "image_path": "train\\image_000120.png",
+    "heading": -0.6123580846043865
+  },
+  {
+    "image_path": "train\\image_000121.png",
+    "heading": 0.6688030967629204
+  },
+  {
+    "image_path": "train\\image_000122.png",
+    "heading": 0.3184687771322543
+  },
+  {
+    "image_path": "train\\image_000123.png",
+    "heading": -0.5786532396465621
+  },
+  {
+    "image_path": "train\\image_000124.png",
+    "heading": 0.7837045708618984
+  },
+  {
+    "image_path": "train\\image_000125.png",
+    "heading": -0.5724322842065732
+  },
+  {
+    "image_path": "train\\image_000126.png",
+    "heading": -0.2676375979360004
+  },
+  {
+    "image_path": "train\\image_000127.png",
+    "heading": -0.7825911662951789
+  },
+  {
+    "image_path": "train\\image_000128.png",
+    "heading": 0.05829231510666655
+  },
+  {
+    "image_path": "train\\image_000129.png",
+    "heading": 0.4194889854291519
+  },
+  {
+    "image_path": "train\\image_000130.png",
+    "heading": 0.5906321605421883
+  },
+  {
+    "image_path": "train\\image_000131.png",
+    "heading": -0.34804230700266464
+  },
+  {
+    "image_path": "train\\image_000132.png",
+    "heading": -0.18371582461616498
+  },
+  {
+    "image_path": "train\\image_000133.png",
+    "heading": 0.0005036147296505478
+  },
+  {
+    "image_path": "train\\image_000134.png",
+    "heading": -0.3247279644432785
+  },
+  {
+    "image_path": "train\\image_000135.png",
+    "heading": -0.13727470871493597
+  },
+  {
+    "image_path": "train\\image_000136.png",
+    "heading": 0.1786830248332053
+  },
+  {
+    "image_path": "train\\image_000137.png",
+    "heading": -0.6645297807227274
+  },
+  {
+    "image_path": "train\\image_000138.png",
+    "heading": -0.2488629323589442
+  },
+  {
+    "image_path": "train\\image_000139.png",
+    "heading": 0.015123344954756757
+  },
+  {
+    "image_path": "train\\image_000140.png",
+    "heading": 0.04129534130218682
+  },
+  {
+    "image_path": "train\\image_000141.png",
+    "heading": -0.5593822613437363
+  },
+  {
+    "image_path": "train\\image_000142.png",
+    "heading": -0.5953705443086845
+  },
+  {
+    "image_path": "train\\image_000143.png",
+    "heading": 0.4918683749586481
+  },
+  {
+    "image_path": "train\\image_000144.png",
+    "heading": -0.7423583905210982
+  },
+  {
+    "image_path": "train\\image_000145.png",
+    "heading": -0.5638118665508115
+  },
+  {
+    "image_path": "train\\image_000146.png",
+    "heading": -0.1920035613618316
+  },
+  {
+    "image_path": "train\\image_000147.png",
+    "heading": -0.5747951384024416
+  },
+  {
+    "image_path": "train\\image_000148.png",
+    "heading": 0.6735420351050301
+  },
+  {
+    "image_path": "train\\image_000149.png",
+    "heading": -0.645281641352564
+  },
+  {
+    "image_path": "train\\image_000150.png",
+    "heading": -0.526199212076317
+  },
+  {
+    "image_path": "train\\image_000151.png",
+    "heading": 0.6530633101019123
+  },
+  {
+    "image_path": "train\\image_000152.png",
+    "heading": 0.5507537709523875
+  },
+  {
+    "image_path": "train\\image_000153.png",
+    "heading": -0.6522689350592715
+  },
+  {
+    "image_path": "train\\image_000154.png",
+    "heading": -0.3327267087429575
+  },
+  {
+    "image_path": "train\\image_000155.png",
+    "heading": 0.7467440860051144
+  },
+  {
+    "image_path": "train\\image_000156.png",
+    "heading": -0.3369895531922517
+  },
+  {
+    "image_path": "train\\image_000157.png",
+    "heading": -0.3489316094892487
+  },
+  {
+    "image_path": "train\\image_000158.png",
+    "heading": -0.3713455417902864
+  },
+  {
+    "image_path": "train\\image_000159.png",
+    "heading": 0.43309516725290487
+  },
+  {
+    "image_path": "train\\image_000160.png",
+    "heading": -0.700881152051913
+  },
+  {
+    "image_path": "train\\image_000161.png",
+    "heading": -0.40783543130364736
+  },
+  {
+    "image_path": "train\\image_000162.png",
+    "heading": 0.2724468993600446
+  },
+  {
+    "image_path": "train\\image_000163.png",
+    "heading": 0.3937486208070704
+  },
+  {
+    "image_path": "train\\image_000164.png",
+    "heading": 0.1287682389743302
+  },
+  {
+    "image_path": "train\\image_000165.png",
+    "heading": -0.5231942593712369
+  },
+  {
+    "image_path": "train\\image_000166.png",
+    "heading": 0.27624699237714356
+  },
+  {
+    "image_path": "train\\image_000167.png",
+    "heading": -0.2095506386441921
+  },
+  {
+    "image_path": "train\\image_000168.png",
+    "heading": 0.47847846947495487
+  },
+  {
+    "image_path": "train\\image_000169.png",
+    "heading": -0.4330882507705229
+  },
+  {
+    "image_path": "train\\image_000170.png",
+    "heading": 0.18319001366394494
+  },
+  {
+    "image_path": "train\\image_000171.png",
+    "heading": 0.26108739297260253
+  },
+  {
+    "image_path": "train\\image_000172.png",
+    "heading": 0.5423877632181844
+  },
+  {
+    "image_path": "train\\image_000173.png",
+    "heading": -0.30511065664120995
+  },
+  {
+    "image_path": "train\\image_000174.png",
+    "heading": -0.1872108127289216
+  },
+  {
+    "image_path": "train\\image_000175.png",
+    "heading": -0.37496840036941315
+  },
+  {
+    "image_path": "train\\image_000176.png",
+    "heading": 0.3520067518386001
+  },
+  {
+    "image_path": "train\\image_000177.png",
+    "heading": 0.7108353577683086
+  },
+  {
+    "image_path": "train\\image_000178.png",
+    "heading": -0.6910930507701646
+  },
+  {
+    "image_path": "train\\image_000179.png",
+    "heading": 0.6267684556932422
+  },
+  {
+    "image_path": "train\\image_000180.png",
+    "heading": 0.32818332433687214
+  },
+  {
+    "image_path": "train\\image_000181.png",
+    "heading": 0.05933261768012532
+  },
+  {
+    "image_path": "train\\image_000182.png",
+    "heading": 0.36184993498894014
+  },
+  {
+    "image_path": "train\\image_000183.png",
+    "heading": 0.742391020327003
+  },
+  {
+    "image_path": "train\\image_000184.png",
+    "heading": -0.7014387860021136
+  },
+  {
+    "image_path": "train\\image_000185.png",
+    "heading": 0.7338297354574346
+  },
+  {
+    "image_path": "train\\image_000186.png",
+    "heading": 0.2596291129802817
+  },
+  {
+    "image_path": "train\\image_000187.png",
+    "heading": -0.42146085513270887
+  },
+  {
+    "image_path": "train\\image_000188.png",
+    "heading": 0.21926562284039108
+  },
+  {
+    "image_path": "train\\image_000189.png",
+    "heading": -0.13828160992507177
+  },
+  {
+    "image_path": "train\\image_000190.png",
+    "heading": -0.601159697520814
+  },
+  {
+    "image_path": "train\\image_000191.png",
+    "heading": -0.7846760950812474
+  },
+  {
+    "image_path": "train\\image_000192.png",
+    "heading": -0.13250321133604503
+  },
+  {
+    "image_path": "train\\image_000193.png",
+    "heading": 0.25410676367519036
+  },
+  {
+    "image_path": "train\\image_000194.png",
+    "heading": 0.3491525728766529
+  },
+  {
+    "image_path": "train\\image_000195.png",
+    "heading": -0.5864583757039856
+  },
+  {
+    "image_path": "train\\image_000196.png",
+    "heading": 0.5620503355921274
+  },
+  {
+    "image_path": "train\\image_000197.png",
+    "heading": -0.5828225562009872
+  },
+  {
+    "image_path": "train\\image_000198.png",
+    "heading": 0.5619514178226823
+  },
+  {
+    "image_path": "train\\image_000199.png",
+    "heading": -0.38488841452398453
+  },
+  {
+    "image_path": "train\\image_000200.png",
+    "heading": 0.5559402839327985
+  },
+  {
+    "image_path": "train\\image_000201.png",
+    "heading": -0.6243011704013872
+  },
+  {
+    "image_path": "train\\image_000202.png",
+    "heading": 0.4937201497167245
+  },
+  {
+    "image_path": "train\\image_000203.png",
+    "heading": 0.3262468002624008
+  },
+  {
+    "image_path": "train\\image_000204.png",
+    "heading": 0.7227077263095627
+  },
+  {
+    "image_path": "train\\image_000205.png",
+    "heading": -0.45414649891874975
+  },
+  {
+    "image_path": "train\\image_000206.png",
+    "heading": 0.029707989355791886
+  },
+  {
+    "image_path": "train\\image_000207.png",
+    "heading": -0.2797823211711211
+  },
+  {
+    "image_path": "train\\image_000208.png",
+    "heading": 0.7660103361856865
+  },
+  {
+    "image_path": "train\\image_000209.png",
+    "heading": 0.19848401117263703
+  },
+  {
+    "image_path": "train\\image_000210.png",
+    "heading": 0.24299737488030737
+  },
+  {
+    "image_path": "train\\image_000211.png",
+    "heading": 0.4956761018107161
+  },
+  {
+    "image_path": "train\\image_000212.png",
+    "heading": 0.579471721848261
+  },
+  {
+    "image_path": "train\\image_000213.png",
+    "heading": -0.5116575250830343
+  },
+  {
+    "image_path": "train\\image_000214.png",
+    "heading": -0.29992525550650734
+  },
+  {
+    "image_path": "train\\image_000215.png",
+    "heading": 0.6321215999682863
+  },
+  {
+    "image_path": "train\\image_000216.png",
+    "heading": 0.47477501014885304
+  },
+  {
+    "image_path": "train\\image_000217.png",
+    "heading": 0.3768009763803757
+  },
+  {
+    "image_path": "train\\image_000218.png",
+    "heading": 0.14980270513461047
+  },
+  {
+    "image_path": "train\\image_000219.png",
+    "heading": 0.1701192859608741
+  },
+  {
+    "image_path": "train\\image_000220.png",
+    "heading": 0.49289456592210645
+  },
+  {
+    "image_path": "train\\image_000221.png",
+    "heading": 0.15987413928210215
+  },
+  {
+    "image_path": "train\\image_000222.png",
+    "heading": 0.046412398731963345
+  },
+  {
+    "image_path": "train\\image_000223.png",
+    "heading": -0.13579568103827178
+  },
+  {
+    "image_path": "train\\image_000224.png",
+    "heading": -0.4253962635886825
+  },
+  {
+    "image_path": "train\\image_000225.png",
+    "heading": -0.7416601911361402
+  },
+  {
+    "image_path": "train\\image_000226.png",
+    "heading": 0.33223776333017363
+  },
+  {
+    "image_path": "train\\image_000227.png",
+    "heading": -0.1932838328051596
+  },
+  {
+    "image_path": "train\\image_000228.png",
+    "heading": -0.5259141409300427
+  },
+  {
+    "image_path": "train\\image_000229.png",
+    "heading": 0.007292899310660128
+  },
+  {
+    "image_path": "train\\image_000230.png",
+    "heading": 0.4427420036289367
+  },
+  {
+    "image_path": "train\\image_000231.png",
+    "heading": -0.6809530657128872
+  },
+  {
+    "image_path": "train\\image_000232.png",
+    "heading": 0.5016483190951129
+  },
+  {
+    "image_path": "train\\image_000233.png",
+    "heading": -0.6738404184856477
+  },
+  {
+    "image_path": "train\\image_000234.png",
+    "heading": -0.6641091038921099
+  },
+  {
+    "image_path": "train\\image_000235.png",
+    "heading": 0.054294691775106485
+  },
+  {
+    "image_path": "train\\image_000236.png",
+    "heading": 0.13471219941859292
+  },
+  {
+    "image_path": "train\\image_000237.png",
+    "heading": -0.2903939863317483
+  },
+  {
+    "image_path": "train\\image_000238.png",
+    "heading": 0.5105282822476302
+  },
+  {
+    "image_path": "train\\image_000239.png",
+    "heading": 0.026557599940381538
+  },
+  {
+    "image_path": "train\\image_000240.png",
+    "heading": -0.34752268314648005
+  },
+  {
+    "image_path": "train\\image_000241.png",
+    "heading": -0.6305497282724176
+  },
+  {
+    "image_path": "train\\image_000242.png",
+    "heading": -0.635316822203538
+  },
+  {
+    "image_path": "train\\image_000243.png",
+    "heading": 0.6860707902920651
+  },
+  {
+    "image_path": "train\\image_000244.png",
+    "heading": -0.23710924468943384
+  },
+  {
+    "image_path": "train\\image_000245.png",
+    "heading": -0.10631673304837141
+  },
+  {
+    "image_path": "train\\image_000246.png",
+    "heading": 0.48832882985959336
+  },
+  {
+    "image_path": "train\\image_000247.png",
+    "heading": 0.6188699734371244
+  },
+  {
+    "image_path": "train\\image_000248.png",
+    "heading": -0.46874555651502625
+  },
+  {
+    "image_path": "train\\image_000249.png",
+    "heading": 0.642708331006296
+  },
+  {
+    "image_path": "train\\image_000250.png",
+    "heading": 0.4117635582231789
+  },
+  {
+    "image_path": "train\\image_000251.png",
+    "heading": -0.5055063034160506
+  },
+  {
+    "image_path": "train\\image_000252.png",
+    "heading": 0.4444227250099311
+  },
+  {
+    "image_path": "train\\image_000253.png",
+    "heading": 0.7386242201112205
+  },
+  {
+    "image_path": "train\\image_000254.png",
+    "heading": 0.0812630969956819
+  },
+  {
+    "image_path": "train\\image_000255.png",
+    "heading": -0.1498700924924452
+  },
+  {
+    "image_path": "train\\image_000256.png",
+    "heading": 0.3094217420417391
+  },
+  {
+    "image_path": "train\\image_000257.png",
+    "heading": 0.5924100680881448
+  },
+  {
+    "image_path": "train\\image_000258.png",
+    "heading": 0.33272111480069166
+  },
+  {
+    "image_path": "train\\image_000259.png",
+    "heading": 0.3076351840771494
+  },
+  {
+    "image_path": "train\\image_000260.png",
+    "heading": 0.28902711180606544
+  },
+  {
+    "image_path": "train\\image_000261.png",
+    "heading": -0.36482062893667166
+  },
+  {
+    "image_path": "train\\image_000262.png",
+    "heading": -0.37660589904571645
+  },
+  {
+    "image_path": "train\\image_000263.png",
+    "heading": -0.6933152837273063
+  },
+  {
+    "image_path": "train\\image_000264.png",
+    "heading": 0.5827624262182762
+  },
+  {
+    "image_path": "train\\image_000265.png",
+    "heading": -0.3381693796987967
+  },
+  {
+    "image_path": "train\\image_000266.png",
+    "heading": -0.759926560817909
+  },
+  {
+    "image_path": "train\\image_000267.png",
+    "heading": -0.2825459666793917
+  },
+  {
+    "image_path": "train\\image_000268.png",
+    "heading": 0.26053061044363424
+  },
+  {
+    "image_path": "train\\image_000269.png",
+    "heading": 0.7300855861141615
+  },
+  {
+    "image_path": "train\\image_000270.png",
+    "heading": 0.7434680892093275
+  },
+  {
+    "image_path": "train\\image_000271.png",
+    "heading": -0.1848784353438112
+  },
+  {
+    "image_path": "train\\image_000272.png",
+    "heading": -0.1398681793276556
+  },
+  {
+    "image_path": "train\\image_000273.png",
+    "heading": 0.43532482640545145
+  },
+  {
+    "image_path": "train\\image_000274.png",
+    "heading": 0.45436407213853713
+  },
+  {
+    "image_path": "train\\image_000275.png",
+    "heading": 0.7207071930559938
+  },
+  {
+    "image_path": "train\\image_000276.png",
+    "heading": -0.593680822624136
+  },
+  {
+    "image_path": "train\\image_000277.png",
+    "heading": 0.09117677383142175
+  },
+  {
+    "image_path": "train\\image_000278.png",
+    "heading": 0.4364500926483703
+  },
+  {
+    "image_path": "train\\image_000279.png",
+    "heading": -0.23219933351146238
+  },
+  {
+    "image_path": "train\\image_000280.png",
+    "heading": -0.41827280722220683
+  },
+  {
+    "image_path": "train\\image_000281.png",
+    "heading": -0.3392260868737704
+  },
+  {
+    "image_path": "train\\image_000282.png",
+    "heading": -0.30131507101101795
+  },
+  {
+    "image_path": "train\\image_000283.png",
+    "heading": -0.38001350611175644
+  },
+  {
+    "image_path": "train\\image_000284.png",
+    "heading": 0.7045192430789022
+  },
+  {
+    "image_path": "train\\image_000285.png",
+    "heading": 0.621463616415779
+  },
+  {
+    "image_path": "train\\image_000286.png",
+    "heading": 0.002154699923851422
+  },
+  {
+    "image_path": "train\\image_000287.png",
+    "heading": 0.07628022337376972
+  },
+  {
+    "image_path": "train\\image_000288.png",
+    "heading": -0.7515870112341954
+  },
+  {
+    "image_path": "train\\image_000289.png",
+    "heading": -0.33886577982926763
+  },
+  {
+    "image_path": "train\\image_000290.png",
+    "heading": 0.43057926051151085
+  },
+  {
+    "image_path": "train\\image_000291.png",
+    "heading": 0.6762277778553158
+  },
+  {
+    "image_path": "train\\image_000292.png",
+    "heading": 0.22163330498465794
+  },
+  {
+    "image_path": "train\\image_000293.png",
+    "heading": -0.033238833538785095
+  },
+  {
+    "image_path": "train\\image_000294.png",
+    "heading": 0.14757316681267585
+  },
+  {
+    "image_path": "train\\image_000295.png",
+    "heading": -0.609369980227406
+  },
+  {
+    "image_path": "train\\image_000296.png",
+    "heading": -0.3215278818068866
+  },
+  {
+    "image_path": "train\\image_000297.png",
+    "heading": 0.6605765893053237
+  },
+  {
+    "image_path": "train\\image_000298.png",
+    "heading": -0.3154780843799198
+  },
+  {
+    "image_path": "train\\image_000299.png",
+    "heading": -0.3457013280905724
+  },
+  {
+    "image_path": "train\\image_000300.png",
+    "heading": 0.5783142588936145
+  },
+  {
+    "image_path": "train\\image_000301.png",
+    "heading": 0.6650488108630783
+  },
+  {
+    "image_path": "train\\image_000302.png",
+    "heading": 0.6859743978367543
+  },
+  {
+    "image_path": "train\\image_000303.png",
+    "heading": -0.44662857266367206
+  },
+  {
+    "image_path": "train\\image_000304.png",
+    "heading": -0.5738900532060519
+  },
+  {
+    "image_path": "train\\image_000305.png",
+    "heading": -0.6583553656083454
+  },
+  {
+    "image_path": "train\\image_000306.png",
+    "heading": -0.4871843632266451
+  },
+  {
+    "image_path": "train\\image_000307.png",
+    "heading": -0.3654201419406899
+  },
+  {
+    "image_path": "train\\image_000308.png",
+    "heading": -0.035239549690939675
+  },
+  {
+    "image_path": "train\\image_000309.png",
+    "heading": 0.3844565255964787
+  },
+  {
+    "image_path": "train\\image_000310.png",
+    "heading": -0.6340164368949478
+  },
+  {
+    "image_path": "train\\image_000311.png",
+    "heading": -0.15454157616263942
+  },
+  {
+    "image_path": "train\\image_000312.png",
+    "heading": 0.13958637120134254
+  },
+  {
+    "image_path": "train\\image_000313.png",
+    "heading": 0.2922538055953168
+  },
+  {
+    "image_path": "train\\image_000314.png",
+    "heading": -0.20193549583982218
+  },
+  {
+    "image_path": "train\\image_000315.png",
+    "heading": -0.6845927748980964
+  },
+  {
+    "image_path": "train\\image_000316.png",
+    "heading": 0.6748694403539779
+  },
+  {
+    "image_path": "train\\image_000317.png",
+    "heading": -0.6682479114676371
+  },
+  {
+    "image_path": "train\\image_000318.png",
+    "heading": 0.4451408315482033
+  },
+  {
+    "image_path": "train\\image_000319.png",
+    "heading": -0.4776469767472031
+  },
+  {
+    "image_path": "train\\image_000320.png",
+    "heading": 0.09215413360077773
+  },
+  {
+    "image_path": "train\\image_000321.png",
+    "heading": 0.3965860425633094
+  },
+  {
+    "image_path": "train\\image_000322.png",
+    "heading": 0.22153504445062766
+  },
+  {
+    "image_path": "train\\image_000323.png",
+    "heading": 0.7349646947090906
+  },
+  {
+    "image_path": "train\\image_000324.png",
+    "heading": -0.4849408691866489
+  },
+  {
+    "image_path": "train\\image_000325.png",
+    "heading": -0.023140812594309335
+  },
+  {
+    "image_path": "train\\image_000326.png",
+    "heading": -0.7317131605963323
+  },
+  {
+    "image_path": "train\\image_000327.png",
+    "heading": -0.32214684555217576
+  },
+  {
+    "image_path": "train\\image_000328.png",
+    "heading": -0.32953607851387134
+  },
+  {
+    "image_path": "train\\image_000329.png",
+    "heading": -0.5413825023793323
+  },
+  {
+    "image_path": "train\\image_000330.png",
+    "heading": 0.32826952635655604
+  },
+  {
+    "image_path": "train\\image_000331.png",
+    "heading": 0.07202512240485048
+  },
+  {
+    "image_path": "train\\image_000332.png",
+    "heading": -0.7130354936410174
+  },
+  {
+    "image_path": "train\\image_000333.png",
+    "heading": -0.691039919743278
+  },
+  {
+    "image_path": "train\\image_000334.png",
+    "heading": -0.10402289884181637
+  },
+  {
+    "image_path": "train\\image_000335.png",
+    "heading": -0.5253679511705672
+  },
+  {
+    "image_path": "train\\image_000336.png",
+    "heading": 0.5339373408133576
+  },
+  {
+    "image_path": "train\\image_000337.png",
+    "heading": 0.45030536214033723
+  },
+  {
+    "image_path": "train\\image_000338.png",
+    "heading": 0.1775828254884645
+  },
+  {
+    "image_path": "train\\image_000339.png",
+    "heading": 0.3501582487139907
+  },
+  {
+    "image_path": "train\\image_000340.png",
+    "heading": -0.5109719059757458
+  },
+  {
+    "image_path": "train\\image_000341.png",
+    "heading": 0.04991643710674987
+  },
+  {
+    "image_path": "train\\image_000342.png",
+    "heading": 0.7189615225088306
+  },
+  {
+    "image_path": "train\\image_000343.png",
+    "heading": -0.7832993720227395
+  },
+  {
+    "image_path": "train\\image_000344.png",
+    "heading": 0.5152443786513456
+  },
+  {
+    "image_path": "train\\image_000345.png",
+    "heading": 0.03192888687024731
+  },
+  {
+    "image_path": "train\\image_000346.png",
+    "heading": -0.4199786321518782
+  },
+  {
+    "image_path": "train\\image_000347.png",
+    "heading": 0.17683694289641894
+  },
+  {
+    "image_path": "train\\image_000348.png",
+    "heading": 0.12526449407207318
+  },
+  {
+    "image_path": "train\\image_000349.png",
+    "heading": -0.12481518296882632
+  },
+  {
+    "image_path": "train\\image_000350.png",
+    "heading": -0.3892138639487264
+  },
+  {
+    "image_path": "train\\image_000351.png",
+    "heading": 0.5497176494856579
+  },
+  {
+    "image_path": "train\\image_000352.png",
+    "heading": 0.05025918551072661
+  },
+  {
+    "image_path": "train\\image_000353.png",
+    "heading": 0.3868425924416061
+  },
+  {
+    "image_path": "train\\image_000354.png",
+    "heading": 0.12270055043567296
+  },
+  {
+    "image_path": "train\\image_000355.png",
+    "heading": 0.5129227406750916
+  },
+  {
+    "image_path": "train\\image_000356.png",
+    "heading": 0.49515252232600804
+  },
+  {
+    "image_path": "train\\image_000357.png",
+    "heading": -0.7530435628498734
+  },
+  {
+    "image_path": "train\\image_000358.png",
+    "heading": 0.6563355109192772
+  },
+  {
+    "image_path": "train\\image_000359.png",
+    "heading": -0.6565546739995696
+  },
+  {
+    "image_path": "train\\image_000360.png",
+    "heading": -0.18933132246909234
+  },
+  {
+    "image_path": "train\\image_000361.png",
+    "heading": 0.07388648751383886
+  },
+  {
+    "image_path": "train\\image_000362.png",
+    "heading": 0.5261978432308538
+  },
+  {
+    "image_path": "train\\image_000363.png",
+    "heading": -0.5402027164561936
+  },
+  {
+    "image_path": "train\\image_000364.png",
+    "heading": -0.3695682166161317
+  },
+  {
+    "image_path": "train\\image_000365.png",
+    "heading": -0.2687513313680139
+  },
+  {
+    "image_path": "train\\image_000366.png",
+    "heading": -0.04377412725733798
+  },
+  {
+    "image_path": "train\\image_000367.png",
+    "heading": -0.7817515184330665
+  },
+  {
+    "image_path": "train\\image_000368.png",
+    "heading": 0.0010261309456667256
+  },
+  {
+    "image_path": "train\\image_000369.png",
+    "heading": 0.6614181943444803
+  },
+  {
+    "image_path": "train\\image_000370.png",
+    "heading": -0.7849171982546932
+  },
+  {
+    "image_path": "train\\image_000371.png",
+    "heading": -0.40735855403014093
+  },
+  {
+    "image_path": "train\\image_000372.png",
+    "heading": 0.5893069213040754
+  },
+  {
+    "image_path": "train\\image_000373.png",
+    "heading": -0.3107199006487879
+  },
+  {
+    "image_path": "train\\image_000374.png",
+    "heading": -0.32218437233779573
+  },
+  {
+    "image_path": "train\\image_000375.png",
+    "heading": -0.7398822525007098
+  },
+  {
+    "image_path": "train\\image_000376.png",
+    "heading": 0.42703527216069603
+  },
+  {
+    "image_path": "train\\image_000377.png",
+    "heading": -0.0998307635295358
+  },
+  {
+    "image_path": "train\\image_000378.png",
+    "heading": -0.4117216182420519
+  },
+  {
+    "image_path": "train\\image_000379.png",
+    "heading": 0.7378636716887488
+  },
+  {
+    "image_path": "train\\image_000380.png",
+    "heading": -0.3945698208138911
+  },
+  {
+    "image_path": "train\\image_000381.png",
+    "heading": -0.6734149703890671
+  },
+  {
+    "image_path": "train\\image_000382.png",
+    "heading": 0.4477028929431215
+  },
+  {
+    "image_path": "train\\image_000383.png",
+    "heading": 0.5163877920492175
+  },
+  {
+    "image_path": "train\\image_000384.png",
+    "heading": -0.6284030388422892
+  },
+  {
+    "image_path": "train\\image_000385.png",
+    "heading": 0.13940447010596935
+  },
+  {
+    "image_path": "train\\image_000386.png",
+    "heading": -0.2308271833350356
+  },
+  {
+    "image_path": "train\\image_000387.png",
+    "heading": 0.5477217487135508
+  },
+  {
+    "image_path": "train\\image_000388.png",
+    "heading": -0.763919579412787
+  },
+  {
+    "image_path": "train\\image_000389.png",
+    "heading": 0.21467134548235878
+  },
+  {
+    "image_path": "train\\image_000390.png",
+    "heading": -0.3293472469001428
+  },
+  {
+    "image_path": "train\\image_000391.png",
+    "heading": -0.08993237187361236
+  },
+  {
+    "image_path": "train\\image_000392.png",
+    "heading": -0.2816131231020348
+  },
+  {
+    "image_path": "train\\image_000393.png",
+    "heading": -0.030157985320064307
+  },
+  {
+    "image_path": "train\\image_000394.png",
+    "heading": 0.7632093275713481
+  },
+  {
+    "image_path": "train\\image_000395.png",
+    "heading": 0.06114748421856919
+  },
+  {
+    "image_path": "train\\image_000396.png",
+    "heading": -0.30664948119508745
+  },
+  {
+    "image_path": "train\\image_000397.png",
+    "heading": -0.1663986950709203
+  },
+  {
+    "image_path": "train\\image_000398.png",
+    "heading": 0.07038843716379839
+  },
+  {
+    "image_path": "train\\image_000399.png",
+    "heading": 0.1766784439135196
+  },
+  {
+    "image_path": "train\\image_000400.png",
+    "heading": -0.48342422821709496
+  },
+  {
+    "image_path": "train\\image_000401.png",
+    "heading": -0.10378168944492094
+  },
+  {
+    "image_path": "train\\image_000402.png",
+    "heading": 0.6132984745098131
+  },
+  {
+    "image_path": "train\\image_000403.png",
+    "heading": 0.5885056495084215
+  },
+  {
+    "image_path": "train\\image_000404.png",
+    "heading": -0.6570112929739178
+  },
+  {
+    "image_path": "train\\image_000405.png",
+    "heading": 0.6950556228823899
+  },
+  {
+    "image_path": "train\\image_000406.png",
+    "heading": 0.11443670669288397
+  },
+  {
+    "image_path": "train\\image_000407.png",
+    "heading": 0.6372709388957052
+  },
+  {
+    "image_path": "train\\image_000408.png",
+    "heading": 0.1602131038772331
+  },
+  {
+    "image_path": "train\\image_000409.png",
+    "heading": -0.6582240166099138
+  },
+  {
+    "image_path": "train\\image_000410.png",
+    "heading": -0.5610120961266951
+  },
+  {
+    "image_path": "train\\image_000411.png",
+    "heading": -0.2527334824553392
+  },
+  {
+    "image_path": "train\\image_000412.png",
+    "heading": 0.39640638818550333
+  },
+  {
+    "image_path": "train\\image_000413.png",
+    "heading": -0.46773063921847274
+  },
+  {
+    "image_path": "train\\image_000414.png",
+    "heading": 0.39537325483206964
+  },
+  {
+    "image_path": "train\\image_000415.png",
+    "heading": 0.10103586778451268
+  },
+  {
+    "image_path": "train\\image_000416.png",
+    "heading": -0.41675849096981454
+  },
+  {
+    "image_path": "train\\image_000417.png",
+    "heading": 0.38556961874776285
+  },
+  {
+    "image_path": "train\\image_000418.png",
+    "heading": 0.434905132864396
+  },
+  {
+    "image_path": "train\\image_000419.png",
+    "heading": -0.5331259695324126
+  },
+  {
+    "image_path": "train\\image_000420.png",
+    "heading": 0.4975086190755462
+  },
+  {
+    "image_path": "train\\image_000421.png",
+    "heading": -0.025359006241456927
+  },
+  {
+    "image_path": "train\\image_000422.png",
+    "heading": -0.41428998480059676
+  },
+  {
+    "image_path": "train\\image_000423.png",
+    "heading": -0.6252065262740312
+  },
+  {
+    "image_path": "train\\image_000424.png",
+    "heading": 0.6538676506703505
+  },
+  {
+    "image_path": "train\\image_000425.png",
+    "heading": 0.35067700691104386
+  },
+  {
+    "image_path": "train\\image_000426.png",
+    "heading": 0.5672181601833244
+  },
+  {
+    "image_path": "train\\image_000427.png",
+    "heading": -0.5085654790223424
+  },
+  {
+    "image_path": "train\\image_000428.png",
+    "heading": 0.0899370125826443
+  },
+  {
+    "image_path": "train\\image_000429.png",
+    "heading": 0.00791604514429367
+  },
+  {
+    "image_path": "train\\image_000430.png",
+    "heading": 0.07451760779941696
+  },
+  {
+    "image_path": "train\\image_000431.png",
+    "heading": -0.36002818235595324
+  },
+  {
+    "image_path": "train\\image_000432.png",
+    "heading": -0.2824563414463166
+  },
+  {
+    "image_path": "train\\image_000433.png",
+    "heading": -0.3276689594483406
+  },
+  {
+    "image_path": "train\\image_000434.png",
+    "heading": 0.7518335953737747
+  },
+  {
+    "image_path": "train\\image_000435.png",
+    "heading": 0.6588158834078146
+  },
+  {
+    "image_path": "train\\image_000436.png",
+    "heading": -0.30011863810038614
+  },
+  {
+    "image_path": "train\\image_000437.png",
+    "heading": -0.29557093603508766
+  },
+  {
+    "image_path": "train\\image_000438.png",
+    "heading": 0.6961362799084752
+  },
+  {
+    "image_path": "train\\image_000439.png",
+    "heading": -0.39773143243689135
+  },
+  {
+    "image_path": "train\\image_000440.png",
+    "heading": -0.3068830447332387
+  },
+  {
+    "image_path": "train\\image_000441.png",
+    "heading": 0.0005349632514896063
+  },
+  {
+    "image_path": "train\\image_000442.png",
+    "heading": 0.23903086983706112
+  },
+  {
+    "image_path": "train\\image_000443.png",
+    "heading": -0.41863905375894794
+  },
+  {
+    "image_path": "train\\image_000444.png",
+    "heading": -0.3060665070930595
+  },
+  {
+    "image_path": "train\\image_000445.png",
+    "heading": 0.15702691383685063
+  },
+  {
+    "image_path": "train\\image_000446.png",
+    "heading": 0.4521685162284177
+  },
+  {
+    "image_path": "train\\image_000447.png",
+    "heading": -0.7434410646783849
+  },
+  {
+    "image_path": "train\\image_000448.png",
+    "heading": -0.3104198843579321
+  },
+  {
+    "image_path": "train\\image_000449.png",
+    "heading": 0.21861447741794748
+  },
+  {
+    "image_path": "train\\image_000450.png",
+    "heading": -0.1046298668809138
+  },
+  {
+    "image_path": "train\\image_000451.png",
+    "heading": 0.07692736836254965
+  },
+  {
+    "image_path": "train\\image_000452.png",
+    "heading": 0.6348297098335054
+  },
+  {
+    "image_path": "train\\image_000453.png",
+    "heading": 0.6819706757676911
+  },
+  {
+    "image_path": "train\\image_000454.png",
+    "heading": -0.3576447515050505
+  },
+  {
+    "image_path": "train\\image_000455.png",
+    "heading": -0.705726010368153
+  },
+  {
+    "image_path": "train\\image_000456.png",
+    "heading": 0.5443206193675041
+  },
+  {
+    "image_path": "train\\image_000457.png",
+    "heading": -0.20174531128363404
+  },
+  {
+    "image_path": "train\\image_000458.png",
+    "heading": 0.5291613314304662
+  },
+  {
+    "image_path": "train\\image_000459.png",
+    "heading": -0.6782709768363808
+  },
+  {
+    "image_path": "train\\image_000460.png",
+    "heading": 0.05846051853470402
+  },
+  {
+    "image_path": "train\\image_000461.png",
+    "heading": 0.06569989685929967
+  },
+  {
+    "image_path": "train\\image_000462.png",
+    "heading": -0.28642525983736344
+  },
+  {
+    "image_path": "train\\image_000463.png",
+    "heading": 0.7407714626367266
+  },
+  {
+    "image_path": "train\\image_000464.png",
+    "heading": 0.4910882296418113
+  },
+  {
+    "image_path": "train\\image_000465.png",
+    "heading": -0.6903833470483195
+  },
+  {
+    "image_path": "train\\image_000466.png",
+    "heading": -0.021257395628658138
+  },
+  {
+    "image_path": "train\\image_000467.png",
+    "heading": 0.6525642857413849
+  },
+  {
+    "image_path": "train\\image_000468.png",
+    "heading": -0.6949376786236422
+  },
+  {
+    "image_path": "train\\image_000469.png",
+    "heading": 0.7632998899028234
+  },
+  {
+    "image_path": "train\\image_000470.png",
+    "heading": 0.702568361948863
+  },
+  {
+    "image_path": "train\\image_000471.png",
+    "heading": -0.37224645271965245
+  },
+  {
+    "image_path": "train\\image_000472.png",
+    "heading": -0.6795853494477357
+  },
+  {
+    "image_path": "train\\image_000473.png",
+    "heading": 0.729666764869241
+  },
+  {
+    "image_path": "train\\image_000474.png",
+    "heading": 0.1171245855645483
+  },
+  {
+    "image_path": "train\\image_000475.png",
+    "heading": 0.42553253809835634
+  },
+  {
+    "image_path": "train\\image_000476.png",
+    "heading": -0.15389643812175635
+  },
+  {
+    "image_path": "train\\image_000477.png",
+    "heading": 0.3104700670412188
+  },
+  {
+    "image_path": "train\\image_000478.png",
+    "heading": 0.5131716798601673
+  },
+  {
+    "image_path": "train\\image_000479.png",
+    "heading": 0.24382143223377306
+  },
+  {
+    "image_path": "train\\image_000480.png",
+    "heading": 0.09017550301276245
+  },
+  {
+    "image_path": "train\\image_000481.png",
+    "heading": 0.7538118910248839
+  },
+  {
+    "image_path": "train\\image_000482.png",
+    "heading": 0.5235030044130768
+  },
+  {
+    "image_path": "train\\image_000483.png",
+    "heading": 0.0018013615787689785
+  },
+  {
+    "image_path": "train\\image_000484.png",
+    "heading": -0.603134903613689
+  },
+  {
+    "image_path": "train\\image_000485.png",
+    "heading": -0.7764641787051901
+  },
+  {
+    "image_path": "train\\image_000486.png",
+    "heading": -0.48696625538410887
+  },
+  {
+    "image_path": "train\\image_000487.png",
+    "heading": -0.468164192493151
+  },
+  {
+    "image_path": "train\\image_000488.png",
+    "heading": -0.35857832724542926
+  },
+  {
+    "image_path": "train\\image_000489.png",
+    "heading": 0.47496205146412507
+  },
+  {
+    "image_path": "train\\image_000490.png",
+    "heading": -0.05783933256288054
+  },
+  {
+    "image_path": "train\\image_000491.png",
+    "heading": 0.49876413972337263
+  },
+  {
+    "image_path": "train\\image_000492.png",
+    "heading": -0.07670863278923667
+  },
+  {
+    "image_path": "train\\image_000493.png",
+    "heading": -0.10429737165085884
+  },
+  {
+    "image_path": "train\\image_000494.png",
+    "heading": -0.5349271797731925
+  },
+  {
+    "image_path": "train\\image_000495.png",
+    "heading": -0.11070118264302864
+  },
+  {
+    "image_path": "train\\image_000496.png",
+    "heading": 0.7532044459488314
+  },
+  {
+    "image_path": "train\\image_000497.png",
+    "heading": -0.6874287951317543
+  },
+  {
+    "image_path": "train\\image_000498.png",
+    "heading": 0.3415743708561023
+  },
+  {
+    "image_path": "train\\image_000499.png",
+    "heading": 0.35852723133925557
+  },
+  {
+    "image_path": "train\\image_000500.png",
+    "heading": -0.0487843528052625
+  },
+  {
+    "image_path": "train\\image_000501.png",
+    "heading": -0.559914898578888
+  },
+  {
+    "image_path": "train\\image_000502.png",
+    "heading": 0.6821306935907416
+  },
+  {
+    "image_path": "train\\image_000503.png",
+    "heading": 0.18119883020573668
+  },
+  {
+    "image_path": "train\\image_000504.png",
+    "heading": 0.5850507572705594
+  },
+  {
+    "image_path": "train\\image_000505.png",
+    "heading": 0.4070875210599436
+  },
+  {
+    "image_path": "train\\image_000506.png",
+    "heading": -0.00613523498253854
+  },
+  {
+    "image_path": "train\\image_000507.png",
+    "heading": 0.4084157389012957
+  },
+  {
+    "image_path": "train\\image_000508.png",
+    "heading": 0.3210784913148028
+  },
+  {
+    "image_path": "train\\image_000509.png",
+    "heading": 0.39414497289275574
+  },
+  {
+    "image_path": "train\\image_000510.png",
+    "heading": -0.4655067643098299
+  },
+  {
+    "image_path": "train\\image_000511.png",
+    "heading": -0.5299357518935106
+  },
+  {
+    "image_path": "train\\image_000512.png",
+    "heading": 0.7234236782083243
+  },
+  {
+    "image_path": "train\\image_000513.png",
+    "heading": 0.6596776763975565
+  },
+  {
+    "image_path": "train\\image_000514.png",
+    "heading": -0.760187555469802
+  },
+  {
+    "image_path": "train\\image_000515.png",
+    "heading": 0.5469036918471337
+  },
+  {
+    "image_path": "train\\image_000516.png",
+    "heading": -0.6910607095419362
+  },
+  {
+    "image_path": "train\\image_000517.png",
+    "heading": -0.6909530087670019
+  },
+  {
+    "image_path": "train\\image_000518.png",
+    "heading": 0.33903872841613913
+  },
+  {
+    "image_path": "train\\image_000519.png",
+    "heading": 0.3346753750086837
+  },
+  {
+    "image_path": "train\\image_000520.png",
+    "heading": 0.621635530235547
+  },
+  {
+    "image_path": "train\\image_000521.png",
+    "heading": 0.23773712822243853
+  },
+  {
+    "image_path": "train\\image_000522.png",
+    "heading": -0.17411586742500118
+  },
+  {
+    "image_path": "train\\image_000523.png",
+    "heading": -0.10646489711811769
+  },
+  {
+    "image_path": "train\\image_000524.png",
+    "heading": -0.15859040765287258
+  },
+  {
+    "image_path": "train\\image_000525.png",
+    "heading": -0.1450596329165823
+  },
+  {
+    "image_path": "train\\image_000526.png",
+    "heading": 0.586286283271443
+  },
+  {
+    "image_path": "train\\image_000527.png",
+    "heading": -0.266383538932223
+  },
+  {
+    "image_path": "train\\image_000528.png",
+    "heading": 0.03962957262672695
+  },
+  {
+    "image_path": "train\\image_000529.png",
+    "heading": -0.3801656501802641
+  },
+  {
+    "image_path": "train\\image_000530.png",
+    "heading": 0.7439816977127809
+  },
+  {
+    "image_path": "train\\image_000531.png",
+    "heading": -0.5860285815837674
+  },
+  {
+    "image_path": "train\\image_000532.png",
+    "heading": -0.6682942919287513
+  },
+  {
+    "image_path": "train\\image_000533.png",
+    "heading": 0.7355830006504549
+  },
+  {
+    "image_path": "train\\image_000534.png",
+    "heading": -0.06336482320462367
+  },
+  {
+    "image_path": "train\\image_000535.png",
+    "heading": -0.0004826332413757628
+  },
+  {
+    "image_path": "train\\image_000536.png",
+    "heading": 0.65618235054886
+  },
+  {
+    "image_path": "train\\image_000537.png",
+    "heading": -0.44525013691416215
+  },
+  {
+    "image_path": "train\\image_000538.png",
+    "heading": -0.18587432779532465
+  },
+  {
+    "image_path": "train\\image_000539.png",
+    "heading": 0.2984562826207069
+  },
+  {
+    "image_path": "train\\image_000540.png",
+    "heading": 0.5577386832095133
+  },
+  {
+    "image_path": "train\\image_000541.png",
+    "heading": 0.44755025789813385
+  },
+  {
+    "image_path": "train\\image_000542.png",
+    "heading": 0.651678375706886
+  },
+  {
+    "image_path": "train\\image_000543.png",
+    "heading": -0.5783076658151329
+  },
+  {
+    "image_path": "train\\image_000544.png",
+    "heading": 0.7462571966840623
+  },
+  {
+    "image_path": "train\\image_000545.png",
+    "heading": -0.2105604302880132
+  },
+  {
+    "image_path": "train\\image_000546.png",
+    "heading": -0.07760655300779684
+  },
+  {
+    "image_path": "train\\image_000547.png",
+    "heading": -0.5411597711313416
+  },
+  {
+    "image_path": "train\\image_000548.png",
+    "heading": -0.775251053713834
+  },
+  {
+    "image_path": "train\\image_000549.png",
+    "heading": -0.4042513178655934
+  },
+  {
+    "image_path": "train\\image_000550.png",
+    "heading": 0.20846732132491075
+  },
+  {
+    "image_path": "train\\image_000551.png",
+    "heading": 0.25176528016227606
+  },
+  {
+    "image_path": "train\\image_000552.png",
+    "heading": 0.036944286832901296
+  },
+  {
+    "image_path": "train\\image_000553.png",
+    "heading": 0.3300067655958834
+  },
+  {
+    "image_path": "train\\image_000554.png",
+    "heading": -0.6754284274658405
+  },
+  {
+    "image_path": "train\\image_000555.png",
+    "heading": 0.35181023204304407
+  },
+  {
+    "image_path": "train\\image_000556.png",
+    "heading": -0.08694099769390062
+  },
+  {
+    "image_path": "train\\image_000557.png",
+    "heading": 0.5116653719606599
+  },
+  {
+    "image_path": "train\\image_000558.png",
+    "heading": -0.5990654276799726
+  },
+  {
+    "image_path": "train\\image_000559.png",
+    "heading": 0.17734663538608997
+  },
+  {
+    "image_path": "train\\image_000560.png",
+    "heading": -0.15746909549190613
+  },
+  {
+    "image_path": "train\\image_000561.png",
+    "heading": 0.18485915761437421
+  },
+  {
+    "image_path": "train\\image_000562.png",
+    "heading": 0.13145134243885592
+  },
+  {
+    "image_path": "train\\image_000563.png",
+    "heading": 0.4951398832212204
+  },
+  {
+    "image_path": "train\\image_000564.png",
+    "heading": -0.2374454784516239
+  },
+  {
+    "image_path": "train\\image_000565.png",
+    "heading": -0.3785092474622321
+  },
+  {
+    "image_path": "train\\image_000566.png",
+    "heading": -0.7439646890014497
+  },
+  {
+    "image_path": "train\\image_000567.png",
+    "heading": 0.623836536486756
+  },
+  {
+    "image_path": "train\\image_000568.png",
+    "heading": -0.26452257172548843
+  },
+  {
+    "image_path": "train\\image_000569.png",
+    "heading": 0.2823868568125323
+  },
+  {
+    "image_path": "train\\image_000570.png",
+    "heading": 0.3174150456460305
+  },
+  {
+    "image_path": "train\\image_000571.png",
+    "heading": -0.012984628594447267
+  },
+  {
+    "image_path": "train\\image_000572.png",
+    "heading": 0.06104081965830599
+  },
+  {
+    "image_path": "train\\image_000573.png",
+    "heading": -0.4582810674509614
+  },
+  {
+    "image_path": "train\\image_000574.png",
+    "heading": -0.03469704759696979
+  },
+  {
+    "image_path": "train\\image_000575.png",
+    "heading": -0.46787297990459265
+  },
+  {
+    "image_path": "train\\image_000576.png",
+    "heading": 0.09267950622582533
+  },
+  {
+    "image_path": "train\\image_000577.png",
+    "heading": -0.3000336743993301
+  },
+  {
+    "image_path": "train\\image_000578.png",
+    "heading": -0.23899877668473435
+  },
+  {
+    "image_path": "train\\image_000579.png",
+    "heading": -0.25240388343229536
+  },
+  {
+    "image_path": "train\\image_000580.png",
+    "heading": 0.2934465868113456
+  },
+  {
+    "image_path": "train\\image_000581.png",
+    "heading": 0.07527458040793833
+  },
+  {
+    "image_path": "train\\image_000582.png",
+    "heading": -0.3067931583518692
+  },
+  {
+    "image_path": "train\\image_000583.png",
+    "heading": 0.12833526000584095
+  },
+  {
+    "image_path": "train\\image_000584.png",
+    "heading": -0.6423652427148459
+  },
+  {
+    "image_path": "train\\image_000585.png",
+    "heading": -0.6615606788770999
+  },
+  {
+    "image_path": "train\\image_000586.png",
+    "heading": 0.4021447794329558
+  },
+  {
+    "image_path": "train\\image_000587.png",
+    "heading": 0.2596412795473002
+  },
+  {
+    "image_path": "train\\image_000588.png",
+    "heading": 0.6665690492016607
+  },
+  {
+    "image_path": "train\\image_000589.png",
+    "heading": -0.7850942988063726
+  },
+  {
+    "image_path": "train\\image_000590.png",
+    "heading": -0.0727077380117993
+  },
+  {
+    "image_path": "train\\image_000591.png",
+    "heading": -0.030289940076645094
+  },
+  {
+    "image_path": "train\\image_000592.png",
+    "heading": -0.41698677120650396
+  },
+  {
+    "image_path": "train\\image_000593.png",
+    "heading": -0.2313186716984058
+  },
+  {
+    "image_path": "train\\image_000594.png",
+    "heading": -0.5016151829427649
+  },
+  {
+    "image_path": "train\\image_000595.png",
+    "heading": 0.7348496055438827
+  },
+  {
+    "image_path": "train\\image_000596.png",
+    "heading": -0.7659926804476127
+  },
+  {
+    "image_path": "train\\image_000597.png",
+    "heading": -0.633014712406378
+  },
+  {
+    "image_path": "train\\image_000598.png",
+    "heading": 0.3106319899890617
+  },
+  {
+    "image_path": "train\\image_000599.png",
+    "heading": 0.6355052249381206
+  },
+  {
+    "image_path": "train\\image_000600.png",
+    "heading": 0.028037388936668184
+  },
+  {
+    "image_path": "train\\image_000601.png",
+    "heading": -0.24889858408676446
+  },
+  {
+    "image_path": "train\\image_000602.png",
+    "heading": -0.36224286729218536
+  },
+  {
+    "image_path": "train\\image_000603.png",
+    "heading": 0.35716036499615655
+  },
+  {
+    "image_path": "train\\image_000604.png",
+    "heading": 0.045629839682764795
+  },
+  {
+    "image_path": "train\\image_000605.png",
+    "heading": -0.4132978251146157
+  },
+  {
+    "image_path": "train\\image_000606.png",
+    "heading": 0.35469498242727027
+  },
+  {
+    "image_path": "train\\image_000607.png",
+    "heading": 0.36862680619376076
+  },
+  {
+    "image_path": "train\\image_000608.png",
+    "heading": -0.3988474611840405
+  },
+  {
+    "image_path": "train\\image_000609.png",
+    "heading": -0.650135582010919
+  },
+  {
+    "image_path": "train\\image_000610.png",
+    "heading": 0.27241389698202423
+  },
+  {
+    "image_path": "train\\image_000611.png",
+    "heading": 0.4633496896375373
+  },
+  {
+    "image_path": "train\\image_000612.png",
+    "heading": -0.7383224007984387
+  },
+  {
+    "image_path": "train\\image_000613.png",
+    "heading": 0.13004864856780274
+  },
+  {
+    "image_path": "train\\image_000614.png",
+    "heading": -0.36646208517482737
+  },
+  {
+    "image_path": "train\\image_000615.png",
+    "heading": -0.2109645526934828
+  },
+  {
+    "image_path": "train\\image_000616.png",
+    "heading": 0.48391789800734863
+  },
+  {
+    "image_path": "train\\image_000617.png",
+    "heading": -0.18006927104200532
+  },
+  {
+    "image_path": "train\\image_000618.png",
+    "heading": -0.07184760340385987
+  },
+  {
+    "image_path": "train\\image_000619.png",
+    "heading": -0.588525386553232
+  },
+  {
+    "image_path": "train\\image_000620.png",
+    "heading": -0.7575702434222472
+  },
+  {
+    "image_path": "train\\image_000621.png",
+    "heading": 0.425405423748243
+  },
+  {
+    "image_path": "train\\image_000622.png",
+    "heading": -0.7752450104458697
+  },
+  {
+    "image_path": "train\\image_000623.png",
+    "heading": -0.5138426867501439
+  },
+  {
+    "image_path": "train\\image_000624.png",
+    "heading": 0.201786537764851
+  },
+  {
+    "image_path": "train\\image_000625.png",
+    "heading": 0.7538281411750003
+  },
+  {
+    "image_path": "train\\image_000626.png",
+    "heading": -0.7470897877515299
+  },
+  {
+    "image_path": "train\\image_000627.png",
+    "heading": 0.0981086656856286
+  },
+  {
+    "image_path": "train\\image_000628.png",
+    "heading": -0.6406197242736251
+  },
+  {
+    "image_path": "train\\image_000629.png",
+    "heading": 0.5861907366828341
+  },
+  {
+    "image_path": "train\\image_000630.png",
+    "heading": 0.3622282054042898
+  },
+  {
+    "image_path": "train\\image_000631.png",
+    "heading": -0.466655404245521
+  },
+  {
+    "image_path": "train\\image_000632.png",
+    "heading": -0.6267911166858404
+  },
+  {
+    "image_path": "train\\image_000633.png",
+    "heading": 0.1991524481331558
+  },
+  {
+    "image_path": "train\\image_000634.png",
+    "heading": 0.373388673342153
+  },
+  {
+    "image_path": "train\\image_000635.png",
+    "heading": -0.25191385533832855
+  },
+  {
+    "image_path": "train\\image_000636.png",
+    "heading": -0.0016377104157395683
+  },
+  {
+    "image_path": "train\\image_000637.png",
+    "heading": -0.47554869405017935
+  },
+  {
+    "image_path": "train\\image_000638.png",
+    "heading": -0.4778062749733133
+  },
+  {
+    "image_path": "train\\image_000639.png",
+    "heading": -0.7292965885822247
+  },
+  {
+    "image_path": "train\\image_000640.png",
+    "heading": 0.6839969744819165
+  },
+  {
+    "image_path": "train\\image_000641.png",
+    "heading": 0.7326842345310833
+  },
+  {
+    "image_path": "train\\image_000642.png",
+    "heading": 0.08520708313452785
+  },
+  {
+    "image_path": "train\\image_000643.png",
+    "heading": 0.6568126919383648
+  },
+  {
+    "image_path": "train\\image_000644.png",
+    "heading": 0.09693773880471879
+  },
+  {
+    "image_path": "train\\image_000645.png",
+    "heading": -0.3770154562696073
+  },
+  {
+    "image_path": "train\\image_000646.png",
+    "heading": -0.4072923799751742
+  },
+  {
+    "image_path": "train\\image_000647.png",
+    "heading": 0.6875068679114065
+  },
+  {
+    "image_path": "train\\image_000648.png",
+    "heading": -0.7133509614248258
+  },
+  {
+    "image_path": "train\\image_000649.png",
+    "heading": -0.4082076340557907
+  },
+  {
+    "image_path": "train\\image_000650.png",
+    "heading": -0.3856311588500921
+  },
+  {
+    "image_path": "train\\image_000651.png",
+    "heading": 0.4229601425719782
+  },
+  {
+    "image_path": "train\\image_000652.png",
+    "heading": -0.4628074130536627
+  },
+  {
+    "image_path": "train\\image_000653.png",
+    "heading": -0.292008906982859
+  },
+  {
+    "image_path": "train\\image_000654.png",
+    "heading": -0.18448399537594407
+  },
+  {
+    "image_path": "train\\image_000655.png",
+    "heading": -0.12281312348550977
+  },
+  {
+    "image_path": "train\\image_000656.png",
+    "heading": 0.010800666471710074
+  },
+  {
+    "image_path": "train\\image_000657.png",
+    "heading": 0.19069575035218134
+  },
+  {
+    "image_path": "train\\image_000658.png",
+    "heading": -0.2920400256980882
+  },
+  {
+    "image_path": "train\\image_000659.png",
+    "heading": -0.4878474271273046
+  },
+  {
+    "image_path": "train\\image_000660.png",
+    "heading": -0.745734222997899
+  },
+  {
+    "image_path": "train\\image_000661.png",
+    "heading": 0.7574749349058361
+  },
+  {
+    "image_path": "train\\image_000662.png",
+    "heading": -0.26636403109920237
+  },
+  {
+    "image_path": "train\\image_000663.png",
+    "heading": -0.5144439910489589
+  },
+  {
+    "image_path": "train\\image_000664.png",
+    "heading": 0.1640213762054712
+  },
+  {
+    "image_path": "train\\image_000665.png",
+    "heading": 0.28044382005144297
+  },
+  {
+    "image_path": "train\\image_000666.png",
+    "heading": 0.722226079791046
+  },
+  {
+    "image_path": "train\\image_000667.png",
+    "heading": 0.7051787814762511
+  },
+  {
+    "image_path": "train\\image_000668.png",
+    "heading": 0.7313069862362394
+  },
+  {
+    "image_path": "train\\image_000669.png",
+    "heading": -0.44187460386503863
+  },
+  {
+    "image_path": "train\\image_000670.png",
+    "heading": -0.7314187701479429
+  },
+  {
+    "image_path": "train\\image_000671.png",
+    "heading": 0.3657758720340336
+  },
+  {
+    "image_path": "train\\image_000672.png",
+    "heading": 0.37407363618260914
+  },
+  {
+    "image_path": "train\\image_000673.png",
+    "heading": 0.23250776811731488
+  },
+  {
+    "image_path": "train\\image_000674.png",
+    "heading": -0.20230274307304486
+  },
+  {
+    "image_path": "train\\image_000675.png",
+    "heading": -0.0026798814440905927
+  },
+  {
+    "image_path": "train\\image_000676.png",
+    "heading": 0.7689502753667878
+  },
+  {
+    "image_path": "train\\image_000677.png",
+    "heading": 0.4414261940276569
+  },
+  {
+    "image_path": "train\\image_000678.png",
+    "heading": 0.10738508040183259
+  },
+  {
+    "image_path": "train\\image_000679.png",
+    "heading": -0.6951117699437871
+  },
+  {
+    "image_path": "train\\image_000680.png",
+    "heading": 0.3482214026392412
+  },
+  {
+    "image_path": "train\\image_000681.png",
+    "heading": -0.4375476521669272
+  },
+  {
+    "image_path": "train\\image_000682.png",
+    "heading": 0.4918989952730688
+  },
+  {
+    "image_path": "train\\image_000683.png",
+    "heading": 0.08484952246217747
+  },
+  {
+    "image_path": "train\\image_000684.png",
+    "heading": 0.35896213761535134
+  },
+  {
+    "image_path": "train\\image_000685.png",
+    "heading": -0.15933390088008348
+  },
+  {
+    "image_path": "train\\image_000686.png",
+    "heading": -0.22754444328919032
+  },
+  {
+    "image_path": "train\\image_000687.png",
+    "heading": -0.20669995386645734
+  },
+  {
+    "image_path": "train\\image_000688.png",
+    "heading": -0.540784957417481
+  },
+  {
+    "image_path": "train\\image_000689.png",
+    "heading": 0.6496593899767003
+  },
+  {
+    "image_path": "train\\image_000690.png",
+    "heading": 0.015143702287297556
+  },
+  {
+    "image_path": "train\\image_000691.png",
+    "heading": -0.6865848024136578
+  },
+  {
+    "image_path": "train\\image_000692.png",
+    "heading": -0.4772213264025529
+  },
+  {
+    "image_path": "train\\image_000693.png",
+    "heading": 0.48015751444053256
+  },
+  {
+    "image_path": "train\\image_000694.png",
+    "heading": 0.3119504497213885
+  },
+  {
+    "image_path": "train\\image_000695.png",
+    "heading": -0.37959935622050084
+  },
+  {
+    "image_path": "train\\image_000696.png",
+    "heading": 0.16582458860647453
+  },
+  {
+    "image_path": "train\\image_000697.png",
+    "heading": -0.5869126855420047
+  },
+  {
+    "image_path": "train\\image_000698.png",
+    "heading": 0.1085653973479701
+  },
+  {
+    "image_path": "train\\image_000699.png",
+    "heading": 0.4711347481889907
+  },
+  {
+    "image_path": "train\\image_000700.png",
+    "heading": 0.46210198659955126
+  },
+  {
+    "image_path": "train\\image_000701.png",
+    "heading": -0.5034587384121237
+  },
+  {
+    "image_path": "train\\image_000702.png",
+    "heading": 0.14131639682512132
+  },
+  {
+    "image_path": "train\\image_000703.png",
+    "heading": -0.19833669493937822
+  },
+  {
+    "image_path": "train\\image_000704.png",
+    "heading": -0.4718781967176434
+  },
+  {
+    "image_path": "train\\image_000705.png",
+    "heading": -0.39994582501862935
+  },
+  {
+    "image_path": "train\\image_000706.png",
+    "heading": 0.5349983181451592
+  },
+  {
+    "image_path": "train\\image_000707.png",
+    "heading": -0.5463534249286681
+  },
+  {
+    "image_path": "train\\image_000708.png",
+    "heading": 0.09496209611297857
+  },
+  {
+    "image_path": "train\\image_000709.png",
+    "heading": -0.5916463453123719
+  },
+  {
+    "image_path": "train\\image_000710.png",
+    "heading": 0.3978770276051291
+  },
+  {
+    "image_path": "train\\image_000711.png",
+    "heading": 0.6052722182716903
+  },
+  {
+    "image_path": "train\\image_000712.png",
+    "heading": -0.06423905412045239
+  },
+  {
+    "image_path": "train\\image_000713.png",
+    "heading": 0.1646971186995435
+  },
+  {
+    "image_path": "train\\image_000714.png",
+    "heading": 0.7214442974990509
+  },
+  {
+    "image_path": "train\\image_000715.png",
+    "heading": -0.2901972991520999
+  },
+  {
+    "image_path": "train\\image_000716.png",
+    "heading": -0.08451389401310305
+  },
+  {
+    "image_path": "train\\image_000717.png",
+    "heading": 0.39988945520033115
+  },
+  {
+    "image_path": "train\\image_000718.png",
+    "heading": 0.19581099782348077
+  },
+  {
+    "image_path": "train\\image_000719.png",
+    "heading": 0.01316299680216415
+  },
+  {
+    "image_path": "train\\image_000720.png",
+    "heading": -0.3969199767448836
+  },
+  {
+    "image_path": "train\\image_000721.png",
+    "heading": 0.3410778641427319
+  },
+  {
+    "image_path": "train\\image_000722.png",
+    "heading": -0.34676030618780135
+  },
+  {
+    "image_path": "train\\image_000723.png",
+    "heading": 0.2996587963200368
+  },
+  {
+    "image_path": "train\\image_000724.png",
+    "heading": 0.7813979936608575
+  },
+  {
+    "image_path": "train\\image_000725.png",
+    "heading": 0.5123485934111136
+  },
+  {
+    "image_path": "train\\image_000726.png",
+    "heading": 0.6214562234972207
+  },
+  {
+    "image_path": "train\\image_000727.png",
+    "heading": -0.6170757426501285
+  },
+  {
+    "image_path": "train\\image_000728.png",
+    "heading": -0.5918456849095733
+  },
+  {
+    "image_path": "train\\image_000729.png",
+    "heading": 0.25847536344434263
+  },
+  {
+    "image_path": "train\\image_000730.png",
+    "heading": 0.29705635967724575
+  },
+  {
+    "image_path": "train\\image_000731.png",
+    "heading": 0.16392962546140466
+  },
+  {
+    "image_path": "train\\image_000732.png",
+    "heading": -0.7521345563786251
+  },
+  {
+    "image_path": "train\\image_000733.png",
+    "heading": 0.3080192975414773
+  },
+  {
+    "image_path": "train\\image_000734.png",
+    "heading": 0.045554814818652756
+  },
+  {
+    "image_path": "train\\image_000735.png",
+    "heading": -0.5708356099345372
+  },
+  {
+    "image_path": "train\\image_000736.png",
+    "heading": -0.7656302060816889
+  },
+  {
+    "image_path": "train\\image_000737.png",
+    "heading": -0.04846434858287507
+  },
+  {
+    "image_path": "train\\image_000738.png",
+    "heading": 0.5545536353979812
+  },
+  {
+    "image_path": "train\\image_000739.png",
+    "heading": -0.7740238843856845
+  },
+  {
+    "image_path": "train\\image_000740.png",
+    "heading": -0.4828639419780877
+  },
+  {
+    "image_path": "train\\image_000741.png",
+    "heading": -0.25087643526585035
+  },
+  {
+    "image_path": "train\\image_000742.png",
+    "heading": 0.17709033296095578
+  },
+  {
+    "image_path": "train\\image_000743.png",
+    "heading": -0.20271719173697578
+  },
+  {
+    "image_path": "train\\image_000744.png",
+    "heading": -0.3191248704888368
+  },
+  {
+    "image_path": "train\\image_000745.png",
+    "heading": -0.17879633889048985
+  },
+  {
+    "image_path": "train\\image_000746.png",
+    "heading": 0.19903351342001452
+  },
+  {
+    "image_path": "train\\image_000747.png",
+    "heading": -0.4682236221814104
+  },
+  {
+    "image_path": "train\\image_000748.png",
+    "heading": 0.25938790529434796
+  },
+  {
+    "image_path": "train\\image_000749.png",
+    "heading": -0.18764542420354502
+  },
+  {
+    "image_path": "train\\image_000750.png",
+    "heading": 0.5739300493950474
+  },
+  {
+    "image_path": "train\\image_000751.png",
+    "heading": 0.13393982016260952
+  },
+  {
+    "image_path": "train\\image_000752.png",
+    "heading": 0.7321123086193515
+  },
+  {
+    "image_path": "train\\image_000753.png",
+    "heading": -0.40749282832113903
+  },
+  {
+    "image_path": "train\\image_000754.png",
+    "heading": 0.1794994669866402
+  },
+  {
+    "image_path": "train\\image_000755.png",
+    "heading": -0.1845949972687948
+  },
+  {
+    "image_path": "train\\image_000756.png",
+    "heading": -0.3841338151513982
+  },
+  {
+    "image_path": "train\\image_000757.png",
+    "heading": -0.3086322148619525
+  },
+  {
+    "image_path": "train\\image_000758.png",
+    "heading": 0.19315382506078793
+  },
+  {
+    "image_path": "train\\image_000759.png",
+    "heading": -0.38303345358819246
+  },
+  {
+    "image_path": "train\\image_000760.png",
+    "heading": 0.04967041219847146
+  },
+  {
+    "image_path": "train\\image_000761.png",
+    "heading": 0.05487547173598195
+  },
+  {
+    "image_path": "train\\image_000762.png",
+    "heading": -0.5148072360309908
+  },
+  {
+    "image_path": "train\\image_000763.png",
+    "heading": 0.061091982193901884
+  },
+  {
+    "image_path": "train\\image_000764.png",
+    "heading": -0.6566533354821198
+  },
+  {
+    "image_path": "train\\image_000765.png",
+    "heading": 0.6698416186760154
+  },
+  {
+    "image_path": "train\\image_000766.png",
+    "heading": -0.20448266777531876
+  },
+  {
+    "image_path": "train\\image_000767.png",
+    "heading": -0.31047804384163774
+  },
+  {
+    "image_path": "train\\image_000768.png",
+    "heading": 0.14741168404293936
+  },
+  {
+    "image_path": "train\\image_000769.png",
+    "heading": -0.4045274292349949
+  },
+  {
+    "image_path": "train\\image_000770.png",
+    "heading": 0.2508602148346093
+  },
+  {
+    "image_path": "train\\image_000771.png",
+    "heading": -0.5104850718459509
+  },
+  {
+    "image_path": "train\\image_000772.png",
+    "heading": 0.49254098883386943
+  },
+  {
+    "image_path": "train\\image_000773.png",
+    "heading": 0.12077863083412266
+  },
+  {
+    "image_path": "train\\image_000774.png",
+    "heading": -0.5836792033278353
+  },
+  {
+    "image_path": "train\\image_000775.png",
+    "heading": -0.017379766388376683
+  },
+  {
+    "image_path": "train\\image_000776.png",
+    "heading": -0.22425775065593756
+  },
+  {
+    "image_path": "train\\image_000777.png",
+    "heading": 0.34709055417745494
+  },
+  {
+    "image_path": "train\\image_000778.png",
+    "heading": -0.5733795246498116
+  },
+  {
+    "image_path": "train\\image_000779.png",
+    "heading": -0.18974089493262924
+  },
+  {
+    "image_path": "train\\image_000780.png",
+    "heading": -0.41292266518695125
+  },
+  {
+    "image_path": "train\\image_000781.png",
+    "heading": 0.28360245874543977
+  },
+  {
+    "image_path": "train\\image_000782.png",
+    "heading": -0.6169933601502701
+  },
+  {
+    "image_path": "train\\image_000783.png",
+    "heading": 0.6949168727638217
+  },
+  {
+    "image_path": "train\\image_000784.png",
+    "heading": -0.4631649644755435
+  },
+  {
+    "image_path": "train\\image_000785.png",
+    "heading": 0.07382174751472137
+  },
+  {
+    "image_path": "train\\image_000786.png",
+    "heading": -0.6847783991150687
+  },
+  {
+    "image_path": "train\\image_000787.png",
+    "heading": 0.08740411894411038
+  },
+  {
+    "image_path": "train\\image_000788.png",
+    "heading": -0.3864973727094869
+  },
+  {
+    "image_path": "train\\image_000789.png",
+    "heading": 0.1133976525763194
+  },
+  {
+    "image_path": "train\\image_000790.png",
+    "heading": 0.2515568619982209
+  },
+  {
+    "image_path": "train\\image_000791.png",
+    "heading": 0.604365305729889
+  },
+  {
+    "image_path": "train\\image_000792.png",
+    "heading": -0.441172835912399
+  },
+  {
+    "image_path": "train\\image_000793.png",
+    "heading": 0.13134327105951882
+  },
+  {
+    "image_path": "train\\image_000794.png",
+    "heading": -0.6221321656151761
+  },
+  {
+    "image_path": "train\\image_000795.png",
+    "heading": 0.6481760212557557
+  },
+  {
+    "image_path": "train\\image_000796.png",
+    "heading": -0.6989360295085563
+  },
+  {
+    "image_path": "train\\image_000797.png",
+    "heading": 0.7096296446394301
+  },
+  {
+    "image_path": "train\\image_000798.png",
+    "heading": 0.14353979201823697
+  },
+  {
+    "image_path": "train\\image_000799.png",
+    "heading": -0.6403804598364032
+  }
+]

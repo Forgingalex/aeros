@@ -1,0 +1,38 @@
+.heading-indicator-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+.heading-compass {
+  filter: drop-shadow(0 4px 8px rgba(186, 28, 52, 0.3));
+}
+
+.heading-arrow {
+  animation: headingPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(186, 28, 52, 0.5));
+}
+
+.heading-value-display {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ba1c34;
+  text-align: center;
+  background: rgba(186, 28, 52, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(186, 28, 52, 0.3);
+}
+
+@keyframes headingPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+

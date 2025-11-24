@@ -1,0 +1,37 @@
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Web framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+python-multipart>=0.0.6
+
+# Simulation
+pybullet>=3.2.0
+
+# ONNX
+onnx>=1.15.0
+onnxruntime>=1.16.0
+
+# Utilities
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+
+# Development
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.11.0
+flake8>=6.1.0
+mypy>=1.7.0
+
+# Jupyter
+jupyter>=1.0.0
+notebook>=7.0.0
+matplotlib>=3.8.0
+ipykernel>=6.26.0
+
