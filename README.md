@@ -4,7 +4,7 @@
 
 AEROS is a compact visual autonomy stack designed to process real-time camera input, estimate heading, and execute stable navigation commands within a simulated or lightweight drone environment.
 
-## 🎯 Overview
+## Overview
 
 AEROS demonstrates a complete autonomy pipeline featuring:
 - **Real-time video processing** (webcam or simulation feed)
@@ -13,7 +13,7 @@ AEROS demonstrates a complete autonomy pipeline featuring:
 - **PyBullet simulation** environment
 - **Web dashboard** for telemetry visualization
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -67,13 +67,13 @@ AEROS demonstrates a complete autonomy pipeline featuring:
    - Live camera feed
    - Real-time metrics visualization
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.10+
 - Node.js 18+ (for web dashboard)
 - CUDA-capable GPU (optional, for training)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -137,7 +137,7 @@ cd web && npm start
 
 The dashboard will be available at `http://localhost:3000`
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Build and Run
 
@@ -204,7 +204,7 @@ Then open the dashboard to see the live feed.
 - `POST /stop_simulation` - Stop simulation
 - `WS /ws` - WebSocket stream for telemetry and frames
 
-## 🧪 Testing
+## Testing
 
 ```bash
 make test
@@ -212,7 +212,7 @@ make test
 pytest tests/ -v --cov=src
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 aeros/
@@ -297,14 +297,14 @@ Edit `src/simulation/drone_sim.py` to adjust:
 - Camera parameters
 - Drone physics
 
-## 📊 Performance Targets
+## Performance Targets
 
 - **Inference**: ≥ 15 FPS on CPU
 - **Latency**: < 100ms end-to-end
 - **Model Size**: < 10MB (ONNX)
 - **Accuracy**: MAE < 0.1 radians on validation set
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### WebSocket Connection Issues
 
@@ -324,15 +324,15 @@ Edit `src/simulation/drone_sim.py` to adjust:
 - Ensure checkpoint file exists
 - Verify model architecture matches checkpoint
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📧 Contact
+## Contact
 
 For questions or issues, please open an issue on GitHub.
 
