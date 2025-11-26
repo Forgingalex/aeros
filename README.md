@@ -324,6 +324,21 @@ Edit `src/simulation/drone_sim.py` to adjust:
 - Ensure checkpoint file exists
 - Verify model architecture matches checkpoint
 
+## Known Limitations (v0.1.0-alpha)
+
+This is a pre-release version. The following limitations should be considered:
+
+- **Simulation Physics**: Simplified torque-based control, not full aerodynamics. Real-world behavior may differ.
+- **Training Data**: Model trained on synthetic corridor data only. Performance on real-world images may vary.
+- **Hardware Access**: Webcam access in Docker requires privileged mode and device mapping (`/dev/video0`).
+- **Optional Dependencies**: PyBullet and ONNX Runtime are optional (system degrades gracefully if not installed).
+- **Real-world Testing**: Not yet tested on physical drones. Use with caution in production environments.
+- **Model Accuracy**: Performance may vary with different lighting conditions, camera angles, and environments.
+- **PID Tuning**: Controller gains are tuned for simulation. May require retuning for real hardware.
+- **Single Drone**: Currently supports single drone simulation. Multi-drone support planned for future releases.
+
+For the latest updates and known issues, see [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
