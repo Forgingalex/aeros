@@ -40,11 +40,11 @@ class ImagePreprocessor:
         # Resize
         processed = cv2.resize(image, self.target_size, interpolation=cv2.INTER_LINEAR)
         
-        # Denoise
+        # Denoise - use fast Gaussian blur instead of expensive NLM
         if self.denoise:
-            processed = cv2.fastNlMeansDenoisingColored(
-                processed, None, 10, 10, 7, 21
-            )
+            # Use Gaussian blur for real-time performance
+            # NLM is too slow (50-200ms per frame)
+            processed = cv2.GaussianBlur(processed, (5, 5), 0)
         
         # Brightness normalization
         if self.normalize_brightness:

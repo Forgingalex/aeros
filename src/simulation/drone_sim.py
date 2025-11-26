@@ -206,24 +206,36 @@ class DroneSimulation:
         pos, orn = p.getBasePositionAndOrientation(self.drone_id)
         vel, ang_vel = p.getBaseVelocity(self.drone_id)
         
-        # Apply angular velocity (yaw control)
-        new_ang_vel = list(ang_vel)
-        new_ang_vel[2] = angular_velocity  # Z-axis rotation (yaw)
+        # Apply torque instead of directly setting velocity
+        # This respects inertia and mass
+        max_torque = 0.5  # Maximum torque (N⋅m)
+        torque_z = np.clip(angular_velocity * 0.1, -max_torque, max_torque)
         
-        # Maintain forward velocity
+        # Apply torque to drone
+        p.applyExternalTorque(
+            self.drone_id,
+            [0, 0, torque_z],
+            flags=p.WORLD_FRAME
+        )
+        
+        # Maintain forward velocity with damping
         forward_vel = np.array([1.0, 0.0, 0.0])
         rot_matrix = p.getMatrixFromQuaternion(orn)
         forward = np.array([rot_matrix[0], rot_matrix[3], rot_matrix[6]])
-        right = np.array([rot_matrix[1], rot_matrix[4], rot_matrix[7]])
         
-        # Rotate forward vector by yaw
-        yaw_angle = np.arctan2(forward[1], forward[0])
-        new_yaw = yaw_angle + angular_velocity * 0.01
+        # Apply velocity with damping
+        current_forward_speed = np.dot(vel, forward)
+        target_speed = 1.0
+        speed_error = target_speed - current_forward_speed
+        force = speed_error * 10.0  # P controller for speed
         
-        new_forward = np.array([np.cos(new_yaw), np.sin(new_yaw), 0.0])
-        new_vel = new_forward * np.linalg.norm(forward_vel)
-        
-        p.resetBaseVelocity(self.drone_id, new_vel.tolist(), new_ang_vel)
+        p.applyExternalForce(
+            self.drone_id,
+            -1,  # Apply to center of mass
+            forward * force,
+            [0, 0, 0],
+            flags=p.WORLD_FRAME
+        )
     
     def step(self, dt: float = 1.0 / 60.0) -> None:
         """Step simulation forward.

@@ -10,9 +10,19 @@ services:
     volumes:
       - ./models:/app/models
       - ./data:/app/data
+    devices:
+      - /dev/video0:/dev/video0  # Map webcam device
+    privileged: true  # Required for hardware access
     environment:
       - PYTHONUNBUFFERED=1
+      - DISPLAY=  # Force headless mode
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     networks:
       - aeros-network
 
@@ -23,9 +33,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_API_URL=http://localhost:8000
+      - REACT_APP_API_URL=http://api:8000
     depends_on:
-      - api
+      api:
+        condition: service_healthy  # Wait for API to be ready
     restart: unless-stopped
     networks:
       - aeros-network

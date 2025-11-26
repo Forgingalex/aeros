@@ -10,6 +10,7 @@ from typing import Optional
 from pathlib import Path
 import json
 import time
+import os
 
 from src.utils.inference import InferenceEngine
 from src.preprocessing.preprocessor import ImagePreprocessor
@@ -42,6 +43,7 @@ preprocessor: Optional[ImagePreprocessor] = None
 pid_controller: Optional[PIDController] = None
 simulation: Optional[DroneSimulation] = None
 use_simulation: bool = False
+simulation_task: Optional[asyncio.Task] = None
 
 
 @app.on_event("startup")
@@ -87,14 +89,40 @@ async def load_model(model_path: str, use_onnx: bool = False):
     """Load inference model.
     
     Args:
-        model_path: Path to model checkpoint or ONNX file
+        model_path: Path to model checkpoint or ONNX file (relative to models/)
         use_onnx: Whether model is ONNX format
     """
     global inference_engine
     
+    # Security: Only allow files from models/ directory
+    model_path_obj = Path(model_path)
+    if model_path_obj.is_absolute():
+        return JSONResponse(
+            status_code=400,
+            content={"status": "error", "message": "Model path must be relative"},
+        )
+    
+    # Resolve to models directory
+    full_path = Path("models") / model_path_obj
+    full_path = full_path.resolve()
+    
+    # Ensure it's within models directory (prevent path traversal)
+    models_dir = Path("models").resolve()
+    if not str(full_path).startswith(str(models_dir)):
+        return JSONResponse(
+            status_code=403,
+            content={"status": "error", "message": "Model path must be within models/ directory"},
+        )
+    
+    if not full_path.exists():
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "message": f"Model file not found: {model_path}"},
+        )
+    
     try:
         inference_engine = InferenceEngine(
-            model_path=model_path,
+            model_path=str(full_path),
             use_onnx=use_onnx,
         )
         return {
@@ -110,11 +138,11 @@ async def load_model(model_path: str, use_onnx: bool = False):
 
 
 @app.post("/start_simulation")
-async def start_simulation(gui: bool = True):
+async def start_simulation(gui: Optional[bool] = None):
     """Start PyBullet simulation.
     
     Args:
-        gui: Whether to show simulation GUI
+        gui: Whether to show simulation GUI (auto-detects Docker if None)
     """
     global simulation, use_simulation
     
@@ -127,12 +155,16 @@ async def start_simulation(gui: bool = True):
             },
         )
     
+    # Auto-detect Docker/headless mode
+    if gui is None:
+        gui = os.getenv("DISPLAY") is not None and os.getenv("DISPLAY") != ""
+    
     try:
         simulation = DroneSimulation(gui=gui)
         use_simulation = True
         return {
             "status": "success",
-            "message": "Simulation started",
+            "message": f"Simulation started (gui={gui})",
         }
     except Exception as e:
         return JSONResponse(
@@ -152,6 +184,18 @@ async def stop_simulation():
         use_simulation = False
     
     return {"status": "success", "message": "Simulation stopped"}
+
+
+async def simulation_loop():
+    """Background task to step simulation independently."""
+    global simulation, use_simulation
+    while use_simulation and simulation:
+        try:
+            simulation.step()
+            await asyncio.sleep(1.0 / 60.0)  # 60 Hz physics
+        except Exception as e:
+            print(f"Simulation loop error: {e}")
+            break
 
 
 @app.websocket("/ws/test")
@@ -179,6 +223,8 @@ async def websocket_endpoint(websocket: WebSocket):
     - Controller output
     - FPS and latency
     """
+    global simulation_task, use_simulation, simulation
+    
     print(f"Incoming WebSocket connection attempt from {websocket.client}")
     try:
         await websocket.accept()
@@ -186,6 +232,11 @@ async def websocket_endpoint(websocket: WebSocket):
     except Exception as e:
         print(f"ERROR: Failed to accept WebSocket connection: {e}")
         return
+    
+    # Start simulation loop if using simulation and not already running
+    if use_simulation and simulation and (simulation_task is None or simulation_task.done()):
+        simulation_task = asyncio.create_task(simulation_loop())
+        print("Simulation loop started")
     
     if not inference_engine:
         error_msg = "Model not loaded. Call /load_model first."
@@ -255,9 +306,8 @@ async def websocket_endpoint(websocket: WebSocket):
             drone_state = None
             if use_simulation and simulation:
                 drone_state = simulation.get_drone_state()
-                # Apply control
+                # Apply control (simulation.step() runs in background task)
                 simulation.apply_control(control_output)
-                simulation.step()
             
             # Encode frame as base64
             _, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 80])

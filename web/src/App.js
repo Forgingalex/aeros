@@ -45,31 +45,33 @@ function App() {
       // Check if message is JSON (telemetry) or binary (frame)
       if (event.data instanceof Blob) {
         // Binary data - frame
-        const reader = new FileReader();
-        reader.onload = () => {
-          const blob = new Blob([reader.result], { type: 'image/jpeg' });
-          const url = URL.createObjectURL(blob);
-          if (videoRef.current) {
-            videoRef.current.src = url;
-            // Clean up previous URL
-            if (videoRef.current.dataset.prevUrl) {
-              URL.revokeObjectURL(videoRef.current.dataset.prevUrl);
-            }
-            videoRef.current.dataset.prevUrl = url;
-          }
-          
-          // Calculate FPS
-          frameCountRef.current += 1;
-          const now = Date.now();
-          const elapsed = (now - lastTimeRef.current) / 1000;
-          if (elapsed >= 1.0) {
-            const currentFps = frameCountRef.current / elapsed;
-            setFps(currentFps);
-            frameCountRef.current = 0;
-            lastTimeRef.current = now;
-          }
-        };
-        reader.readAsArrayBuffer(event.data);
+        // Use createImageBitmap for better performance (avoids Blob URL overhead)
+        event.data.arrayBuffer().then(buffer => {
+          createImageBitmap(new Blob([buffer], { type: 'image/jpeg' }))
+            .then(bitmap => {
+              if (videoRef.current) {
+                const canvas = document.createElement('canvas');
+                canvas.width = bitmap.width;
+                canvas.height = bitmap.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(bitmap, 0, 0);
+                videoRef.current.src = canvas.toDataURL('image/jpeg');
+                bitmap.close(); // Free memory
+              }
+              
+              // Calculate FPS
+              frameCountRef.current += 1;
+              const now = Date.now();
+              const elapsed = (now - lastTimeRef.current) / 1000;
+              if (elapsed >= 1.0) {
+                const currentFps = frameCountRef.current / elapsed;
+                setFps(currentFps);
+                frameCountRef.current = 0;
+                lastTimeRef.current = now;
+              }
+            })
+            .catch(err => console.error('Image decode error:', err));
+        });
       } else {
         // JSON data - telemetry
         try {

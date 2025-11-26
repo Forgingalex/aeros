@@ -2,6 +2,7 @@
 
 import torch
 import numpy as np
+import cv2
 from typing import Optional, Union
 from pathlib import Path
 import time
@@ -73,12 +74,16 @@ class InferenceEngine:
         """Predict heading angle from image.
         
         Args:
-            image: Preprocessed image (H, W, 3) in RGB format
+            image: Preprocessed image (H, W, 3) in BGR format (will be converted to RGB)
             
         Returns:
             Predicted heading angle (radians)
         """
         start_time = time.time()
+        
+        # Convert BGR to RGB (model was trained on RGB)
+        if image.shape[2] == 3:  # Ensure it's a color image
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
         if self.use_onnx:
             # ONNX inference

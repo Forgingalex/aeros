@@ -53,6 +53,7 @@ class PIDController:
         current_time = time.time()
         if self._last_time is None:
             self._last_time = current_time
+            self._last_error = error  # Prevent startup derivative spike
             dt = 0.01  # Default timestep
         else:
             dt = current_time - self._last_time
