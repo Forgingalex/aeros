@@ -156,7 +156,7 @@ Services will be available at:
 - API: `http://localhost:8000`
 - Dashboard: `http://localhost:3000`
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Starting the Simulation
 
@@ -245,7 +245,7 @@ aeros/
 └── README.md              # This file
 ```
 
-## 🎓 Model Training
+## Model Training
 
 ### Dataset Format
 
@@ -276,7 +276,7 @@ Example metadata entry:
 - **Output**: Single scalar (heading angle in radians)
 - **Parameters**: ~500K-1M (lightweight for edge deployment)
 
-## 🔧 Configuration
+## Configuration
 
 ### PID Controller Tuning
 
