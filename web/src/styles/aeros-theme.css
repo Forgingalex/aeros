@@ -1,0 +1,79 @@
+:root {
+  /* Colors */
+  --aeros-bg: #050815;
+  --aeros-bg-elevated: #0b1020;
+  --aeros-bg-card: #12182b;
+  --aeros-bg-card-soft: #161d33;
+  --aeros-border-subtle: rgba(255, 255, 255, 0.06);
+  --aeros-border-strong: rgba(255, 255, 255, 0.12);
+  --aeros-text-primary: #f5f7ff;
+  --aeros-text-secondary: #a7b3d9;
+  --aeros-text-muted: #6c7897;
+  --aeros-brand: #1c7df2;
+  --aeros-brand-soft: rgba(28, 125, 242, 0.15);
+  --aeros-brand-strong: #0d4bb3;
+  --aeros-success: #00d67f;
+  --aeros-warning: #f6c744;
+  --aeros-error: #e03232;
+  /* Status backgrounds */
+  --aeros-status-disconnected-bg: rgba(224, 50, 50, 0.08);
+  --aeros-status-connected-bg: rgba(0, 214, 127, 0.1);
+  /* Shadows and blur */
+  --aeros-shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --aeros-shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.35);
+  /* Radii */
+  --aeros-radius-lg: 18px;
+  --aeros-radius-md: 14px;
+  --aeros-radius-sm: 10px;
+  --aeros-radius-pill: 999px;
+  /* Spacing scale */
+  --aeros-space-1: 4px;
+  --aeros-space-2: 8px;
+  --aeros-space-3: 12px;
+  --aeros-space-4: 16px;
+  --aeros-space-5: 20px;
+  --aeros-space-6: 24px;
+  --aeros-space-7: 32px;
+  --aeros-space-8: 40px;
+  /* Typography */
+  --aeros-font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Inter", "Segoe UI", sans-serif;
+  --aeros-text-xs: 11px;
+  --aeros-text-sm: 13px;
+  --aeros-text-md: 15px;
+  --aeros-text-lg: 17px;
+  --aeros-text-xl: 22px;
+  --aeros-text-xxl: 30px;
+  /* Motion */
+  --aeros-transition-fast: 150ms ease-out;
+  --aeros-transition-med: 220ms ease-out;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #101835 0, #050815 55%);
+  color: var(--aeros-text-primary);
+  font-family: var(--aeros-font-family);
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Simple scroll styling */
+body,
+#root {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 40px;
+}
+

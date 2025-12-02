@@ -1,52 +1,57 @@
 import React from 'react';
 import './Logo.css';
 
+/**
+ * AEROS Logo Component
+ * Abstract geometric flight vector icon - two intertwined elements:
+ * 1. Stylized arrow pointing diagonally upwards and to the right
+ * 2. Elongated open oval that the arrow passes through
+ */
 const Logo = ({ size = 48 }) => {
   return (
-    <div className="logo-container">
+    <div className="aeros-logo" style={{ width: size, height: size }}>
       <svg
         width={size}
         height={size}
         viewBox="0 0 100 100"
         className="logo-svg"
         xmlns="http://www.w3.org/2000/svg"
+        fill="none"
       >
-        {/* Drone body */}
+        {/* Elongated open oval - passes through the arrow */}
         <ellipse
           cx="50"
           cy="50"
-          rx="25"
-          ry="15"
-          fill="#ba1c34"
-          className="logo-drone-body"
+          rx="35"
+          ry="20"
+          stroke="#1C7DF2"
+          strokeWidth="3"
+          fill="none"
+          className="logo-oval"
         />
-        {/* Propellers */}
-        <circle cx="30" cy="40" r="8" fill="#ffffff" opacity="0.9" className="logo-propeller" />
-        <circle cx="70" cy="40" r="8" fill="#ffffff" opacity="0.9" className="logo-propeller" />
-        <circle cx="30" cy="60" r="8" fill="#ffffff" opacity="0.9" className="logo-propeller" />
-        <circle cx="70" cy="60" r="8" fill="#ffffff" opacity="0.9" className="logo-propeller" />
-        {/* Center dot */}
-        <circle cx="50" cy="50" r="4" fill="#ffffff" />
-        {/* Motion lines */}
-        <path
-          d="M 20 50 L 30 50"
-          stroke="#ba1c34"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="logo-motion"
-        />
-        <path
-          d="M 70 50 L 80 50"
-          stroke="#ba1c34"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="logo-motion"
-        />
+        
+        {/* Stylized arrow - curved shaft with triangular arrowhead */}
+        <g className="logo-arrow">
+          {/* Curved arrow shaft */}
+          <path
+            d="M 15 75 Q 30 60, 50 50 Q 70 40, 85 25"
+            stroke="#1C7DF2"
+            strokeWidth="4"
+            strokeLinecap="round"
+            fill="none"
+            className="logo-arrow-shaft"
+          />
+          
+          {/* Arrowhead */}
+          <path
+            d="M 75 30 L 85 25 L 80 20 Z"
+            fill="#1C7DF2"
+            className="logo-arrowhead"
+          />
+        </g>
       </svg>
-      <span className="logo-text">AEROS</span>
     </div>
   );
 };
 
 export default Logo;
-

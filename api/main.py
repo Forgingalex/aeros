@@ -3,6 +3,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 import cv2
 import numpy as np
 import asyncio
@@ -15,6 +16,13 @@ import os
 from src.utils.inference import InferenceEngine
 from src.preprocessing.preprocessor import ImagePreprocessor
 from src.control.pid_controller import PIDController
+
+
+class PIDGains(BaseModel):
+    """PID controller gains model."""
+    kp: float
+    ki: float
+    kd: float
 
 # PyBullet simulation is optional
 try:
@@ -184,6 +192,42 @@ async def stop_simulation():
         use_simulation = False
     
     return {"status": "success", "message": "Simulation stopped"}
+
+
+@app.post("/set_pid_gains")
+async def set_pid_gains(gains: PIDGains):
+    """Configure PID controller gains dynamically.
+    
+    Args:
+        gains: PIDGains model with kp, ki, kd values
+    """
+    global pid_controller
+    
+    if pid_controller is None:
+        return JSONResponse(
+            status_code=400,
+            content={
+                "status": "error",
+                "message": "PID controller not initialized",
+            },
+        )
+    
+    # Update PID controller gains
+    pid_controller.kp = gains.kp
+    pid_controller.ki = gains.ki
+    pid_controller.kd = gains.kd
+    
+    print(f"PID gains updated: Kp={gains.kp}, Ki={gains.ki}, Kd={gains.kd}")
+    
+    return {
+        "status": "success",
+        "message": "PID gains updated successfully",
+        "gains": {
+            "kp": gains.kp,
+            "ki": gains.ki,
+            "kd": gains.kd,
+        },
+    }
 
 
 async def simulation_loop():

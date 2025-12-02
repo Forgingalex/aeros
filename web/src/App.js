@@ -1,24 +1,77 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
-import Logo from './components/Logo';
-import MetricCard from './components/MetricCard';
-import HeadingIndicator from './components/HeadingIndicator';
+import { AerosDashboard } from './components/AerosDashboard';
 
 function App() {
-  const [connected, setConnected] = useState(false);
-  const [heading, setHeading] = useState(0.0);
-  const [controlOutput, setControlOutput] = useState(0.0);
-  const [fps, setFps] = useState(0.0);
-  const [latency, setLatency] = useState(0.0);
-  const [frameCount, setFrameCount] = useState(0);
-  const [droneState, setDroneState] = useState(null);
+  // Connection state
+  const [status, setStatus] = useState("disconnected"); // "connected" | "disconnected" | "connecting"
   const [error, setError] = useState(null);
   
-  const videoRef = useRef(null);
+  // Model and pipeline state
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [running, setRunning] = useState(false);
+  
+  // Telemetry data stored in refs for performance (avoid re-renders)
+  const telemetryRef = useRef({
+    heading: 0.0,
+    controlOutput: 0.0,
+    fps: 0.0,
+    latency: 0.0,
+    frameCount: 0,
+    droneState: null,
+  });
+  
+  // State for UI updates (debounced/throttled)
+  const [displayHeading, setDisplayHeading] = useState(0.0);
+  const [displayControlOutput, setDisplayControlOutput] = useState(0.0);
+  const [displayFps, setDisplayFps] = useState(0.0);
+  const [displayLatency, setDisplayLatency] = useState(0.0);
+  const [displayFrameCount, setDisplayFrameCount] = useState(0);
+  const [cameraUrl, setCameraUrl] = useState(undefined);
+  
+  // Refs for video rendering
+  const canvasRef = useRef(null);
   const wsRef = useRef(null);
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(Date.now());
-
+  const animationFrameRef = useRef(null);
+  const lastUpdateTimeRef = useRef(0);
+  
+  // Performance: Update UI at max 30fps (33ms intervals)
+  const UI_UPDATE_INTERVAL = 33;
+  
+  // Update display values from refs (throttled)
+  const updateDisplay = useCallback(() => {
+    const now = Date.now();
+    if (now - lastUpdateTimeRef.current < UI_UPDATE_INTERVAL) {
+      return;
+    }
+    lastUpdateTimeRef.current = now;
+    
+    const telemetry = telemetryRef.current;
+    setDisplayHeading(telemetry.heading);
+    setDisplayControlOutput(telemetry.controlOutput);
+    setDisplayFps(telemetry.fps);
+    setDisplayLatency(telemetry.latency);
+    setDisplayFrameCount(telemetry.frameCount);
+  }, []);
+  
+  // Use requestAnimationFrame for smooth UI updates
+  useEffect(() => {
+    const updateLoop = () => {
+      updateDisplay();
+      animationFrameRef.current = requestAnimationFrame(updateLoop);
+    };
+    animationFrameRef.current = requestAnimationFrame(updateLoop);
+    
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [updateDisplay]);
+  
+  // WebSocket connection
   useEffect(() => {
     connectWebSocket();
     return () => {
@@ -29,6 +82,7 @@ function App() {
   }, []);
 
   const connectWebSocket = () => {
+    setStatus("connecting");
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const wsUrl = `${protocol}//${window.location.host.replace(':3000', ':8000')}/ws`;
     
@@ -37,7 +91,7 @@ function App() {
 
     ws.onopen = () => {
       console.log('WebSocket connected');
-      setConnected(true);
+      setStatus("connected");
       setError(null);
     };
 
@@ -45,218 +99,169 @@ function App() {
       // Check if message is JSON (telemetry) or binary (frame)
       if (event.data instanceof Blob) {
         // Binary data - frame
-        // Use createImageBitmap for better performance (avoids Blob URL overhead)
-        event.data.arrayBuffer().then(buffer => {
-          createImageBitmap(new Blob([buffer], { type: 'image/jpeg' }))
-            .then(bitmap => {
-              if (videoRef.current) {
-                const canvas = document.createElement('canvas');
-                canvas.width = bitmap.width;
-                canvas.height = bitmap.height;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(bitmap, 0, 0);
-                videoRef.current.src = canvas.toDataURL('image/jpeg');
-                bitmap.close(); // Free memory
-              }
-              
-              // Calculate FPS
-              frameCountRef.current += 1;
-              const now = Date.now();
-              const elapsed = (now - lastTimeRef.current) / 1000;
-              if (elapsed >= 1.0) {
-                const currentFps = frameCountRef.current / elapsed;
-                setFps(currentFps);
-                frameCountRef.current = 0;
-                lastTimeRef.current = now;
-              }
-            })
-            .catch(err => console.error('Image decode error:', err));
-        });
+        handleFrameData(event.data);
       } else {
         // JSON data - telemetry
-        try {
-          const data = JSON.parse(event.data);
-          if (data.type === 'telemetry') {
-            setHeading(data.heading || 0.0);
-            setControlOutput(data.control_output || 0.0);
-            setLatency(data.latency_ms || 0.0);
-            setFrameCount(data.frame_count || 0);
-            if (data.drone_state) {
-              setDroneState(data.drone_state);
-            }
-          } else if (data.error) {
-            setError(data.error);
-          }
-        } catch (e) {
-          console.error('Failed to parse telemetry:', e);
-        }
+        handleTelemetryData(event.data);
       }
     };
 
     ws.onerror = (error) => {
       console.error('WebSocket error:', error);
       setError('WebSocket connection error');
-      setConnected(false);
+      setStatus("disconnected");
     };
 
     ws.onclose = () => {
       console.log('WebSocket disconnected');
-      setConnected(false);
-      // Attempt to reconnect after 3 seconds
+      setStatus("disconnected");
+      // Attempt to reconnect after 3 seconds if not manually closed
       setTimeout(() => {
-        if (!connected) {
+        if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
           connectWebSocket();
         }
       }, 3000);
     };
   };
+  
+  // Optimized frame handling with downscaling
+  const handleFrameData = useCallback((blob) => {
+    blob.arrayBuffer().then(buffer => {
+      createImageBitmap(new Blob([buffer], { type: 'image/jpeg' }))
+        .then(bitmap => {
+          if (!canvasRef.current) return;
+          
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext('2d');
+          
+          // Downscale for performance (max 1280px width)
+          const maxWidth = 1280;
+          const scale = bitmap.width > maxWidth ? maxWidth / bitmap.width : 1;
+          canvas.width = bitmap.width * scale;
+          canvas.height = bitmap.height * scale;
+          
+          ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+          setCameraUrl(dataUrl);
+          bitmap.close();
+          
+          // Calculate FPS
+          frameCountRef.current += 1;
+          const now = Date.now();
+          const elapsed = (now - lastTimeRef.current) / 1000;
+          if (elapsed >= 1.0) {
+            const currentFps = frameCountRef.current / elapsed;
+            telemetryRef.current.fps = currentFps;
+            frameCountRef.current = 0;
+            lastTimeRef.current = now;
+          }
+        })
+        .catch(err => console.error('Image decode error:', err));
+    });
+  }, []);
+  
+  // Optimized telemetry handling (store in ref, update display separately)
+  const handleTelemetryData = useCallback((data) => {
+    try {
+      const parsed = JSON.parse(data);
+      if (parsed.type === 'telemetry') {
+        // Update refs immediately (no re-render)
+        telemetryRef.current.heading = parsed.heading || 0.0;
+        telemetryRef.current.controlOutput = parsed.control_output || 0.0;
+        telemetryRef.current.latency = parsed.latency_ms || 0.0;
+        telemetryRef.current.frameCount = parsed.frame_count || 0;
+        if (parsed.drone_state) {
+          telemetryRef.current.droneState = parsed.drone_state;
+        }
+      } else if (parsed.error) {
+        setError(parsed.error);
+      }
+    } catch (e) {
+      console.error('Failed to parse telemetry:', e);
+    }
+  }, []);
 
-  const formatAngle = (radians) => {
-    const degrees = (radians * 180) / Math.PI;
-    return degrees.toFixed(2);
-  };
+  // API call functions
+  const handleLoadModel = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/load_model?model_path=checkpoints/best_model.pth&use_onnx=false', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        setModelLoaded(true);
+        setError(null);
+        console.log('Model loaded successfully');
+      } else {
+        setError(data.message || 'Failed to load model');
+      }
+    } catch (err) {
+      console.error('Error loading model:', err);
+      setError('Failed to load model: ' + err.message);
+    }
+  }, []);
+
+  const handleStart = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/start_simulation?gui=true', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        setRunning(true);
+        console.log('Simulation started');
+      } else {
+        setError(data.message || 'Failed to start simulation');
+      }
+    } catch (err) {
+      console.error('Error starting simulation:', err);
+      setError('Failed to start simulation');
+    }
+  }, []);
+
+  const handleStop = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/stop_simulation', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        setRunning(false);
+        console.log('Simulation stopped');
+      } else {
+        setError(data.message || 'Failed to stop simulation');
+      }
+    } catch (err) {
+      console.error('Error stopping simulation:', err);
+      setError('Failed to stop simulation');
+    }
+  }, []);
+
+  // Convert heading from radians to degrees
+  const headingDeg = (displayHeading * 180) / Math.PI;
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-left">
-          <Logo size={40} />
-          <div className="header-title">
-            <h1>AEROS</h1>
-            <span className="header-subtitle">Autonomy Pipeline</span>
-          </div>
-        </div>
-        <div className="header-right">
-          <div className={`status-indicator ${connected ? 'connected' : 'disconnected'}`}>
-            <span className="status-dot"></span>
-            <span className="status-text">{connected ? 'Connected' : 'Disconnected'}</span>
-          </div>
-        </div>
-      </header>
-
-      <main className="dashboard">
-        {error && (
-          <div className="error-banner">
-            Error: {error}
-          </div>
-        )}
-
-        <div className="dashboard-grid">
-          {/* Camera View */}
-          <div className="panel camera-panel">
-            <div className="panel-header">
-              <h2>
-                <span className="panel-icon">📹</span>
-                Camera Feed
-              </h2>
-            </div>
-            <div className="video-container">
-              <img
-                ref={videoRef}
-                alt="Camera feed"
-                className="camera-feed"
-              />
-              {!connected && (
-                <div className="video-placeholder">
-                  <div className="placeholder-icon">📡</div>
-                  <div className="placeholder-text">Waiting for connection...</div>
-                  <div className="placeholder-subtext">Ensure API server is running</div>
-                </div>
-              )}
-              {connected && (
-                <div className="video-overlay">
-                  <div className="overlay-badge">
-                    <span className="badge-dot"></span>
-                    LIVE
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Telemetry Panel */}
-          <div className="panel telemetry-panel">
-            <div className="panel-header">
-              <h2>
-                <span className="panel-icon">📊</span>
-                Telemetry
-              </h2>
-            </div>
-            <div className="telemetry-grid">
-              <div className="heading-section">
-                <HeadingIndicator heading={heading} size={180} />
-              </div>
-
-              <MetricCard
-                label="Control Output"
-                value={controlOutput.toFixed(4)}
-                unit="rad/s"
-                icon="⚡"
-                color="primary"
-              />
-
-              <div className="metrics-row">
-                <MetricCard
-                  label="FPS"
-                  value={fps.toFixed(1)}
-                  icon="🎯"
-                  color="info"
-                />
-                <MetricCard
-                  label="Latency"
-                  value={latency.toFixed(2)}
-                  unit="ms"
-                  icon="⏱️"
-                  color={latency < 100 ? 'success' : latency < 200 ? 'warning' : 'primary'}
-                />
-              </div>
-
-              <MetricCard
-                label="Frames Processed"
-                value={frameCount.toLocaleString()}
-                icon="🎬"
-                color="primary"
-              />
-            </div>
-          </div>
-
-          {/* Drone State Panel */}
-          {droneState && (
-            <div className="panel drone-panel">
-              <div className="panel-header">
-                <h2>
-                  <span className="panel-icon">🚁</span>
-                  Drone State
-                </h2>
-              </div>
-              <div className="drone-state">
-                <MetricCard
-                  label="Position"
-                  value={`[${droneState.position[0].toFixed(2)}, ${droneState.position[1].toFixed(2)}, ${droneState.position[2].toFixed(2)}]`}
-                  icon="📍"
-                  color="primary"
-                />
-                <MetricCard
-                  label="Heading"
-                  value={formatAngle(droneState.heading)}
-                  unit="°"
-                  icon="🧭"
-                  color="info"
-                />
-                <MetricCard
-                  label="Velocity"
-                  value={`[${droneState.velocity[0].toFixed(2)}, ${droneState.velocity[1].toFixed(2)}, ${droneState.velocity[2].toFixed(2)}]`}
-                  icon="💨"
-                  color="success"
-                />
-              </div>
-            </div>
-          )}
-        </div>
-      </main>
-    </div>
+    <>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <AerosDashboard
+        status={status}
+        cameraUrl={cameraUrl}
+        headingDeg={headingDeg}
+        controlOutput={displayControlOutput}
+        fps={displayFps}
+        latencyMs={displayLatency}
+        framesProcessed={displayFrameCount}
+        modelLoaded={modelLoaded}
+        running={running}
+        onLoadModel={handleLoadModel}
+        onStart={handleStart}
+        onStop={handleStop}
+      />
+    </>
   );
 }
 
 export default App;
-

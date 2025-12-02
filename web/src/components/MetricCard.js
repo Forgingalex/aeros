@@ -1,11 +1,15 @@
 import React from 'react';
 import './MetricCard.css';
 
-const MetricCard = ({ label, value, unit, icon, color, trend, subtitle }) => {
+/**
+ * Metric Card Component
+ * Minimal borders, subtle depth, no thick shadows
+ * Line-based icons only (removed emoji icons per design requirements)
+ */
+const MetricCard = ({ label, value, unit, color, trend, subtitle }) => {
   return (
     <div className={`metric-card ${color || ''}`}>
       <div className="metric-header">
-        {icon && <div className="metric-icon">{icon}</div>}
         <div className="metric-label">{label}</div>
       </div>
       <div className="metric-content">
@@ -25,4 +29,3 @@ const MetricCard = ({ label, value, unit, icon, color, trend, subtitle }) => {
 };
 
 export default MetricCard;
-

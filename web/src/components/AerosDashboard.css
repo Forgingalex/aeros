@@ -1,0 +1,491 @@
+/**
+ * AEROS Dashboard Component Styles
+ * Using design tokens from aeros-theme.css
+ */
+
+.aeros-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.aeros-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--aeros-space-5) var(--aeros-space-7);
+  background: var(--aeros-bg-elevated);
+  border-bottom: 1px solid var(--aeros-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(11, 16, 32, 0.8);
+}
+
+.aeros-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--aeros-space-4);
+}
+
+.aeros-logo-wrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aeros-logo-symbol {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.aeros-wordmark {
+  font-size: var(--aeros-text-xl);
+  font-weight: 600;
+  color: var(--aeros-text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.aeros-tagline {
+  font-size: var(--aeros-text-xs);
+  color: var(--aeros-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.aeros-header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Status Badge */
+.aeros-status {
+  display: flex;
+  align-items: center;
+  gap: var(--aeros-space-2);
+  padding: var(--aeros-space-2) var(--aeros-space-4);
+  border-radius: var(--aeros-radius-pill);
+  font-size: var(--aeros-text-sm);
+  font-weight: 500;
+  border: 1px solid var(--aeros-border-subtle);
+  background: var(--aeros-bg-card);
+  transition: all var(--aeros-transition-med);
+}
+
+.aeros-status:hover {
+  border-color: var(--aeros-border-strong);
+}
+
+.aeros-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+}
+
+.aeros-status-connected {
+  background: var(--aeros-status-connected-bg);
+  border-color: rgba(0, 214, 127, 0.2);
+}
+
+.aeros-status-connected .aeros-status-dot {
+  background: var(--aeros-success);
+}
+
+.aeros-status-disconnected {
+  background: var(--aeros-status-disconnected-bg);
+  border-color: rgba(224, 50, 50, 0.2);
+}
+
+.aeros-status-disconnected .aeros-status-dot {
+  background: var(--aeros-error);
+}
+
+.aeros-status-connecting {
+  background: var(--aeros-bg-card);
+  border-color: var(--aeros-border-subtle);
+}
+
+.aeros-status-connecting .aeros-status-dot {
+  background: var(--aeros-warning);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.aeros-status-label {
+  color: var(--aeros-text-secondary);
+}
+
+/* Main Layout */
+.aeros-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--aeros-space-6);
+  padding: var(--aeros-space-7);
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.aeros-main-left,
+.aeros-main-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aeros-space-6);
+}
+
+/* Cards */
+.aeros-card {
+  background: var(--aeros-bg-card);
+  border: 1px solid var(--aeros-border-subtle);
+  border-radius: var(--aeros-radius-lg);
+  padding: var(--aeros-space-6);
+  transition: all var(--aeros-transition-med);
+}
+
+.aeros-card:hover {
+  border-color: var(--aeros-border-strong);
+}
+
+.aeros-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.aeros-panel-header-row {
+  margin-bottom: var(--aeros-space-5);
+  padding-bottom: var(--aeros-space-4);
+  border-bottom: 1px solid var(--aeros-border-subtle);
+}
+
+.aeros-panel-title {
+  font-size: var(--aeros-text-lg);
+  font-weight: 600;
+  color: var(--aeros-text-primary);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+/* Camera Panel */
+.aeros-camera-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  background: var(--aeros-bg-elevated);
+  border-radius: var(--aeros-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--aeros-border-subtle);
+}
+
+.aeros-camera-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--aeros-radius-sm);
+}
+
+.aeros-camera-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--aeros-text-muted);
+}
+
+.aeros-camera-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--aeros-space-4);
+  opacity: 0.5;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c7897' stroke-width='1.5'%3E%3Cpath d='M23 7l-7 5 7 5V7z'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.aeros-camera-text-main {
+  font-size: var(--aeros-text-md);
+  font-weight: 500;
+  color: var(--aeros-text-secondary);
+  margin-bottom: var(--aeros-space-2);
+}
+
+.aeros-camera-text-sub {
+  font-size: var(--aeros-text-sm);
+  color: var(--aeros-text-muted);
+}
+
+/* Telemetry Panel */
+.aeros-telemetry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--aeros-space-5);
+}
+
+.aeros-compass {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.aeros-compass-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 1.5px solid var(--aeros-border-subtle);
+  border-radius: 50%;
+  background: var(--aeros-bg-elevated);
+}
+
+.aeros-compass-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 80px;
+  background: var(--aeros-brand);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(0deg);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(28, 125, 242, 0.4);
+}
+
+.aeros-compass-needle::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid var(--aeros-brand);
+}
+
+.aeros-compass-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: var(--aeros-brand);
+  border-radius: 50%;
+  border: 2px solid var(--aeros-bg-elevated);
+}
+
+.aeros-compass-label {
+  position: absolute;
+  font-size: var(--aeros-text-sm);
+  font-weight: 600;
+  color: var(--aeros-text-secondary);
+}
+
+.aeros-compass-n {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--aeros-brand);
+}
+
+.aeros-compass-e {
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.aeros-compass-s {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.aeros-compass-w {
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.aeros-heading-pill {
+  padding: var(--aeros-space-2) var(--aeros-space-5);
+  background: var(--aeros-bg-card-soft);
+  border: 1px solid var(--aeros-border-subtle);
+  border-radius: var(--aeros-radius-pill);
+  font-size: var(--aeros-text-md);
+  font-weight: 600;
+  color: var(--aeros-brand);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Control Panel */
+.aeros-control-row {
+  display: flex;
+  gap: var(--aeros-space-3);
+  flex-wrap: wrap;
+}
+
+.aeros-btn {
+  padding: var(--aeros-space-3) var(--aeros-space-5);
+  border-radius: var(--aeros-radius-sm);
+  font-size: var(--aeros-text-sm);
+  font-weight: 500;
+  border: 1px solid var(--aeros-border-subtle);
+  background: var(--aeros-bg-card-soft);
+  color: var(--aeros-text-primary);
+  cursor: pointer;
+  transition: all var(--aeros-transition-fast);
+  font-family: var(--aeros-font-family);
+}
+
+.aeros-btn:hover:not(:disabled) {
+  border-color: var(--aeros-border-strong);
+  background: var(--aeros-bg-card);
+}
+
+.aeros-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aeros-btn-primary {
+  background: var(--aeros-brand);
+  border-color: var(--aeros-brand);
+  color: white;
+}
+
+.aeros-btn-primary:hover:not(:disabled) {
+  background: var(--aeros-brand-strong);
+  border-color: var(--aeros-brand-strong);
+}
+
+.aeros-btn-outline {
+  background: transparent;
+  border-color: var(--aeros-border-strong);
+}
+
+.aeros-btn-ghost {
+  background: transparent;
+  border-color: var(--aeros-border-subtle);
+}
+
+.aeros-inline-alert {
+  margin-top: var(--aeros-space-4);
+  padding: var(--aeros-space-3);
+  background: rgba(246, 199, 68, 0.1);
+  border: 1px solid rgba(246, 199, 68, 0.2);
+  border-radius: var(--aeros-radius-sm);
+  font-size: var(--aeros-text-sm);
+  color: var(--aeros-warning);
+}
+
+/* Metrics */
+.aeros-metric {
+  padding: var(--aeros-space-4);
+}
+
+.aeros-metric-label {
+  font-size: var(--aeros-text-xs);
+  font-weight: 600;
+  color: var(--aeros-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--aeros-space-3);
+}
+
+.aeros-metric-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--aeros-space-2);
+}
+
+.aeros-metric-value {
+  font-size: var(--aeros-text-xl);
+  font-weight: 600;
+  color: var(--aeros-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.aeros-metric-unit {
+  font-size: var(--aeros-text-sm);
+  font-weight: 400;
+  color: var(--aeros-text-muted);
+}
+
+.aeros-metric-brand {
+  border-color: rgba(28, 125, 242, 0.2);
+}
+
+.aeros-metric-success {
+  border-color: rgba(0, 214, 127, 0.2);
+}
+
+.aeros-metric-warning {
+  border-color: rgba(246, 199, 68, 0.2);
+}
+
+.aeros-metric-error {
+  border-color: rgba(224, 50, 50, 0.2);
+}
+
+.aeros-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--aeros-space-4);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .aeros-main {
+    grid-template-columns: 1fr;
+  }
+  
+  .aeros-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .aeros-header {
+    flex-direction: column;
+    gap: var(--aeros-space-4);
+    padding: var(--aeros-space-4) var(--aeros-space-5);
+  }
+  
+  .aeros-header-left {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .aeros-main {
+    padding: var(--aeros-space-4);
+  }
+  
+  .aeros-control-row {
+    flex-direction: column;
+  }
+  
+  .aeros-btn {
+    width: 100%;
+  }
+}
+
