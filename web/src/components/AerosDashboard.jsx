@@ -1,6 +1,7 @@
 import React from "react";
 import "./AerosDashboard.css";
 import Logo from "./Logo";
+import PIDControlPanel from "./PIDControlPanel";
 
 const StatusBadge = ({ status }) => {
   const label =
@@ -152,6 +153,10 @@ export const AerosDashboard = (props) => {
     onStop,
     modelLoaded,
     running,
+    pidGains,
+    onUpdatePIDGains,
+    onResetPIDGains,
+    pidGainsLoading,
   } = props;
 
   return (
@@ -188,6 +193,13 @@ export const AerosDashboard = (props) => {
             onStop={onStop}
             modelLoaded={modelLoaded}
             running={running}
+          />
+
+          <PIDControlPanel
+            currentGains={pidGains}
+            onUpdateGains={onUpdatePIDGains}
+            onReset={onResetPIDGains}
+            disabled={!modelLoaded || pidGainsLoading}
           />
 
           <div className="aeros-metrics-grid">

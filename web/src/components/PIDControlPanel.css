@@ -1,0 +1,160 @@
+.aeros-pid-panel {
+  margin-top: var(--aeros-space-5);
+}
+
+.aeros-pid-current {
+  margin-bottom: var(--aeros-space-5);
+  padding: var(--aeros-space-4);
+  background: var(--aeros-bg-card-soft);
+  border-radius: var(--aeros-radius-md);
+  border: 1px solid var(--aeros-border-subtle);
+}
+
+.aeros-pid-current-label {
+  font-size: var(--aeros-text-xs);
+  color: var(--aeros-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--aeros-space-2);
+}
+
+.aeros-pid-current-values {
+  display: flex;
+  gap: var(--aeros-space-4);
+  font-size: var(--aeros-text-sm);
+  font-weight: 500;
+  color: var(--aeros-text-primary);
+}
+
+.aeros-pid-current-values span {
+  font-family: "SF Mono", "Monaco", "Consolas", monospace;
+  color: var(--aeros-brand);
+}
+
+.aeros-pid-presets {
+  margin-bottom: var(--aeros-space-5);
+}
+
+.aeros-pid-presets-label {
+  font-size: var(--aeros-text-xs);
+  color: var(--aeros-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--aeros-space-3);
+}
+
+.aeros-pid-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--aeros-space-2);
+}
+
+.aeros-pid-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aeros-space-4);
+  margin-bottom: var(--aeros-space-5);
+}
+
+.aeros-pid-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aeros-space-2);
+}
+
+.aeros-pid-control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aeros-pid-control-label {
+  font-size: var(--aeros-text-sm);
+  font-weight: 600;
+  color: var(--aeros-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.aeros-pid-input {
+  width: 80px;
+  padding: var(--aeros-space-2) var(--aeros-space-3);
+  background: var(--aeros-bg-card-soft);
+  border: 1px solid var(--aeros-border-subtle);
+  border-radius: var(--aeros-radius-sm);
+  color: var(--aeros-text-primary);
+  font-size: var(--aeros-text-sm);
+  font-family: "SF Mono", "Monaco", "Consolas", monospace;
+  text-align: right;
+  transition: all var(--aeros-transition-fast);
+}
+
+.aeros-pid-input:focus {
+  outline: none;
+  border-color: var(--aeros-brand);
+  background: var(--aeros-bg-card);
+}
+
+.aeros-pid-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aeros-pid-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--aeros-radius-pill);
+  background: var(--aeros-bg-card-soft);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.aeros-pid-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--aeros-brand);
+  cursor: pointer;
+  transition: all var(--aeros-transition-fast);
+  border: 2px solid var(--aeros-bg);
+}
+
+.aeros-pid-slider::-webkit-slider-thumb:hover {
+  background: var(--aeros-brand-strong);
+  transform: scale(1.1);
+}
+
+.aeros-pid-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--aeros-brand);
+  cursor: pointer;
+  border: 2px solid var(--aeros-bg);
+  transition: all var(--aeros-transition-fast);
+}
+
+.aeros-pid-slider::-moz-range-thumb:hover {
+  background: var(--aeros-brand-strong);
+  transform: scale(1.1);
+}
+
+.aeros-pid-slider:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aeros-pid-apply {
+  display: flex;
+  justify-content: center;
+}
+
+.aeros-btn-sm {
+  padding: var(--aeros-space-2) var(--aeros-space-3);
+  font-size: var(--aeros-text-xs);
+}
+

@@ -9,9 +9,9 @@ AEROS is a compact visual autonomy stack designed to process real-time camera in
 AEROS demonstrates a complete autonomy pipeline featuring:
 - **Real-time video processing** (webcam or simulation feed)
 - **CNN-based heading estimation** trained on synthetic corridor data
-- **PID control** for heading correction
+- **PID control** for heading correction with real-time tuning
 - **PyBullet simulation** environment
-- **Web dashboard** for telemetry visualization
+- **Web dashboard** with interactive PID control panel and telemetry visualization
 
 ## Architecture
 
@@ -66,6 +66,8 @@ AEROS demonstrates a complete autonomy pipeline featuring:
    - React-based web interface
    - Live camera feed
    - Real-time metrics visualization
+   - Interactive PID control panel
+   - Premium aviation-grade UI design
 
 ## Requirements
 
@@ -202,6 +204,25 @@ Then open the dashboard to see the live feed.
   ```
 - `POST /start_simulation?gui=true` - Start PyBullet simulation
 - `POST /stop_simulation` - Stop simulation
+- `GET /get_pid_gains` - Get current PID controller gains
+  ```json
+  {
+    "status": "success",
+    "gains": {
+      "kp": 1.0,
+      "ki": 0.1,
+      "kd": 0.5
+    }
+  }
+  ```
+- `POST /set_pid_gains` - Update PID controller gains
+  ```json
+  {
+    "kp": 1.5,
+    "ki": 0.15,
+    "kd": 0.8
+  }
+  ```
 - `WS /ws` - WebSocket stream for telemetry and frames
 
 ## Testing
@@ -280,7 +301,35 @@ Example metadata entry:
 
 ### PID Controller Tuning
 
-Edit `api/main.py` to adjust PID gains:
+The PID controller can be tuned in two ways:
+
+#### Method 1: Dashboard UI (Recommended)
+
+1. Start the dashboard and load the model
+2. Navigate to the **PID Controller** panel
+3. Use the interactive controls:
+   - **Presets**: Click preset buttons (Default, Aggressive, Smooth, Fast Response, Stable)
+   - **Manual Adjustment**: Use sliders or number inputs to adjust Kp, Ki, Kd
+   - **Apply Changes**: Click to update gains in real-time
+   - **Reset**: Restore default values (Kp=1.0, Ki=0.1, Kd=0.5)
+
+#### Method 2: API Endpoints
+
+**Get current gains:**
+```bash
+curl http://localhost:8000/get_pid_gains
+```
+
+**Update gains:**
+```bash
+curl -X POST "http://localhost:8000/set_pid_gains" \
+  -H "Content-Type: application/json" \
+  -d '{"kp": 1.5, "ki": 0.15, "kd": 0.8}'
+```
+
+#### Method 3: Code Configuration
+
+Edit `api/main.py` to set default gains:
 
 ```python
 pid_controller = PIDController(
@@ -289,6 +338,43 @@ pid_controller = PIDController(
     kd=0.5,   # Derivative gain
 )
 ```
+
+#### PID Tuning Guide
+
+**Understanding PID Gains:**
+
+- **Kp (Proportional)**: Controls response speed
+  - Higher Kp = Faster response, but may cause overshoot
+  - Lower Kp = Slower response, more stable
+  - Default: 1.0
+
+- **Ki (Integral)**: Eliminates steady-state error
+  - Higher Ki = Better accuracy, but may cause oscillation
+  - Lower Ki = May have steady-state error
+  - Default: 0.1
+
+- **Kd (Derivative)**: Reduces overshoot and oscillation
+  - Higher Kd = More damping, less overshoot
+  - Lower Kd = Less damping, may oscillate
+  - Default: 0.5
+
+**Preset Configurations:**
+
+- **Default** (Kp=1.0, Ki=0.1, Kd=0.5): Balanced performance
+- **Aggressive** (Kp=2.0, Ki=0.2, Kd=1.0): Fast response, may overshoot
+- **Smooth** (Kp=0.5, Ki=0.05, Kd=0.3): Slow, stable response
+- **Fast Response** (Kp=1.5, Ki=0.15, Kd=0.8): Quick correction with damping
+- **Stable** (Kp=0.8, Ki=0.2, Kd=0.6): High stability, good accuracy
+
+**Tuning Tips:**
+
+1. Start with Default preset and observe behavior
+2. If response is too slow, increase Kp gradually
+3. If there's overshoot, increase Kd
+4. If steady-state error exists, increase Ki slightly
+5. Test one gain at a time to understand its effect
+6. Watch the "Control output" metric for immediate feedback
+7. Use Reset button to return to defaults if system becomes unstable
 
 ### Simulation Parameters
 

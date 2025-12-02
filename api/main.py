@@ -12,6 +12,7 @@ from pathlib import Path
 import json
 import time
 import os
+import traceback
 
 from src.utils.inference import InferenceEngine
 from src.preprocessing.preprocessor import ImagePreprocessor
@@ -230,6 +231,34 @@ async def set_pid_gains(gains: PIDGains):
     }
 
 
+@app.get("/get_pid_gains")
+async def get_pid_gains():
+    """Get current PID controller gains.
+    
+    Returns:
+        Current kp, ki, kd values
+    """
+    global pid_controller
+    
+    if pid_controller is None:
+        return JSONResponse(
+            status_code=400,
+            content={
+                "status": "error",
+                "message": "PID controller not initialized",
+            },
+        )
+    
+    return {
+        "status": "success",
+        "gains": {
+            "kp": pid_controller.kp,
+            "ki": pid_controller.ki,
+            "kd": pid_controller.kd,
+        },
+    }
+
+
 async def simulation_loop():
     """Background task to step simulation independently."""
     global simulation, use_simulation
@@ -317,73 +346,144 @@ async def websocket_endpoint(websocket: WebSocket):
     
     print("WebSocket connection established - starting stream")
     
+    # Comprehensive error handling for entire streaming loop
     try:
         frame_count = 0
         start_time = time.time()
         
         while True:
-            # Get frame
-            if use_simulation and simulation:
-                frame = simulation.get_camera_image()
-                # Convert RGB to BGR for OpenCV compatibility
-                frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-            else:
-                ret, frame = camera.read()
-                if not ret:
-                    print("WARNING: Failed to read frame from camera")
+            try:
+                # Get frame
+                if use_simulation and simulation:
+                    try:
+                        frame = simulation.get_camera_image()
+                        # Convert RGB to BGR for OpenCV compatibility
+                        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+                    except Exception as e:
+                        print(f"ERROR: Failed to get simulation frame: {e}")
+                        print(f"Traceback: {traceback.format_exc()}")
+                        break
+                else:
+                    try:
+                        ret, frame = camera.read()
+                        if not ret:
+                            print("WARNING: Failed to read frame from camera")
+                            break
+                    except Exception as e:
+                        print(f"ERROR: Camera read failed: {e}")
+                        print(f"Traceback: {traceback.format_exc()}")
+                        break
+                
+                # Preprocess
+                try:
+                    processed = preprocessor.preprocess(frame)
+                except Exception as e:
+                    print(f"ERROR: Preprocessing failed: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    # Continue to next frame instead of breaking
+                    await asyncio.sleep(1.0 / 30.0)
+                    continue
+                
+                # Predict heading
+                try:
+                    heading = inference_engine.predict(processed)
+                except Exception as e:
+                    print(f"ERROR: Inference failed: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    # Continue to next frame instead of breaking
+                    await asyncio.sleep(1.0 / 30.0)
+                    continue
+                
+                # Compute control output
+                try:
+                    control_output = pid_controller.update(heading)
+                except Exception as e:
+                    print(f"ERROR: PID control computation failed: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    control_output = 0.0  # Default to zero on error
+                
+                # Get metrics
+                try:
+                    fps = inference_engine.get_fps()
+                    latency = inference_engine.get_latency()
+                except Exception as e:
+                    print(f"WARNING: Failed to get metrics: {e}")
+                    fps = 0.0
+                    latency = 0.0
+                
+                # Get drone state if simulation
+                drone_state = None
+                if use_simulation and simulation:
+                    try:
+                        drone_state = simulation.get_drone_state()
+                        # Apply control (simulation.step() runs in background task)
+                        simulation.apply_control(control_output)
+                    except Exception as e:
+                        print(f"WARNING: Simulation state/control failed: {e}")
+                
+                # Encode frame as base64
+                try:
+                    _, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 80])
+                    frame_base64 = buffer.tobytes()
+                except Exception as e:
+                    print(f"ERROR: Frame encoding failed: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    # Continue to next frame instead of breaking
+                    await asyncio.sleep(1.0 / 30.0)
+                    continue
+                
+                # Send telemetry
+                try:
+                    await websocket.send_json({
+                        "type": "telemetry",
+                        "heading": float(heading),
+                        "control_output": float(control_output),
+                        "fps": float(fps),
+                        "latency_ms": float(latency),
+                        "frame_count": frame_count,
+                        "drone_state": drone_state,
+                    })
+                except Exception as e:
+                    print(f"ERROR: Failed to send telemetry: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    # If we can't send, connection is likely broken
                     break
-            
-            # Preprocess
-            processed = preprocessor.preprocess(frame)
-            
-            # Predict heading
-            heading = inference_engine.predict(processed)
-            
-            # Compute control output
-            control_output = pid_controller.update(heading)
-            
-            # Get metrics
-            fps = inference_engine.get_fps()
-            latency = inference_engine.get_latency()
-            
-            # Get drone state if simulation
-            drone_state = None
-            if use_simulation and simulation:
-                drone_state = simulation.get_drone_state()
-                # Apply control (simulation.step() runs in background task)
-                simulation.apply_control(control_output)
-            
-            # Encode frame as base64
-            _, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 80])
-            frame_base64 = buffer.tobytes()
-            
-            # Send telemetry
-            await websocket.send_json({
-                "type": "telemetry",
-                "heading": float(heading),
-                "control_output": float(control_output),
-                "fps": float(fps),
-                "latency_ms": float(latency),
-                "frame_count": frame_count,
-                "drone_state": drone_state,
-            })
-            
-            # Send frame
-            await websocket.send_bytes(frame_base64)
-            
-            frame_count += 1
-            
-            # Small delay to control frame rate
-            await asyncio.sleep(1.0 / 30.0)  # Target 30 FPS
-            
+                
+                # Send frame
+                try:
+                    await websocket.send_bytes(frame_base64)
+                except Exception as e:
+                    print(f"ERROR: Failed to send frame: {e}")
+                    print(f"Traceback: {traceback.format_exc()}")
+                    # If we can't send, connection is likely broken
+                    break
+                
+                frame_count += 1
+                
+                # Small delay to control frame rate
+                await asyncio.sleep(1.0 / 30.0)  # Target 30 FPS
+                
+            except WebSocketDisconnect:
+                print("WebSocket disconnected (client closed)")
+                break
+            except Exception as e:
+                print(f"ERROR: Unexpected error in frame loop: {e}")
+                print(f"Traceback: {traceback.format_exc()}")
+                # Try to send error to client
+                try:
+                    await websocket.send_json({"error": str(e), "type": "error"})
+                except:
+                    pass  # Connection might already be closed
+                # Break on unexpected errors
+                break
+                
     except WebSocketDisconnect:
         print("WebSocket disconnected (client closed)")
     except Exception as e:
-        import traceback
-        print(f"WebSocket error: {e}")
-        print(f"Traceback: {traceback.format_exc()}")
+        print(f"CRITICAL ERROR: WebSocket stream error: {e}")
+        print(f"Full traceback: {traceback.format_exc()}")
         try:
-            await websocket.send_json({"error": str(e)})
+            await websocket.send_json({"error": str(e), "type": "critical_error"})
         except:
             pass  # Connection might already be closed
     finally:

@@ -11,6 +11,10 @@ function App() {
   const [modelLoaded, setModelLoaded] = useState(false);
   const [running, setRunning] = useState(false);
   
+  // PID Controller state
+  const [pidGains, setPidGains] = useState({ kp: 1.0, ki: 0.1, kd: 0.5 });
+  const [pidGainsLoading, setPidGainsLoading] = useState(false);
+  
   // Telemetry data stored in refs for performance (avoid re-renders)
   const telemetryRef = useRef({
     heading: 0.0,
@@ -240,6 +244,56 @@ function App() {
     }
   }, []);
 
+  // Fetch current PID gains on mount
+  const fetchPIDGains = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/get_pid_gains');
+      const data = await response.json();
+      if (data.status === 'success') {
+        setPidGains(data.gains);
+      }
+    } catch (err) {
+      console.error('Error fetching PID gains:', err);
+    }
+  }, []);
+
+  // Update PID gains
+  const handleUpdatePIDGains = useCallback(async (gains) => {
+    setPidGainsLoading(true);
+    try {
+      const response = await fetch('http://localhost:8000/set_pid_gains', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gains),
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        setPidGains(data.gains);
+        console.log('PID gains updated:', data.gains);
+      } else {
+        setError(data.message || 'Failed to update PID gains');
+      }
+    } catch (err) {
+      console.error('Error updating PID gains:', err);
+      setError('Failed to update PID gains: ' + err.message);
+    } finally {
+      setPidGainsLoading(false);
+    }
+  }, []);
+
+  // Reset PID gains to default
+  const handleResetPIDGains = useCallback(async () => {
+    const defaultGains = { kp: 1.0, ki: 0.1, kd: 0.5 };
+    await handleUpdatePIDGains(defaultGains);
+  }, [handleUpdatePIDGains]);
+
+  // Fetch PID gains on mount
+  useEffect(() => {
+    fetchPIDGains();
+  }, [fetchPIDGains]);
+
   // Convert heading from radians to degrees
   const headingDeg = (displayHeading * 180) / Math.PI;
 
@@ -259,6 +313,10 @@ function App() {
         onLoadModel={handleLoadModel}
         onStart={handleStart}
         onStop={handleStop}
+        pidGains={pidGains}
+        onUpdatePIDGains={handleUpdatePIDGains}
+        onResetPIDGains={handleResetPIDGains}
+        pidGainsLoading={pidGainsLoading}
       />
     </>
   );

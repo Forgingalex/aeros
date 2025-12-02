@@ -59,6 +59,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **PID Control Panel**: Interactive dashboard component for real-time PID gain adjustment
+  - Real-time sliders and number inputs for Kp, Ki, Kd gains
+  - 5 preset configurations (Default, Aggressive, Smooth, Fast Response, Stable)
+  - Current values display showing active PID gains
+  - Reset button to restore default values
+  - Apply button for manual gain updates
+- **PID API Endpoints**: REST endpoints for PID controller configuration
+  - `GET /get_pid_gains` - Retrieve current PID controller gains
+  - `POST /set_pid_gains` - Update PID controller gains dynamically
+- **Dashboard Redesign**: Premium aviation-grade interface
+  - New AEROS design system with CSS variables
+  - Dark mode aerospace aesthetic
+  - Updated logo with geometric flight vector icon
+  - Improved component styling and layout
+- **Enhanced Error Handling**: Comprehensive error handling for WebSocket endpoint
+  - Multi-layer try-except blocks for frame processing
+  - Detailed traceback logging for all errors
+  - Graceful error recovery for non-critical failures
+  - Improved error messages and diagnostics
+
+### Fixed
+- **WebSocket Stability**: Improved error handling prevents connection drops
+- **PID Gain Updates**: Real-time gain updates now work correctly during operation
+
+### Changed
+- PID controller gains can now be adjusted dynamically via dashboard (no code changes required)
+- Dashboard UI redesigned with new AEROS brand identity
+
 ### Planned
 - Real-world dataset collection and training
 - Enhanced simulation physics (aerodynamics, wind, turbulence)
