@@ -20,7 +20,7 @@ Existing solutions either:
 - Needed additional sensors (GPS, IMU, LiDAR) that add cost and complexity
 - Weren't designed for edge deployment (large model sizes, no ONNX support)
 
-I built AEROS to bridge this gap: a complete autonomy pipeline that processes camera frames at 30+ FPS, estimates heading in real-time, and executes control commands—all optimized for deployment on resource-constrained hardware.
+I built AEROS to bridge this gap: a complete autonomy pipeline that processes camera frames at 30+ FPS, estimates heading in real-time, and executes control commands all optimized for deployment on resource-constrained hardware.
 
 ## Why This Matters
 
