@@ -1,5 +1,9 @@
 # AEROS: Autonomy Pipeline for Lightweight Drone Navigation
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/48f5aced-001a-46cb-b109-cd301ff7eac5" alt="AEROS Logo" width="150"/>
+</div>
+
 **A real-time visual navigation system I built to enable camera-only autonomous navigation for lightweight drones.**
 
 ---
@@ -166,7 +170,7 @@ I implemented dual inference paths (PyTorch and ONNX) in the `InferenceEngine` c
 
 ## What's Implemented
 
-### ✅ Completed Features
+###  Completed Features
 
 Based on the codebase and CHANGELOG:
 
@@ -184,7 +188,7 @@ Based on the codebase and CHANGELOG:
 - Path validation security fix
 - Dashboard redesign with PID control panel
 
-### ❌ Planned (Not Yet Implemented)
+###  Planned (Not Yet Implemented)
 
 From the CHANGELOG "Planned" section:
 
