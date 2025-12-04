@@ -2,11 +2,11 @@
 
 **Release Date**: November 24, 2024
 
-## 🎉 First Pre-Release
+##  First Pre-Release
 
 This is the initial pre-release of AEROS (Autonomy Pipeline for Lightweight Drone Navigation). AEROS is a complete visual autonomy stack designed to process real-time camera input, estimate heading, and execute stable navigation commands.
 
-## ✨ Key Features
+##  Key Features
 
 ### Core Components
 - **CNN-based Heading Estimation**: Lightweight MobileNet-style architecture (~500K-1M parameters)
@@ -26,7 +26,7 @@ This is the initial pre-release of AEROS (Autonomy Pipeline for Lightweight Dron
 - **Unit Tests**: Test coverage for core components
 - **ONNX Export**: Edge device deployment support
 
-## 🐛 Recent Critical Fixes
+##  Recent Critical Fixes
 
 This release includes fixes for several critical issues:
 
@@ -38,7 +38,7 @@ This release includes fixes for several critical issues:
 6. **Performance**: Optimized preprocessing (50-200ms → <5ms per frame)
 7. **Memory Management**: Improved React video handling for high-frequency streams
 
-## 📋 Installation
+##  Installation
 
 ```bash
 # Clone repository
@@ -69,14 +69,14 @@ Or use Docker:
 docker-compose up -d
 ```
 
-## 📊 Performance Targets
+##  Performance Targets
 
 - **Inference**: ≥15 FPS on CPU, ≥30 FPS on GPU
 - **Latency**: <100ms end-to-end
 - **Model Size**: <10MB (ONNX format)
 - **Accuracy**: MAE <0.1 radians on validation set
 
-## ⚠️ Known Limitations
+##  Known Limitations
 
 This is a **pre-release** version. Please note:
 
@@ -86,9 +86,9 @@ This is a **pre-release** version. Please note:
 - Webcam access in Docker requires privileged mode
 - PID controller tuned for simulation (may need retuning for hardware)
 
-**⚠️ Do not use in production or on real drones without extensive testing.**
+** Do not use in production or on real drones without extensive testing.**
 
-## 🚀 What's Next
+##  What's Next
 
 Planned for future releases:
 - Real-world dataset collection and training
@@ -98,24 +98,24 @@ Planned for future releases:
 - Model quantization for embedded systems
 - Multi-drone simulation support
 
-## 📚 Documentation
+##  Documentation
 
 - [README.md](README.md) - Full documentation and quick start
 - [CHANGELOG.md](CHANGELOG.md) - Detailed change history
 - [API Documentation](http://localhost:8000/docs) - Interactive API docs (when server running)
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please:
 1. Fork the repository
 2. Create a feature branch
 3. Submit a pull request
 
-## 📝 License
+##  License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 Built with:
 - PyTorch for deep learning
