@@ -30,7 +30,7 @@ Visual navigation is critical for indoor drones where GPS is unavailable. Applic
 - **Delivery** in warehouses or hospitals
 - **Research** in constrained environments
 
-The key constraint: these systems need to run on hardware that can actually fit on a drone. A laptop-grade GPU isn't an option. Every component—from preprocessing to inference to control—must be optimized for real-time performance on edge devices.
+The key constraint: these systems need to run on hardware that can actually fit on a drone. A laptop-grade GPU isn't an option. Every component from preprocessing to inference to control must be optimized for real-time performance on edge devices.
 
 ---
 
