@@ -6,11 +6,11 @@ A real-time, camera-only autonomy pipeline built to treat latency as a first-cla
 
 ## The Constraint That Matters
 
-Latency kills control stability. Not model accuracy, not sensor fusion complexity—latency.
+Latency kills control stability. Not model accuracy, not sensor fusion complexity; latency.
 
 When your perception loop runs at 30 FPS and your control loop needs corrections every 33ms, a 50ms preprocessing step means you're always one frame behind. The PID controller sees stale heading estimates. The drone oscillates. You debug for hours thinking it's a tuning problem when it's actually a timing problem.
 
-Edge hardware makes this worse. A Raspberry Pi 4 can't run ResNet in real-time. A Jetson Nano can, but only if you're careful about memory bandwidth and quantization. Every millisecond you spend on preprocessing or inference directly couples with control behavior. There's no buffer, no queue, no graceful degradation—just missed deadlines and unstable flight.
+Edge hardware makes this worse. A Raspberry Pi 4 can't run ResNet in real-time. A Jetson Nano can, but only if you're careful about memory bandwidth and quantization. Every millisecond you spend on preprocessing or inference directly couples with control behavior. There's no buffer, no queue, no graceful degradation; just missed deadlines and unstable flight.
 
 This system exists because I needed to see how far camera-only perception can go when you treat latency as the primary constraint, not an afterthought.
 
@@ -52,9 +52,9 @@ Everything is instrumented. Every component reports latency. The system fails fa
 
 **Torque-based control over direct velocity setting.** Setting velocity directly is simpler but unrealistic. Torque-based control respects inertia, makes the simulation behave like real hardware, and forces proper PID tuning. The extra complexity is worth it.
 
-**Fixed-rate physics loop in background task.** Multiple WebSocket clients used to cause physics time warp—simulation would speed up or slow down unpredictably. Moving physics stepping to a background `asyncio.Task` at 60 Hz fixed it. Physics time is now independent of client count.
+**Fixed-rate physics loop in background task.** Multiple WebSocket clients used to cause physics time warp; simulation would speed up or slow down unpredictably. Moving physics stepping to a background `asyncio.Task` at 60 Hz fixed it. Physics time is now independent of client count.
 
-**Frontend performance discipline.** Telemetry in refs, not state. Throttled UI updates. `createImageBitmap` instead of Blob URLs. These aren't micro-optimizations—they're the difference between a responsive dashboard and a frozen browser when streaming at 30 FPS.
+**Frontend performance discipline.** Telemetry in refs, not state. Throttled UI updates. `createImageBitmap` instead of Blob URLs. These aren't micro-optimizations; they're the difference between a responsive dashboard and a frozen browser when streaming at 30 FPS.
 
 **BGR->RGB conversion in inference engine.** The model was trained on RGB. OpenCV returns BGR. Without explicit conversion, the model sees inverted color channels. This was a subtle bug that degraded accuracy until I caught it.
 
@@ -90,7 +90,7 @@ Real-world dataset collection. Synthetic data works for proof-of-concept. Real c
 
 ## For the Full Engineering Details
 
-Setup instructions, API documentation, architecture diagrams, performance targets, Docker deployment, testing—see [TECHNICAL.md](TECHNICAL.md).
+Setup instructions, API documentation, architecture diagrams, performance targets, Docker deployment, testing. See [TECHNICAL.md](TECHNICAL.md).
 
 Quick start:
 
@@ -108,4 +108,5 @@ Dashboard at `http://localhost:3000`.
 **Built with:** PyTorch, FastAPI, React, PyBullet
 
 *This README reflects only what's implemented. All technical decisions are verifiable in the source code and CHANGELOG.*
+
 ...aeros it is
