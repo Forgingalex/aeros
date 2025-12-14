@@ -7,7 +7,8 @@ from typing import Optional, Union
 from pathlib import Path
 import time
 
-# ONNX runtime is optional - only needed for ONNX models
+# ONNX runtime optional: allows graceful degradation if not installed
+# Enables edge deployment path without requiring PyTorch runtime
 try:
     import onnxruntime as ort
     ONNX_AVAILABLE = True
@@ -46,7 +47,7 @@ class InferenceEngine:
         else:
             self._load_pytorch_model()
         
-        self.inference_times = []
+        self.inference_latencies = []
     
     def _load_pytorch_model(self) -> None:
         """Load PyTorch model."""
@@ -81,24 +82,21 @@ class InferenceEngine:
         """
         start_time = time.time()
         
-        # Convert BGR to RGB (model was trained on RGB)
-        if image.shape[2] == 3:  # Ensure it's a color image
+        # Critical fix: OpenCV VideoCapture returns BGR, but model was trained on RGB
+        # Without this conversion, model receives inverted color channels, degrading accuracy
+        if image.shape[2] == 3:
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
         if self.use_onnx:
-            # ONNX inference
-            # Convert to NCHW format
+            # ONNX inference path: optimized for edge deployment (lower memory, faster startup)
             image_nchw = np.transpose(image, (2, 0, 1)).astype(np.float32)
             image_batch = np.expand_dims(image_nchw, axis=0)
-            
-            # Normalize to [0, 1]
             image_batch = image_batch / 255.0
             
             outputs = self.session.run(None, {self.input_name: image_batch})
             prediction = float(outputs[0][0, 0])
         else:
-            # PyTorch inference
-            # Convert to tensor
+            # PyTorch inference path: used during development, supports GPU acceleration
             image_tensor = torch.from_numpy(image).permute(2, 0, 1).float()
             image_tensor = image_tensor / 255.0
             image_batch = image_tensor.unsqueeze(0).to(self.device)
@@ -107,8 +105,8 @@ class InferenceEngine:
                 output = self.model(image_batch)
                 prediction = float(output[0, 0].cpu().item())
         
-        inference_time = time.time() - start_time
-        self.inference_times.append(inference_time)
+        inference_latency = time.time() - start_time
+        self.inference_latencies.append(inference_latency)
         
         return prediction
     
@@ -118,13 +116,13 @@ class InferenceEngine:
         Returns:
             Average FPS
         """
-        if not self.inference_times:
+        if not self.inference_latencies:
             return 0.0
         
-        # Use last 100 inferences
-        recent_times = self.inference_times[-100:]
-        avg_time = np.mean(recent_times)
-        return 1.0 / avg_time if avg_time > 0 else 0.0
+        # Rolling window: last 100 inferences to smooth out transient spikes
+        recent_latencies = self.inference_latencies[-100:]
+        avg_latency = np.mean(recent_latencies)
+        return 1.0 / avg_latency if avg_latency > 0 else 0.0
     
     def get_latency(self) -> float:
         """Get average latency from recent inferences.
@@ -132,9 +130,14 @@ class InferenceEngine:
         Returns:
             Average latency in milliseconds
         """
-        if not self.inference_times:
+        if not self.inference_latencies:
             return 0.0
         
-        recent_times = self.inference_times[-100:]
-        return np.mean(recent_times) * 1000  # Convert to ms
+        recent_latencies = self.inference_latencies[-100:]
+        return np.mean(recent_latencies) * 1000
+    
+    # TODO: Add perception confidence estimation (e.g., model uncertainty via Monte Carlo dropout
+    # or ensemble variance) to enable confidence-conditioned control. Hypothesis: low-confidence
+    # predictions indicate ambiguous scenes (e.g., featureless walls) where aggressive control
+    # should be damped. Measure correlation between confidence and control stability in simulation.
 

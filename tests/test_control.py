@@ -13,12 +13,12 @@ def test_pid_initialization():
     assert pid.setpoint == 0.0
 
 
-def test_pid_update():
-    """Test PID controller update."""
+def test_pid_compute_control():
+    """Test PID controller compute_control."""
     pid = PIDController(kp=1.0, ki=0.1, kd=0.5, setpoint=0.0)
     
     # Test with error
-    output = pid.update(0.5)  # Current value is 0.5, setpoint is 0.0
+    output = pid.compute_control(0.5)  # Current heading is 0.5, setpoint is 0.0
     
     # Output should be negative (to reduce error)
     assert output < 0
@@ -29,8 +29,8 @@ def test_pid_reset():
     pid = PIDController()
     
     # Update a few times
-    pid.update(0.5)
-    pid.update(0.3)
+    pid.compute_control(0.5)
+    pid.compute_control(0.3)
     
     # Reset
     pid.reset()
@@ -48,7 +48,7 @@ def test_pid_output_limits():
     )
     
     # Large error should be clamped
-    output = pid.update(10.0)
+    output = pid.compute_control(10.0)
     
     assert -1.0 <= output <= 1.0
 

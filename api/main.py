@@ -1,5 +1,12 @@
 """FastAPI server for AEROS backend."""
 
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -52,7 +59,7 @@ preprocessor: Optional[ImagePreprocessor] = None
 pid_controller: Optional[PIDController] = None
 simulation: Optional[DroneSimulation] = None
 use_simulation: bool = False
-simulation_task: Optional[asyncio.Task] = None
+physics_loop_task: Optional[asyncio.Task] = None
 
 
 @app.on_event("startup")
@@ -103,7 +110,8 @@ async def load_model(model_path: str, use_onnx: bool = False):
     """
     global inference_engine
     
-    # Security: Only allow files from models/ directory
+    # Path traversal protection: restrict model loading to models/ directory only
+    # Prevents loading arbitrary files via ../ sequences
     model_path_obj = Path(model_path)
     if model_path_obj.is_absolute():
         return JSONResponse(
@@ -111,12 +119,10 @@ async def load_model(model_path: str, use_onnx: bool = False):
             content={"status": "error", "message": "Model path must be relative"},
         )
     
-    # Resolve to models directory
-    full_path = Path("models") / model_path_obj
+    full_path = project_root / "models" / model_path_obj
     full_path = full_path.resolve()
     
-    # Ensure it's within models directory (prevent path traversal)
-    models_dir = Path("models").resolve()
+    models_dir = (project_root / "models").resolve()
     if not str(full_path).startswith(str(models_dir)):
         return JSONResponse(
             status_code=403,
@@ -147,11 +153,19 @@ async def load_model(model_path: str, use_onnx: bool = False):
 
 
 @app.post("/start_simulation")
-async def start_simulation(gui: Optional[bool] = None):
+async def start_simulation(
+    gui: Optional[bool] = None,
+    enable_obstacles: bool = True,
+    enable_turns: bool = True,
+    lighting_variation: float = 0.3,
+):
     """Start PyBullet simulation.
     
     Args:
         gui: Whether to show simulation GUI (auto-detects Docker if None)
+        enable_obstacles: Whether to add obstacles in corridor
+        enable_turns: Whether to add turns in corridor (future feature)
+        lighting_variation: Lighting variation (0-1)
     """
     global simulation, use_simulation
     
@@ -164,16 +178,24 @@ async def start_simulation(gui: Optional[bool] = None):
             },
         )
     
-    # Auto-detect Docker/headless mode
+    # Auto-detect headless environment (Docker/CI) to prevent GUI initialization failures
     if gui is None:
         gui = os.getenv("DISPLAY") is not None and os.getenv("DISPLAY") != ""
     
+    # Clamp lighting variation
+    lighting_variation = max(0.0, min(1.0, lighting_variation))
+    
     try:
-        simulation = DroneSimulation(gui=gui)
+        simulation = DroneSimulation(
+            gui=gui,
+            enable_obstacles=enable_obstacles,
+            enable_turns=enable_turns,
+            lighting_variation=lighting_variation,
+        )
         use_simulation = True
         return {
             "status": "success",
-            "message": f"Simulation started (gui={gui})",
+            "message": f"Simulation started (gui={gui}, obstacles={enable_obstacles}, lighting={lighting_variation})",
         }
     except Exception as e:
         return JSONResponse(
@@ -259,15 +281,19 @@ async def get_pid_gains():
     }
 
 
-async def simulation_loop():
-    """Background task to step simulation independently."""
+async def physics_loop():
+    """Background task running at fixed 60 Hz independent of WebSocket client count.
+    
+    Prevents physics time warp: without this, multiple clients would cause
+    simulation.step() to be called multiple times per frame, speeding up physics.
+    """
     global simulation, use_simulation
     while use_simulation and simulation:
         try:
             simulation.step()
-            await asyncio.sleep(1.0 / 60.0)  # 60 Hz physics
+            await asyncio.sleep(1.0 / 60.0)  # Fixed 60 Hz physics timestep
         except Exception as e:
-            print(f"Simulation loop error: {e}")
+            print(f"Physics loop error: {e}")
             break
 
 
@@ -296,7 +322,7 @@ async def websocket_endpoint(websocket: WebSocket):
     - Controller output
     - FPS and latency
     """
-    global simulation_task, use_simulation, simulation
+    global physics_loop_task, use_simulation, simulation
     
     print(f"Incoming WebSocket connection attempt from {websocket.client}")
     try:
@@ -306,10 +332,11 @@ async def websocket_endpoint(websocket: WebSocket):
         print(f"ERROR: Failed to accept WebSocket connection: {e}")
         return
     
-    # Start simulation loop if using simulation and not already running
-    if use_simulation and simulation and (simulation_task is None or simulation_task.done()):
-        simulation_task = asyncio.create_task(simulation_loop())
-        print("Simulation loop started")
+    # Start background physics loop only once (shared across all WebSocket connections)
+    # Prevents multiple physics loops from running simultaneously
+    if use_simulation and simulation and (physics_loop_task is None or physics_loop_task.done()):
+        physics_loop_task = asyncio.create_task(physics_loop())
+        print("Physics loop started")
     
     if not inference_engine:
         error_msg = "Model not loaded. Call /load_model first."
@@ -323,16 +350,16 @@ async def websocket_endpoint(websocket: WebSocket):
             print(f"Error sending error message: {e}")
         return
     
-    # Initialize camera (webcam or simulation)
-    camera = None
+    # Initialize video capture (webcam or simulation)
+    video_capture = None
     if use_simulation and simulation:
         print("Using simulation camera")
-        camera = None  # Use simulation camera
+        video_capture = None  # Use simulation camera
     else:
         # Try to open webcam
         print("Attempting to open camera (index 0)...")
-        camera = cv2.VideoCapture(0)
-        if not camera.isOpened():
+        video_capture = cv2.VideoCapture(0)
+        if not video_capture.isOpened():
             error_msg = "Could not open camera. Check if camera is available and not in use by another application."
             print(f"ERROR: {error_msg}")
             print("Trying to get camera backend info...")
@@ -353,7 +380,6 @@ async def websocket_endpoint(websocket: WebSocket):
         
         while True:
             try:
-                # Get frame
                 if use_simulation and simulation:
                     try:
                         frame = simulation.get_camera_image()
@@ -365,7 +391,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         break
                 else:
                     try:
-                        ret, frame = camera.read()
+                        ret, frame = video_capture.read()
                         if not ret:
                             print("WARNING: Failed to read frame from camera")
                             break
@@ -374,35 +400,35 @@ async def websocket_endpoint(websocket: WebSocket):
                         print(f"Traceback: {traceback.format_exc()}")
                         break
                 
-                # Preprocess
+                # Preprocess frame for perception pipeline
                 try:
-                    processed = preprocessor.preprocess(frame)
+                    preprocessed_frame = preprocessor.preprocess(frame)
                 except Exception as e:
                     print(f"ERROR: Preprocessing failed: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    # Continue to next frame instead of breaking
+                    # Non-critical error: skip frame to maintain stream continuity
                     await asyncio.sleep(1.0 / 30.0)
                     continue
                 
-                # Predict heading
+                # Predict heading from preprocessed frame
                 try:
-                    heading = inference_engine.predict(processed)
+                    heading = inference_engine.predict(preprocessed_frame)
                 except Exception as e:
                     print(f"ERROR: Inference failed: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    # Continue to next frame instead of breaking
+                    # Non-critical error: skip frame to maintain stream continuity
                     await asyncio.sleep(1.0 / 30.0)
                     continue
                 
-                # Compute control output
+                # Compute control command from heading error
                 try:
-                    control_output = pid_controller.update(heading)
+                    angular_velocity_command = pid_controller.compute_control(heading)
                 except Exception as e:
                     print(f"ERROR: PID control computation failed: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    control_output = 0.0  # Default to zero on error
+                    # Fail-safe: zero command prevents runaway control
+                    angular_velocity_command = 0.0
                 
-                # Get metrics
                 try:
                     fps = inference_engine.get_fps()
                     latency = inference_engine.get_latency()
@@ -411,33 +437,32 @@ async def websocket_endpoint(websocket: WebSocket):
                     fps = 0.0
                     latency = 0.0
                 
-                # Get drone state if simulation
                 drone_state = None
                 if use_simulation and simulation:
                     try:
                         drone_state = simulation.get_drone_state()
-                        # Apply control (simulation.step() runs in background task)
-                        simulation.apply_control(control_output)
+                        # Control applied here; physics stepping happens in background task at 60 Hz
+                        simulation.apply_control(angular_velocity_command)
                     except Exception as e:
                         print(f"WARNING: Simulation state/control failed: {e}")
+                        print(f"Traceback: {traceback.format_exc()}")
                 
-                # Encode frame as base64
+                # Encode frame as JPEG (quality 80 balances size vs visual quality for real-time streaming)
                 try:
                     _, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 80])
-                    frame_base64 = buffer.tobytes()
+                    encoded_frame_bytes = buffer.tobytes()
                 except Exception as e:
                     print(f"ERROR: Frame encoding failed: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    # Continue to next frame instead of breaking
+                    # Non-critical error: skip frame to maintain stream continuity
                     await asyncio.sleep(1.0 / 30.0)
                     continue
                 
-                # Send telemetry
                 try:
                     await websocket.send_json({
                         "type": "telemetry",
                         "heading": float(heading),
-                        "control_output": float(control_output),
+                        "control_output": float(angular_velocity_command),
                         "fps": float(fps),
                         "latency_ms": float(latency),
                         "frame_count": frame_count,
@@ -446,22 +471,21 @@ async def websocket_endpoint(websocket: WebSocket):
                 except Exception as e:
                     print(f"ERROR: Failed to send telemetry: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    # If we can't send, connection is likely broken
+                    # Connection broken: exit loop to allow reconnection
                     break
                 
-                # Send frame
                 try:
-                    await websocket.send_bytes(frame_base64)
+                    await websocket.send_bytes(encoded_frame_bytes)
                 except Exception as e:
                     print(f"ERROR: Failed to send frame: {e}")
                     print(f"Traceback: {traceback.format_exc()}")
-                    # If we can't send, connection is likely broken
+                    # Connection broken: exit loop to allow reconnection
                     break
                 
                 frame_count += 1
                 
-                # Small delay to control frame rate
-                await asyncio.sleep(1.0 / 30.0)  # Target 30 FPS
+                # Throttle to 30 FPS to match frontend display rate and reduce network bandwidth
+                await asyncio.sleep(1.0 / 30.0)
                 
             except WebSocketDisconnect:
                 print("WebSocket disconnected (client closed)")
@@ -488,8 +512,8 @@ async def websocket_endpoint(websocket: WebSocket):
             pass  # Connection might already be closed
     finally:
         print("Cleaning up WebSocket connection...")
-        if camera and not use_simulation:
-            camera.release()
+        if video_capture and not use_simulation:
+            video_capture.release()
             print("Camera released")
         try:
             await websocket.close()

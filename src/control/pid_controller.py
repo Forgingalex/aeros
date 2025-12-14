@@ -38,22 +38,29 @@ class PIDController:
         self._last_error = 0.0
         self._last_time = None
     
-    def update(self, current_value: float) -> float:
-        """Compute PID output.
+    # TODO: Implement confidence-conditioned control: scale PID gains based on perception confidence.
+    # When confidence < threshold (e.g., 0.7), reduce Kp/Kd to prevent overcorrection on ambiguous
+    # visual features. Test hypothesis: confidence-based gain scheduling reduces oscillation in
+    # low-texture environments (corridor walls) while maintaining responsiveness in high-texture
+    # areas (doors, signs).
+    
+    def compute_control(self, current_heading: float) -> float:
+        """Compute PID control output from heading error.
         
         Args:
-            current_value: Current heading angle (radians)
+            current_heading: Current heading angle (radians)
             
         Returns:
-            Control output (angular velocity command)
+            Angular velocity command (rad/s)
         """
-        error = self.setpoint - current_value
+        error = self.setpoint - current_heading
         
-        # Get current time
         current_time = time.time()
         if self._last_time is None:
             self._last_time = current_time
-            self._last_error = error  # Prevent startup derivative spike
+            # Bug fix: initialize _last_error to prevent derivative term spike on first update
+            # Without this, (error - undefined) / dt causes violent initial correction
+            self._last_error = error
             dt = 0.01  # Default timestep
         else:
             dt = current_time - self._last_time
@@ -74,7 +81,6 @@ class PIDController:
             derivative = 0.0
         d_term = self.kd * derivative
         
-        # Compute output
         output = p_term + i_term + d_term
         
         # Apply output limits

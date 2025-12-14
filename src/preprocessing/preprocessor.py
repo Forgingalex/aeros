@@ -37,13 +37,12 @@ class ImagePreprocessor:
         Returns:
             Preprocessed image ready for model input
         """
-        # Resize
         processed = cv2.resize(image, self.target_size, interpolation=cv2.INTER_LINEAR)
         
-        # Denoise - use fast Gaussian blur instead of expensive NLM
+        # Performance tradeoff: Gaussian blur instead of Non-Local Means (NLM)
+        # NLM provides better denoising but costs 50-200ms per frame, breaking real-time constraint
+        # Gaussian blur keeps preprocessing under 10ms while providing sufficient noise reduction
         if self.denoise:
-            # Use Gaussian blur for real-time performance
-            # NLM is too slow (50-200ms per frame)
             processed = cv2.GaussianBlur(processed, (5, 5), 0)
         
         # Brightness normalization
@@ -56,6 +55,11 @@ class ImagePreprocessor:
             processed = cv2.cvtColor(processed, cv2.COLOR_LAB2BGR)
         
         return processed
+    
+    # TODO: Explore event-based or sparse visual representations for ultra-low latency perception.
+    # Hypothesis: Converting frames to event streams (pixel-level brightness changes) could reduce
+    # preprocessing to <2ms while maintaining heading estimation accuracy. Test with DVS camera
+    # simulation or frame-to-event conversion, measure latency vs accuracy tradeoff on Jetson Nano.
     
     def preprocess_batch(self, images: np.ndarray) -> np.ndarray:
         """Preprocess a batch of images.
