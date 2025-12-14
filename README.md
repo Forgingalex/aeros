@@ -1,6 +1,9 @@
 # AEROS — Autonomous Edge Robotics Operating System
 
 A real-time, camera-only autonomy pipeline built to treat latency as a first-class design constraint.
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/48f5aced-001a-46cb-b109-cd301ff7eac5" alt="AEROS Logo" width="150"/>
+</div>
 
 ---
 
