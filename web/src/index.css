@@ -1,14 +1,19 @@
-/* Import AEROS theme first */
-@import './styles/aeros-theme.css';
+/* Import AEROS Tactical HUD Design System */
+@import './hud.css';
 
-body {
+html,
+body,
+#root {
   margin: 0;
-  font-family: var(--aeros-font-family);
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden !important;
+  background-color: #030611;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', Consolas, 'Courier New', monospace;
 }

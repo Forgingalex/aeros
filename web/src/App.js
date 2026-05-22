@@ -1,324 +1,520 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './App.css';
-import { AerosDashboard } from './components/AerosDashboard';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import TacticalHUD from "./components/TacticalHUD";
+
+const WS_RECONNECT_DELAY_MS = 3000;
+const DEFAULT_RUNTIME_CONFIG = {
+  runtime_mode: "legacy",
+  safety_mode: "legacy",
+  stream_view: "auto",
+  predict_horizon_ms: 100,
+};
+const DEFAULT_PID_GAINS = { kp: 1.0, ki: 0.1, kd: 0.5 };
+const DEFAULT_TELEMETRY = {
+  seqId: 0,
+  headingRadians: 0,
+  headingDegrees: 0,
+  headingRate: 0,
+  controlOutput: 0,
+  telemetryFps: 0,
+  viewFps: 0,
+  latencyMs: 0,
+  motionEnergy: null,
+  confidence: null,
+  runtimeMode: "legacy",
+  authoritativePath: "legacy",
+  frameKind: "rgb",
+  warmup: true,
+  predictHorizonMs: 100,
+  droneState: null,
+  shadow: null,
+  lastFrameTs: 0,
+};
+
+function toFiniteNumber(value, fallback = 0) {
+  const next = Number(value);
+  return Number.isFinite(next) ? next : fallback;
+}
+
+function normalizeHeadingDegrees(value) {
+  const normalized = value % 360;
+  return normalized < 0 ? normalized + 360 : normalized;
+}
+
+function radiansToDegrees(value) {
+  return (value * 180) / Math.PI;
+}
+
+function formatApiBaseUrl() {
+  const { protocol, hostname, port } = window.location;
+  if (port === "3000") {
+    return `${protocol}//${hostname}:8000`;
+  }
+  return `${protocol}//${hostname}${port ? `:${port}` : ""}`;
+}
+
+function formatWebSocketUrl() {
+  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  const { hostname, port } = window.location;
+  if (port === "3000") {
+    return `${protocol}//${hostname}:8000/ws`;
+  }
+  return `${protocol}//${hostname}${port ? `:${port}` : ""}/ws`;
+}
 
 function App() {
-  // Connection state
-  const [status, setStatus] = useState("disconnected"); // "connected" | "disconnected" | "connecting"
+  const apiBaseUrlRef = useRef(formatApiBaseUrl());
+  const websocketUrlRef = useRef(formatWebSocketUrl());
+  const websocketRef = useRef(null);
+  const reconnectTimeoutRef = useRef(null);
+  const frameCanvasRef = useRef(null);
+  const frameContextRef = useRef(null);
+  const frameDecodeInFlightRef = useRef(false);
+  const pendingFrameBlobRef = useRef(null);
+  const streamFpsWindowRef = useRef({ count: 0, startedAt: 0 });
+  const telemetryRef = useRef({ ...DEFAULT_TELEMETRY });
+  const runtimeConfigRef = useRef({ ...DEFAULT_RUNTIME_CONFIG });
+
+  const [status, setStatus] = useState("connecting");
   const [error, setError] = useState(null);
-  
-  // Model and pipeline state
   const [modelLoaded, setModelLoaded] = useState(false);
   const [running, setRunning] = useState(false);
-  
-  // PID Controller state
-  const [pidGains, setPidGains] = useState({ kp: 1.0, ki: 0.1, kd: 0.5 });
+  const [runtimeConfig, setRuntimeConfig] = useState(DEFAULT_RUNTIME_CONFIG);
+  const [runtimeConfigLoading, setRuntimeConfigLoading] = useState(false);
+  const [pidGains, setPidGains] = useState(DEFAULT_PID_GAINS);
   const [pidGainsLoading, setPidGainsLoading] = useState(false);
-  
-  // Telemetry data stored in refs for performance (avoid re-renders)
-  const telemetryRef = useRef({
-    heading: 0.0,
-    controlOutput: 0.0,
-    fps: 0.0,
-    latency: 0.0,
-    frameCount: 0,
-    droneState: null,
-  });
-  
-  // State for UI updates (debounced/throttled)
-  const [displayHeading, setDisplayHeading] = useState(0.0);
-  const [displayControlOutput, setDisplayControlOutput] = useState(0.0);
-  const [displayFps, setDisplayFps] = useState(0.0);
-  const [displayLatency, setDisplayLatency] = useState(0.0);
-  const [displayFrameCount, setDisplayFrameCount] = useState(0);
-  const [cameraUrl, setCameraUrl] = useState(undefined);
-  
-  // Refs for video rendering
-  const canvasRef = useRef(null);
-  const wsRef = useRef(null);
-  const frameCountRef = useRef(0);
-  const lastTimeRef = useRef(Date.now());
-  const animationFrameRef = useRef(null);
-  const lastUpdateTimeRef = useRef(0);
-  
-  // Performance: Update UI at max 30fps (33ms intervals)
-  const UI_UPDATE_INTERVAL = 33;
-  
-  // Update display values from refs (throttled)
-  const updateDisplay = useCallback(() => {
-    const now = Date.now();
-    if (now - lastUpdateTimeRef.current < UI_UPDATE_INTERVAL) {
+  const [cameraIndex, setCameraIndex] = useState(0);
+
+  // Resize canvas to match the window viewport size
+  const handleResize = useCallback(() => {
+    const canvas = frameCanvasRef.current;
+    if (canvas) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial call
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
+  const drawFrame = useCallback((bitmap) => {
+    const canvas = frameCanvasRef.current;
+    if (!canvas) {
+      if (typeof bitmap.close === "function") {
+        bitmap.close();
+      }
       return;
     }
-    lastUpdateTimeRef.current = now;
-    
-    const telemetry = telemetryRef.current;
-    setDisplayHeading(telemetry.heading);
-    setDisplayControlOutput(telemetry.controlOutput);
-    setDisplayFps(telemetry.fps);
-    setDisplayLatency(telemetry.latency);
-    setDisplayFrameCount(telemetry.frameCount);
+
+    const context =
+      frameContextRef.current ||
+      canvas.getContext("2d", {
+        alpha: false,
+        desynchronized: true,
+      });
+
+    if (!context) {
+      if (typeof bitmap.close === "function") {
+        bitmap.close();
+      }
+      return;
+    }
+
+    frameContextRef.current = context;
+
+    // Direct width/height verification before draw to prevent visual scaling bugs
+    if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    // Cover-fit rendering logic (crop and center to fill viewport)
+    const scale = Math.max(canvas.width / bitmap.width, canvas.height / bitmap.height);
+    const dw = bitmap.width * scale;
+    const dh = bitmap.height * scale;
+    const dx = (canvas.width - dw) / 2;
+    const dy = (canvas.height - dh) / 2;
+
+    context.drawImage(bitmap, dx, dy, dw, dh);
+
+    const now = performance.now();
+    const streamWindow = streamFpsWindowRef.current;
+    if (streamWindow.startedAt === 0) {
+      streamWindow.startedAt = now;
+    }
+
+    streamWindow.count += 1;
+    if (now - streamWindow.startedAt >= 1000) {
+      telemetryRef.current.viewFps =
+        (streamWindow.count * 1000) / (now - streamWindow.startedAt);
+      streamWindow.count = 0;
+      streamWindow.startedAt = now;
+    }
+
+    telemetryRef.current.lastFrameTs = now;
+
+    if (typeof bitmap.close === "function") {
+      bitmap.close();
+    }
   }, []);
-  
-  // Use requestAnimationFrame for smooth UI updates
-  useEffect(() => {
-    const updateLoop = () => {
-      updateDisplay();
-      animationFrameRef.current = requestAnimationFrame(updateLoop);
-    };
-    animationFrameRef.current = requestAnimationFrame(updateLoop);
-    
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [updateDisplay]);
-  
-  // WebSocket connection
-  useEffect(() => {
-    connectWebSocket();
-    return () => {
-      if (wsRef.current) {
-        wsRef.current.close();
-      }
-    };
-  }, []);
 
-  const connectWebSocket = () => {
-    setStatus("connecting");
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host.replace(':3000', ':8000')}/ws`;
-    
-    const ws = new WebSocket(wsUrl);
-    wsRef.current = ws;
+  const decodeFrameBlob = useCallback(async (blob) => {
+    if ("createImageBitmap" in window) {
+      return window.createImageBitmap(blob);
+    }
 
-    ws.onopen = () => {
-      console.log('WebSocket connected');
-      setStatus("connected");
-      setError(null);
-    };
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(blob);
+      const image = new Image();
 
-    ws.onmessage = (event) => {
-      // Check if message is JSON (telemetry) or binary (frame)
-      if (event.data instanceof Blob) {
-        // Binary data - frame
-        handleFrameData(event.data);
-      } else {
-        // JSON data - telemetry
-        handleTelemetryData(event.data);
-      }
-    };
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(image);
+      };
 
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
-      setError('WebSocket connection error');
-      setStatus("disconnected");
-    };
+      image.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("Image decode failed"));
+      };
 
-    ws.onclose = () => {
-      console.log('WebSocket disconnected');
-      setStatus("disconnected");
-      // Attempt to reconnect after 3 seconds if not manually closed
-      setTimeout(() => {
-        if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
-          connectWebSocket();
-        }
-      }, 3000);
-    };
-  };
-  
-  // Optimized frame handling with downscaling
-  const handleFrameData = useCallback((blob) => {
-    blob.arrayBuffer().then(buffer => {
-      createImageBitmap(new Blob([buffer], { type: 'image/jpeg' }))
-        .then(bitmap => {
-          if (!canvasRef.current) return;
-          
-          const canvas = canvasRef.current;
-          const ctx = canvas.getContext('2d');
-          
-          // Downscale for performance (max 1280px width)
-          const maxWidth = 1280;
-          const scale = bitmap.width > maxWidth ? maxWidth / bitmap.width : 1;
-          canvas.width = bitmap.width * scale;
-          canvas.height = bitmap.height * scale;
-          
-          ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
-          setCameraUrl(dataUrl);
-          bitmap.close();
-          
-          // Calculate FPS
-          frameCountRef.current += 1;
-          const now = Date.now();
-          const elapsed = (now - lastTimeRef.current) / 1000;
-          if (elapsed >= 1.0) {
-            const currentFps = frameCountRef.current / elapsed;
-            telemetryRef.current.fps = currentFps;
-            frameCountRef.current = 0;
-            lastTimeRef.current = now;
-          }
-        })
-        .catch(err => console.error('Image decode error:', err));
+      image.src = url;
     });
   }, []);
-  
-  // Optimized telemetry handling (store in ref, update display separately)
-  const handleTelemetryData = useCallback((data) => {
-    try {
-      const parsed = JSON.parse(data);
-      if (parsed.type === 'telemetry') {
-        // Update refs immediately (no re-render)
-        telemetryRef.current.heading = parsed.heading || 0.0;
-        telemetryRef.current.controlOutput = parsed.control_output || 0.0;
-        telemetryRef.current.latency = parsed.latency_ms || 0.0;
-        telemetryRef.current.frameCount = parsed.frame_count || 0;
-        if (parsed.drone_state) {
-          telemetryRef.current.droneState = parsed.drone_state;
+
+  const processQueuedFrame = useCallback(
+    async (blob) => {
+      frameDecodeInFlightRef.current = true;
+
+      try {
+        const decodedFrame = await decodeFrameBlob(blob);
+        drawFrame(decodedFrame);
+      } catch (decodeError) {
+        console.error("Frame decode error:", decodeError);
+      } finally {
+        frameDecodeInFlightRef.current = false;
+        const nextBlob = pendingFrameBlobRef.current;
+        pendingFrameBlobRef.current = null;
+
+        if (nextBlob) {
+          processQueuedFrame(nextBlob);
         }
-      } else if (parsed.error) {
-        setError(parsed.error);
       }
-    } catch (e) {
-      console.error('Failed to parse telemetry:', e);
+    },
+    [decodeFrameBlob, drawFrame]
+  );
+
+  const handleFrameBlob = useCallback(
+    (blob) => {
+      if (frameDecodeInFlightRef.current) {
+        pendingFrameBlobRef.current = blob;
+        return;
+      }
+      processQueuedFrame(blob);
+    },
+    [processQueuedFrame]
+  );
+
+  const handleTelemetryPacket = useCallback((payload) => {
+    if (payload.type !== "telemetry") {
+      if (payload.error) {
+        setError(payload.error);
+      }
+      return;
+    }
+
+    const headingRadians = toFiniteNumber(payload.heading, 0);
+    const headingDegrees = normalizeHeadingDegrees(radiansToDegrees(headingRadians));
+
+    telemetryRef.current = {
+      ...telemetryRef.current,
+      seqId: toFiniteNumber(payload.seq_id, telemetryRef.current.seqId),
+      headingRadians,
+      headingDegrees,
+      headingRate: toFiniteNumber(payload.heading_rate, 0),
+      controlOutput: toFiniteNumber(payload.control_output, 0),
+      telemetryFps: toFiniteNumber(payload.fps, 0),
+      latencyMs: toFiniteNumber(payload.latency_ms, 0),
+      motionEnergy:
+        payload.motion_energy == null ? null : toFiniteNumber(payload.motion_energy, 0),
+      confidence:
+        payload.confidence == null ? null : toFiniteNumber(payload.confidence, 0),
+      runtimeMode: payload.runtime_mode || "legacy",
+      authoritativePath: payload.authoritative_path || "legacy",
+      frameKind: payload.frame_kind || "rgb",
+      warmup: Boolean(payload.warmup),
+      predictHorizonMs: toFiniteNumber(
+        payload.predict_horizon_ms,
+        runtimeConfigRef.current.predict_horizon_ms
+      ),
+      droneState: payload.drone_state ?? null,
+      shadow: payload.shadow ?? null,
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const connectWebSocket = () => {
+      if (!mounted) return;
+
+      setStatus("connecting");
+      const socket = new WebSocket(websocketUrlRef.current);
+      socket.binaryType = "blob";
+      websocketRef.current = socket;
+
+      socket.onopen = () => {
+        if (!mounted) return;
+        setStatus("connected");
+        setError(null);
+      };
+
+      socket.onmessage = (event) => {
+        if (event.data instanceof Blob) {
+          handleFrameBlob(event.data);
+          return;
+        }
+
+        try {
+          const payload = JSON.parse(event.data);
+          handleTelemetryPacket(payload);
+        } catch (parseError) {
+          console.error("Failed to parse websocket payload:", parseError);
+        }
+      };
+
+      socket.onerror = () => {
+        if (!mounted) return;
+        setError("WebSocket connection error");
+      };
+
+      socket.onclose = () => {
+        if (!mounted) return;
+        setStatus("disconnected");
+        reconnectTimeoutRef.current = window.setTimeout(
+          connectWebSocket,
+          WS_RECONNECT_DELAY_MS
+        );
+      };
+    };
+
+    connectWebSocket();
+
+    return () => {
+      mounted = false;
+      if (reconnectTimeoutRef.current) {
+        window.clearTimeout(reconnectTimeoutRef.current);
+      }
+      if (websocketRef.current) {
+        websocketRef.current.close();
+      }
+    };
+  }, [handleFrameBlob, handleTelemetryPacket]);
+
+  const fetchRuntimeConfig = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiBaseUrlRef.current}/runtime_config`);
+      const payload = await response.json();
+
+      if (payload.status === "success") {
+        runtimeConfigRef.current = payload.config;
+        setRuntimeConfig(payload.config);
+      }
+    } catch (requestError) {
+      console.error("Failed to fetch runtime config:", requestError);
     }
   }, []);
 
-  // API call functions
+  const handleSetCameraSource = useCallback(async (index) => {
+    try {
+      const response = await fetch(
+        `${apiBaseUrlRef.current}/set_camera_source?index=${index}`,
+        { method: "POST" }
+      );
+      const payload = await response.json();
+      if (payload.status === "success") {
+        setCameraIndex(index);
+        setError(null);
+      } else {
+        setError(payload.message || "Failed to switch camera");
+      }
+    } catch (requestError) {
+      console.error("Failed to switch camera:", requestError);
+      setError(`Failed to switch camera: ${requestError.message}`);
+    }
+  }, []);
+
+  const fetchPidGains = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiBaseUrlRef.current}/get_pid_gains`);
+      const payload = await response.json();
+
+      if (payload.status === "success") {
+        setPidGains(payload.gains);
+      }
+    } catch (requestError) {
+      console.error("Failed to fetch PID gains:", requestError);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchRuntimeConfig();
+    fetchPidGains();
+  }, [fetchPidGains, fetchRuntimeConfig]);
+
+  const handleSetRuntimeConfig = useCallback(async (patch) => {
+    const nextConfig = {
+      ...runtimeConfigRef.current,
+      ...patch,
+    };
+
+    setRuntimeConfigLoading(true);
+
+    try {
+      const response = await fetch(`${apiBaseUrlRef.current}/runtime_config`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nextConfig),
+      });
+      const payload = await response.json();
+
+      if (payload.status === "success") {
+        runtimeConfigRef.current = payload.config;
+        setRuntimeConfig(payload.config);
+        setError(null);
+      } else {
+        setError(payload.message || "Failed to update runtime configuration");
+      }
+    } catch (requestError) {
+      console.error("Failed to update runtime config:", requestError);
+      setError(`Failed to update runtime config: ${requestError.message}`);
+    } finally {
+      setRuntimeConfigLoading(false);
+    }
+  }, []);
+
   const handleLoadModel = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8000/load_model?model_path=checkpoints/best_model.pth&use_onnx=false', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      if (data.status === 'success') {
+      const response = await fetch(
+        `${apiBaseUrlRef.current}/load_model?model_path=checkpoints/best_model.pth&use_onnx=false`,
+        {
+          method: "POST",
+        }
+      );
+      const payload = await response.json();
+
+      if (payload.status === "success") {
         setModelLoaded(true);
         setError(null);
-        console.log('Model loaded successfully');
       } else {
-        setError(data.message || 'Failed to load model');
+        setError(payload.message || "Failed to load model");
       }
-    } catch (err) {
-      console.error('Error loading model:', err);
-      setError('Failed to load model: ' + err.message);
+    } catch (requestError) {
+      console.error("Failed to load model:", requestError);
+      setError(`Failed to load model: ${requestError.message}`);
     }
   }, []);
 
-  const handleStart = useCallback(async () => {
+  const handleStartSimulation = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8000/start_simulation?gui=true', {
-        method: 'POST',
-      });
-      const data = await response.json();
-      if (data.status === 'success') {
+      const response = await fetch(
+        `${apiBaseUrlRef.current}/start_simulation?gui=true`,
+        {
+          method: "POST",
+        }
+      );
+      const payload = await response.json();
+
+      if (payload.status === "success") {
         setRunning(true);
-        console.log('Simulation started');
+        setError(null);
       } else {
-        setError(data.message || 'Failed to start simulation');
-      }
-    } catch (err) {
-      console.error('Error starting simulation:', err);
-      setError('Failed to start simulation');
-    }
-  }, []);
-
-  const handleStop = useCallback(async () => {
-    try {
-      const response = await fetch('http://localhost:8000/stop_simulation', {
-        method: 'POST',
-      });
-      const data = await response.json();
-      if (data.status === 'success') {
         setRunning(false);
-        console.log('Simulation stopped');
+        setError(payload.message || "Failed to start simulation");
+      }
+    } catch (requestError) {
+      console.error("Failed to start simulation:", requestError);
+      setRunning(false);
+      setError(`Failed to start simulation: ${requestError.message}`);
+    }
+  }, []);
+
+  const handleStopSimulation = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiBaseUrlRef.current}/stop_simulation`, {
+        method: "POST",
+      });
+      const payload = await response.json();
+
+      if (payload.status === "success") {
+        setRunning(false);
+        setError(null);
       } else {
-        setError(data.message || 'Failed to stop simulation');
+        setError(payload.message || "Failed to stop simulation");
       }
-    } catch (err) {
-      console.error('Error stopping simulation:', err);
-      setError('Failed to stop simulation');
+    } catch (requestError) {
+      console.error("Failed to stop simulation:", requestError);
+      setError(`Failed to stop simulation: ${requestError.message}`);
     }
   }, []);
 
-  // Fetch current PID gains on mount
-  const fetchPIDGains = useCallback(async () => {
-    try {
-      const response = await fetch('http://localhost:8000/get_pid_gains');
-      const data = await response.json();
-      if (data.status === 'success') {
-        setPidGains(data.gains);
-      }
-    } catch (err) {
-      console.error('Error fetching PID gains:', err);
-    }
-  }, []);
-
-  // Update PID gains
-  const handleUpdatePIDGains = useCallback(async (gains) => {
+  const handleUpdatePidGains = useCallback(async (gains) => {
     setPidGainsLoading(true);
+
     try {
-      const response = await fetch('http://localhost:8000/set_pid_gains', {
-        method: 'POST',
+      const response = await fetch(`${apiBaseUrlRef.current}/set_pid_gains`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(gains),
       });
-      const data = await response.json();
-      if (data.status === 'success') {
-        setPidGains(data.gains);
-        console.log('PID gains updated:', data.gains);
+      const payload = await response.json();
+
+      if (payload.status === "success") {
+        setPidGains(payload.gains);
+        setError(null);
       } else {
-        setError(data.message || 'Failed to update PID gains');
+        setError(payload.message || "Failed to update PID gains");
       }
-    } catch (err) {
-      console.error('Error updating PID gains:', err);
-      setError('Failed to update PID gains: ' + err.message);
+    } catch (requestError) {
+      console.error("Failed to update PID gains:", requestError);
+      setError(`Failed to update PID gains: ${requestError.message}`);
     } finally {
       setPidGainsLoading(false);
     }
   }, []);
 
-  // Reset PID gains to default
-  const handleResetPIDGains = useCallback(async () => {
-    const defaultGains = { kp: 1.0, ki: 0.1, kd: 0.5 };
-    await handleUpdatePIDGains(defaultGains);
-  }, [handleUpdatePIDGains]);
-
-  // Fetch PID gains on mount
-  useEffect(() => {
-    fetchPIDGains();
-  }, [fetchPIDGains]);
-
-  // Convert heading from radians to degrees
-  const headingDeg = (displayHeading * 180) / Math.PI;
+  const handleResetPidGains = useCallback(async () => {
+    await handleUpdatePidGains(DEFAULT_PID_GAINS);
+  }, [handleUpdatePidGains]);
 
   return (
-    <>
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <AerosDashboard
-        status={status}
-        cameraUrl={cameraUrl}
-        headingDeg={headingDeg}
-        controlOutput={displayControlOutput}
-        fps={displayFps}
-        latencyMs={displayLatency}
-        framesProcessed={displayFrameCount}
-        modelLoaded={modelLoaded}
-        running={running}
-        onLoadModel={handleLoadModel}
-        onStart={handleStart}
-        onStop={handleStop}
-        pidGains={pidGains}
-        onUpdatePIDGains={handleUpdatePIDGains}
-        onResetPIDGains={handleResetPIDGains}
-        pidGainsLoading={pidGainsLoading}
-      />
-    </>
+    <TacticalHUD
+      status={status}
+      error={error}
+      modelLoaded={modelLoaded}
+      running={running}
+      runtimeConfig={runtimeConfig}
+      runtimeConfigLoading={runtimeConfigLoading}
+      pidGains={pidGains}
+      pidGainsLoading={pidGainsLoading}
+      telemetryRef={telemetryRef}
+      viewportCanvasRef={frameCanvasRef}
+      onLoadModel={handleLoadModel}
+      onStartSimulation={handleStartSimulation}
+      onStopSimulation={handleStopSimulation}
+      onSetRuntimeConfig={handleSetRuntimeConfig}
+      onUpdatePidGains={handleUpdatePidGains}
+      onResetPidGains={handleResetPidGains}
+      cameraIndex={cameraIndex}
+      onSetCameraSource={handleSetCameraSource}
+    />
   );
 }
 
