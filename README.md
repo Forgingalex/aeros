@@ -16,17 +16,17 @@ When your perception loop runs at 30 FPS and your control loop needs corrections
 
 This system exists to answer one question: given a single camera, a lightweight CNN, and strict timing requirements, what is the minimum viable perception pipeline that keeps a drone stable? 
 
-We enforce a strict 5ms budget per stage. Any feature that takes longer is rejected, redesigned, or disabled.
+I enforce a strict 5ms budget per stage. Any feature that takes longer is rejected, redesigned, or disabled.
 
 ---
 
 ## The Engine: The Authoritative Heartbeat
 
-The original Alpha version served as foundational base, but it tied perception and control to the WebSocket client connection. We rebuilt the system for professional-grade autonomy.
+The original Alpha version served as foundational base, but it tied perception and control to the WebSocket client connection. I rebuilt the system for professional-grade autonomy.
 
 Today, AEROS runs on a single **Authoritative Heartbeat**. The backend uses a dedicated background runtime loop for each active video source. This loop owns frame acquisition, inference, control computation, and telemetry generation. WebSocket subscribers are strictly passive read-only consumers. If ten clients connect, or if zero clients connect, the physics and perception loop marches on at its fixed rate. 
 
-I also introduced **Camera Hot-Swapping**. You can switch the active sensor on the fly—from a built-in webcam to an iPhone Continuity Camera—via a POST endpoint. The engine drops the old stream and initializes the new one without killing the heartbeat or severing the telemetry connection.
+I also introduced **Camera Hot-Swapping**. You can switch the active sensor on the fly, from a built-in webcam to an iPhone Continuity Camera via a POST endpoint. The engine drops the old stream and initializes the new one without killing the heartbeat or severing the telemetry connection.
 
 ---
 
@@ -52,9 +52,9 @@ The model is trained on synthetic corridor data. Real-world performance remains 
 
 ---
 
-## Where I'm Going (The Omega Mandate)
+## Where I'm Going (The Mandate)
 
-I am actively transitioning to the **AEROS-Omega** architecture, prioritizing motion over color.
+I am actively transitioning to the **AEROS.vOmega** architecture, prioritizing motion over color.
 
 **Temporal Eyes:** I will perceive geometry through change. The pipeline will compute temporal delta encodings from grayscale frames, dropping reliance on static RGB textures. 
 
