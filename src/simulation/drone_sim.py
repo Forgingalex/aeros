@@ -58,7 +58,10 @@ class DroneSimulation:
         """
         if not PYBULLET_AVAILABLE:
             raise ImportError(
-                "PyBullet is not installed. Install it with: pip install pybullet\n"
+                "PyBullet is not installed. Native macOS installs currently skip "
+                "it due to upstream Bullet build failures on recent Apple SDKs.\n"
+                "Use Docker/Linux or a patched local build to enable simulation "
+                "support.\n"
                 "Note: PyBullet requires Visual C++ Build Tools on Windows."
             )
         

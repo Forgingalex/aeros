@@ -12,7 +12,10 @@ websockets>=12.0
 python-multipart>=0.0.6
 
 # Simulation
-pybullet>=3.2.0
+# Native macOS installs skip PyBullet because recent Apple SDKs currently break
+# upstream Bullet builds, and Python 3.14 has no compatible wheel path.
+# Use Docker/Linux or a patched local build for simulation support.
+pybullet>=3.2.0; platform_system != "Darwin" and python_version < "3.14"
 
 # ONNX
 onnx>=1.15.0
@@ -34,4 +37,3 @@ jupyter>=1.0.0
 notebook>=7.0.0
 matplotlib>=3.8.0
 ipykernel>=6.26.0
-

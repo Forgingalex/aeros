@@ -10,9 +10,6 @@ services:
     volumes:
       - ./models:/app/models
       - ./data:/app/data
-    devices:
-      - /dev/video0:/dev/video0  # Map webcam device
-    privileged: true  # Required for hardware access
     environment:
       - PYTHONUNBUFFERED=1
       - DISPLAY=  # Force headless mode
@@ -44,4 +41,3 @@ services:
 networks:
   aeros-network:
     driver: bridge
-

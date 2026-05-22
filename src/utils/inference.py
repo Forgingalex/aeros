@@ -1,11 +1,10 @@
-"""Real-time inference engine."""
-
-import torch
-import numpy as np
-import cv2
-from typing import Optional, Union
-from pathlib import Path
 import time
+from pathlib import Path
+from typing import Optional, Union
+
+import cv2
+import numpy as np
+import torch
 
 # ONNX runtime optional: allows graceful degradation if not installed
 # Enables edge deployment path without requiring PyTorch runtime
@@ -141,3 +140,29 @@ class InferenceEngine:
     # predictions indicate ambiguous scenes (e.g., featureless walls) where aggressive control
     # should be damped. Measure correlation between confidence and control stability in simulation.
 
+
+class PassthroughInferenceEngine:
+    """Fallback engine that keeps the runtime alive without a trained model.
+
+    This is the Phase 0 turnkey path: video and telemetry continue to flow
+    even when no checkpoint has been loaded yet.
+    """
+
+    is_passthrough = True
+    use_onnx = False
+
+    def __init__(self):
+        self.model_path: Optional[Path] = None
+
+    def predict(self, image: np.ndarray) -> float:
+        """Return a neutral heading command while the model is unavailable."""
+        _ = image
+        return 0.0
+
+    def get_fps(self) -> float:
+        """Passthrough mode does not report model FPS."""
+        return 0.0
+
+    def get_latency(self) -> float:
+        """Passthrough mode reports zero model latency."""
+        return 0.0
