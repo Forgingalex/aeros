@@ -5,101 +5,46 @@ All notable changes to the AEROS project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-omega-baseline] - 2026-05-22
+
+This release establishes the baseline for the Omega transition. It abandons the foundational per-client alpha architecture in favor of a professional-grade, mission-ready perception stack.
+
+### Added
+- **Authoritative Heartbeat Loop**: A single `AuthoritativeStreamRuntime` background loop now owns the active video source. It executes frame acquisition, inference, control computation, and telemetry generation independently of WebSocket client connections.
+- **Camera Hot-Swapping**: New `POST /set_camera_source?index=n` endpoint allows dynamic swapping of camera inputs (e.g., iPhone Continuity Camera) without killing the heartbeat or severing the WebSocket stream.
+- **Aviation-Window HUD**: Completely rebuilt React dashboard utilizing zero-state animation constraints. Tapes slide physically behind stationary glass readouts to mimic jet avionics.
+- **Kinetic Bore-Sight**: The center crosshair actively tracks drift. A Velocity Vector (Ghost Icon) shifts laterally based on heading rate telemetry, and AOA brackets pulse/scale dynamically based on motion energy.
+- **PID API Endpoints**: REST endpoints for PID controller configuration (`GET /get_pid_gains`, `POST /set_pid_gains`).
+- **PID Control Panel**: Interactive dashboard component for real-time PID gain adjustment with 5 preset configurations.
+
+### Changed
+- **Frontend Performance Restrictions**: Strict enforcement of the 5ms latency law. High-frequency HUD elements bypass React state entirely, updating via direct DOM mutations inside `requestAnimationFrame`.
+- **Identity Update**: Rebranded strictly to AEROS. Applied holographic cyan `drop-shadow` styling and removed legacy text.
+
+### Fixed
+- **WebSocket Stability**: Decoupling the heartbeat from the WebSocket connection eliminates connection drop cascades.
+- **Memory Pressure**: Active rejection of `URL.createObjectURL(Blob)` in favor of `createImageBitmap` drastically reduces frontend garbage collection spikes.
+
 ## [0.1.0-alpha] - 2024-11-24
 
+My foundational base. This release proved that a lightweight CNN can maintain drone stability when latency is treated as the primary constraint.
+
 ### Added
-- Initial release of AEROS autonomy pipeline
-- CNN-based heading estimation model (MobileNet-style architecture)
-- Real-time WebSocket streaming for telemetry and video frames
-- PyBullet simulation environment with corridor navigation
-- React dashboard with live camera feed and telemetry visualization
-- Docker containerization with multi-container setup
-- PID controller for heading correction with configurable gains
-- Synthetic data generation pipeline for training
-- ONNX export functionality for edge deployment
-- FastAPI backend with REST and WebSocket endpoints
-- Comprehensive documentation with architecture diagrams
-- Makefile for build automation
-- Unit tests for preprocessing and model components
-- Health check endpoints for Docker orchestration
+- Initial release of the AEROS autonomy pipeline.
+- CNN-based heading estimation model (MobileNet-style architecture).
+- Real-time WebSocket streaming for telemetry and video frames.
+- PyBullet simulation environment with corridor navigation.
+- Docker containerization with multi-container setup.
+- PID controller for heading correction with configurable gains.
+- ONNX export functionality for edge deployment.
 
 ### Fixed
-- **Docker Headless Mode**: Auto-detection of headless environment, prevents crashes in containers
-- **Physics Time Warp**: Moved simulation stepping to background asyncio task, prevents speed changes with multiple clients
-- **RGB/BGR Mismatch**: Fixed color channel conversion in inference pipeline (model now receives correct RGB input)
-- **PID Startup Kick**: Initialize `_last_error` on first update to prevent derivative spike
-- **Security**: Added path validation to `/load_model` endpoint to prevent path traversal attacks
-- **Performance**: Replaced expensive `fastNlMeansDenoisingColored` with `GaussianBlur` for real-time performance
-- **React Memory**: Replaced Blob URLs with `createImageBitmap` and canvas to reduce GC pressure
-- **Simulation Physics**: Improved physics model using torque/force instead of direct velocity setting
-
-### Changed
-- Default simulation GUI mode changed to `False` (auto-detects Docker environment)
-- Preprocessing denoising now uses Gaussian blur instead of NLM for better performance
-- Model path validation restricts loading to `models/` directory only
+- **Physics Time Warp**: Moved simulation stepping to a background asyncio task.
+- **RGB/BGR Mismatch**: Fixed color channel conversion in inference pipeline.
+- **PID Startup Kick**: Initialized `_last_error` on first update to prevent derivative spikes.
 
 ### Known Limitations
-- Simulation physics simplified (torque-based control, not full aerodynamics)
-- Model trained on synthetic corridor data only (not real-world images)
-- Webcam access in Docker requires privileged mode and device mapping
-- ONNX Runtime and PyBullet are optional dependencies (graceful degradation)
-- Not yet tested on physical drones
-- Model accuracy may vary with different lighting/environments
-- PID controller tuned for simulation, may need retuning for real hardware
-
-### Technical Details
-- **Model Size**: ~500K-1M parameters (lightweight for edge deployment)
-- **Target FPS**: ≥15 FPS on CPU, ≥30 FPS on GPU
-- **Target Latency**: <100ms end-to-end
-- **Model Format**: PyTorch (.pth) and ONNX (.onnx) supported
-- **Python Version**: 3.10+
-- **Node.js Version**: 18+
-
----
-
-## [Unreleased]
-
-### Added
-- **PID Control Panel**: Interactive dashboard component for real-time PID gain adjustment
-  - Real-time sliders and number inputs for Kp, Ki, Kd gains
-  - 5 preset configurations (Default, Aggressive, Smooth, Fast Response, Stable)
-  - Current values display showing active PID gains
-  - Reset button to restore default values
-  - Apply button for manual gain updates
-- **PID API Endpoints**: REST endpoints for PID controller configuration
-  - `GET /get_pid_gains` - Retrieve current PID controller gains
-  - `POST /set_pid_gains` - Update PID controller gains dynamically
-- **Dashboard Redesign**: Premium aviation-grade interface
-  - New AEROS design system with CSS variables
-  - Dark mode aerospace aesthetic
-  - Updated logo with geometric flight vector icon
-  - Improved component styling and layout
-- **Enhanced Error Handling**: Comprehensive error handling for WebSocket endpoint
-  - Multi-layer try-except blocks for frame processing
-  - Detailed traceback logging for all errors
-  - Graceful error recovery for non-critical failures
-  - Improved error messages and diagnostics
-
-### Fixed
-- **WebSocket Stability**: Improved error handling prevents connection drops
-- **PID Gain Updates**: Real-time gain updates now work correctly during operation
-
-### Changed
-- PID controller gains can now be adjusted dynamically via dashboard (no code changes required)
-- Dashboard UI redesigned with new AEROS brand identity
-
-### Planned
-- Real-world dataset collection and training
-- Enhanced simulation physics (aerodynamics, wind, turbulence)
-- ROS2 integration
-- Edge device deployment guides
-- Model quantization for embedded systems
-- Multi-drone simulation support
-- Advanced control algorithms (MPC, LQR)
-- Real-time obstacle detection
-- Path planning integration
-
-
-
-
-
+- Simulation physics are simplified (torque-based control, no full aerodynamics).
+- macOS native PyBullet installation fails against recent Apple SDKs.
+- Model relies entirely on synthetic corridor data.
+- PID controller requires severe retuning for physical hardware.
