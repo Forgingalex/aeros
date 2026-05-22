@@ -83,3 +83,6 @@ Thumbs.db
 .dmypy.json
 dmypy.json
 
+.venv311/
+aeros_sh.md
+benchmarks/
